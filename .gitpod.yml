@@ -23,6 +23,4 @@ tasks:
       python docs/assets/greeting.py front
     openMode: split-right
 
-vscode:
-  extensions:
-    - esbenp.prettier-vscode
+
