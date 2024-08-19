@@ -67,3 +67,43 @@ class Games(db.Model):
             "developer": self.developer,
             "publisher": self.publisher
         }      
+
+class GamesCharacteristic(db.Model):
+    __tablename__ = "games_characteristic"
+    id = db.Column(db.Integer, primary_key=True)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    plataform_id = db.Column(db.Integer, db.ForeignKey('plataforms.id'))
+    filename = db.Column(db.String(255), nullable=False)
+    filetype = db.Column(db.String(50))
+    size = db.Column(db.Integer)
+    minimun = db.Column(db.JSON)
+    recomended = db.Column(db.JSON)
+
+    def __repr__(self):
+        return f'<GamesCharacteristic {self.id} - GameID {self.game_id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "game_id": self.game_id,
+            "plataform_id": self.plataform_id,
+            "filename": self.filename,
+            "filetype": self.filetype,
+            "size": self.size,
+            "minimun": self.minimun,
+            "recomended": self.recomended
+        }
+
+
+class Plataforms(db.Model):
+    __tablename__ = "plataforms"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    def __repr__(self):
+        return f'<Plataform {self.id} - {self.name}>'
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
+
