@@ -99,11 +99,41 @@ class Plataforms(db.Model):
     __tablename__ = "plataforms"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+
     def __repr__(self):
         return f'<Plataform {self.id} - {self.name}>'
+
     def serialize(self):
         return {
             "id": self.id,
             "name": self.name
         }
 
+class Genders(db.Model):
+    __tablename__ = "genres"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Genre {self.id} - {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
+
+
+class GameGenders(db.Model):
+    __tablename__ = "game_genres"
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), primary_key=True, nullable=False)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'), primary_key=True, nullable=False)
+
+    def __repr__(self):
+        return f'<GameGenre GameID {self.game_id} - GenreID {self.genre_id}>'
+
+    def serialize(self):
+        return {
+            "game_id": self.game_id,
+            "genre_id": self.genre_id
+        }
