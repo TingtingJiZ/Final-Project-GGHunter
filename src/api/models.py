@@ -23,10 +23,8 @@ class Users(db.Model):
     rol = db.Column(db.Enum('admin', 'user', 'premium', name='role_enum'), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
 
-
     def __repr__(self):
         return f'<User {self.id} - {self.email}>'
-
 
     def serialize(self):
         return {
@@ -46,3 +44,26 @@ class Users(db.Model):
             "rol": self.rol,
             "created_at": self.created_at
         }
+
+      
+class Games(db.Model):
+    __tablename__ = "games"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    release_date = db.Column(db.Date)
+    developer = db.Column(db.String(100))
+    publisher = db.Column(db.String(100))
+    
+    def __repr__(self):
+        return f'<Game {self.id} - {self.title}>'
+      
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "release_date": self.release_date,
+            "developer": self.developer,
+            "publisher": self.publisher
+        }      
