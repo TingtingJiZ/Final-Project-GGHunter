@@ -107,3 +107,37 @@ class Plataforms(db.Model):
             "name": self.name
         }
 
+class Store(db.Model):
+    __tablename__ = "store"
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(255))
+    home_page = db.Column(db.String(255))
+    def __repr__(self):
+        return f'<Store {self.id} - {self.url}>'
+    def serialize(self):
+        return {
+            "id": self.id,
+            "url": self.url,
+            "home_page": self.home_page
+        }
+class Comparatives(db.Model):
+    __tablename__ = "comparativas"
+    id = db.Column(db.Integer, primary_key=True)
+    characteristic_id = db.Column(db.Integer, db.ForeignKey('games_characteristic.id'), nullable=False)
+    offert_slug = db.Column(db.String(255))
+    store_id = db.Column(db.Integer, db.ForeignKey('store.id'), nullable=False)
+    price = db.Column(db.Numeric)
+    price_date = db.Column(db.DateTime, default=db.func.current_timestamp())
+    characteristic = db.relationship('GamesCharacteristic', backref=db.backref('comparativas', lazy=True))
+    store = db.relationship('Store', backref=db.backref('comparativas', lazy=True))
+    def __repr__(self):
+        return f'<Comparativa {self.id} - CharacteristicID {self.characteristic_id}>'
+    def serialize(self):
+        return {
+            "id": self.id,
+            "characteristic_id": self.characteristic_id,
+            "offert_slug": self.offert_slug,
+            "store_id": self.store_id,
+            "price": self.price,
+            "price_date": self.price_date
+        }
