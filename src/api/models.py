@@ -168,8 +168,8 @@ class Platforms(db.Model):
                 "name": self.name}
       
 
-class Store(db.Model):
-    __tablename__ = "store"
+class Stores(db.Model):
+    __tablename__ = "stores"
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(255))
     home_page = db.Column(db.String(255))
@@ -188,11 +188,11 @@ class Comparatives(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     characteristic_id = db.Column(db.Integer, db.ForeignKey('game_characteristics.id'), nullable=False)
     offert_slug = db.Column(db.String(255))
-    store_id = db.Column(db.Integer, db.ForeignKey('store.id'), nullable=False)
+    stores_id = db.Column(db.Integer, db.ForeignKey('stores.id'), nullable=False)
     price = db.Column(db.Numeric)
     price_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     characteristic = db.relationship('GameCharacteristics', backref=db.backref('comparatives', lazy=True))
-    store = db.relationship('Store', backref=db.backref('comparatives', lazy=True))
+    stores = db.relationship('Stores', backref=db.backref('comparatives', lazy=True))
     
     def __repr__(self):
         return f'<Comparative {self.id} - CharacteristicID {self.characteristic_id}>'
@@ -201,7 +201,7 @@ class Comparatives(db.Model):
         return {"id": self.id,
                 "characteristic_id": self.characteristic_id,
                 "offert_slug": self.offert_slug,
-                "store_id": self.store_id,
+                "stores_id": self.stores_id,
                 "price": self.price,
                 "price_date": self.price_date}
 
@@ -225,7 +225,7 @@ class GameGenders(db.Model):
     gender_id = db.Column(db.Integer, db.ForeignKey('genders.id'), primary_key=True, nullable=False)
 
     def __repr__(self):
-        return f'<GameGender GameID {self.game_id} - GenreID {self.gender_id}>'
+        return f'<GameGender GameID {self.game_id} - GenderID {self.gender_id}>'
 
     def serialize(self):
         return {"game_id": self.game_id,

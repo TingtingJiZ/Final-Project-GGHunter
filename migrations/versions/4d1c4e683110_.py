@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d40a7db34dd2
+Revision ID: 4d1c4e683110
 Revises: 
-Create Date: 2024-08-20 17:30:59.164582
+Create Date: 2024-08-20 18:09:10.245580
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd40a7db34dd2'
+revision = '4d1c4e683110'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,7 +38,7 @@ def upgrade():
     sa.Column('name', sa.String(length=100), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('store',
+    op.create_table('stores',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('url', sa.String(length=255), nullable=True),
     sa.Column('home_page', sa.String(length=255), nullable=True),
@@ -112,11 +112,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('characteristic_id', sa.Integer(), nullable=False),
     sa.Column('offert_slug', sa.String(length=255), nullable=True),
-    sa.Column('store_id', sa.Integer(), nullable=False),
+    sa.Column('stores_id', sa.Integer(), nullable=False),
     sa.Column('price', sa.Numeric(), nullable=True),
     sa.Column('price_date', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['characteristic_id'], ['game_characteristics.id'], ),
-    sa.ForeignKeyConstraint(['store_id'], ['store.id'], ),
+    sa.ForeignKeyConstraint(['stores_id'], ['stores.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -132,7 +132,7 @@ def downgrade():
     op.drop_table('favorites')
     op.drop_table('comments')
     op.drop_table('users')
-    op.drop_table('store')
+    op.drop_table('stores')
     op.drop_table('platforms')
     op.drop_table('genders')
     op.drop_table('games')
