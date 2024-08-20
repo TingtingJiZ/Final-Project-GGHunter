@@ -68,7 +68,7 @@ class Games(db.Model):
             "publisher": self.publisher
         }      
 
-class GamesCharacteristic(db.Model):
+class gamesCharacteristic(db.Model):
     __tablename__ = "games_characteristic"
     id = db.Column(db.Integer, primary_key=True)
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
