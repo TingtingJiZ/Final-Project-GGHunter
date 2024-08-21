@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4d1c4e683110
+Revision ID: 5219fbd6c047
 Revises: 
-Create Date: 2024-08-20 18:09:10.245580
+Create Date: 2024-08-21 18:36:46.887425
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4d1c4e683110'
+revision = '5219fbd6c047'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,6 +21,7 @@ def upgrade():
     op.create_table('games',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('release_date', sa.Date(), nullable=True),
     sa.Column('developer', sa.String(length=100), nullable=True),
@@ -46,9 +47,22 @@ def upgrade():
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('email', sa.String(length=120), nullable=False),
-    sa.Column('password', sa.String(length=80), nullable=False),
+    sa.Column('email', sa.String(length=50), nullable=False),
+    sa.Column('password', sa.String(length=255), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('alias', sa.String(length=50), nullable=True),
+    sa.Column('lastname', sa.String(length=50), nullable=True),
+    sa.Column('birth_day', sa.DateTime(), nullable=True),
+    sa.Column('mobile_phone', sa.String(length=20), nullable=True),
+    sa.Column('address', sa.String(length=100), nullable=True),
+    sa.Column('country', sa.String(length=25), nullable=True),
+    sa.Column('city', sa.String(length=50), nullable=True),
+    sa.Column('zip_code', sa.String(length=10), nullable=True),
+    sa.Column('imagen', sa.String(length=50), nullable=True),
+    sa.Column('status', sa.Boolean(), nullable=True),
+    sa.Column('bio', sa.Text(), nullable=True),
+    sa.Column('rol', sa.Enum('admin', 'user', 'premium', name='role_enum'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
@@ -72,14 +86,14 @@ def upgrade():
     op.create_table('game_characteristics',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('game_id', sa.Integer(), nullable=True),
-    sa.Column('Platform_id', sa.Integer(), nullable=True),
+    sa.Column('platform_id', sa.Integer(), nullable=True),
     sa.Column('filename', sa.String(length=255), nullable=False),
     sa.Column('filetype', sa.String(length=50), nullable=True),
     sa.Column('size', sa.Integer(), nullable=True),
     sa.Column('minimun', sa.JSON(), nullable=True),
     sa.Column('recomended', sa.JSON(), nullable=True),
-    sa.ForeignKeyConstraint(['Platform_id'], ['platforms.id'], ),
     sa.ForeignKeyConstraint(['game_id'], ['games.id'], ),
+    sa.ForeignKeyConstraint(['platform_id'], ['platforms.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('game_genders',
