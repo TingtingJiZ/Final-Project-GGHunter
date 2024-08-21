@@ -23,6 +23,7 @@ class Users(db.Model):
     bio = db.Column(db.Text)
     rol = db.Column(db.Enum('admin', 'user', 'premium', name='role_enum'), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    comments = db.relationship("Comments", backref="user", lazy=True)
 
     def __repr__(self):
         return f'<User {self.id} - {self.email}>'
@@ -44,7 +45,8 @@ class Users(db.Model):
             "status": self.status,
             "bio": self.bio,
             "rol": self.rol,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "comments": [row.serialize() for row in self.comments]
         }
 
 
@@ -92,8 +94,8 @@ class Comments(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
     body = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    user = db.relationship('Users', backref=db.backref('comments', lazy=True))
-    game = db.relationship('Games', backref=db.backref('comments', lazy=True))
+    # user = db.relationship('Users', backref=db.backref('comments', lazy=True))
+    # game = db.relationship('Games', backref=db.backref('comments', lazy=True))
 
     def __repr__(self):
         return f'<Comment {self.id} - User {self.user_id} - Game {self.game_id}>'
@@ -148,7 +150,7 @@ class Games(db.Model):
                 "description": self.description,
                 "release_date": self.release_date,
                 "developer": self.developer,
-                "publisher": self.publisher}      
+                "publisher": self.publisher}
 
 
 class GameCharacteristics(db.Model):
@@ -224,7 +226,8 @@ class Comparatives(db.Model):
                 "offert_slug": self.offert_slug,
                 "stores_id": self.stores_id,
                 "price": self.price,
-                "price_date": self.price_date}
+                "price_date": self.price_date,
+                "characteristic": [row.serialize() for row in self.characteristic]}
 
 
 class Genders(db.Model):
