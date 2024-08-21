@@ -22,6 +22,8 @@ class Users(db.Model):
     status = db.Column(db.Boolean)
     bio = db.Column(db.Text)
     rol = db.Column(db.Enum('admin', 'user', 'premium', name='role_enum'), nullable=False)
+    social_accounts_user = db.relationship('SocialAccounts', backref=db.backref('social_account_user', lazy=True))
+    favourites_user = db.relationship('Favorites', backref=db.backref('favourites_per_user', lazy=True))
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
     comments = db.relationship("Comments", backref="user", lazy=True)
 
@@ -42,22 +44,30 @@ class Users(db.Model):
             "city": self.city,
             "zip_code": self.zip_code,
             "imagen": self.imagen,
+            "social_accounts_user": [row.serialize() for row in self.social_accounts_user],
             "status": self.status,
             "bio": self.bio,
             "rol": self.rol,
             "created_at": self.created_at,
             "comments": [row.serialize() for row in self.comments]
         }
-
-
+    
+    def serialize_data():
+       return{
+            "id": self.id,
+            "email": self.email,
+            "is_active": self.is_active,
+            "social_accounts_user": [row.serialize() for row in self.social_accounts_user],
+            "favourites_user": [row.serialize() for row in self.favourites_user]
+    }
 
 
 class Favorites(db.Model):
     __tablename__ = 'favorites'
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True, nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), primary_key=True, nullable=False)
-    user = db.relationship('Users', backref=db.backref('favorites', lazy=True))
-    game = db.relationship('Games', backref=db.backref('favorites', lazy=True))
+    #user = db.relationship('Users', backref=db.backref('favorites', lazy=True))
+    #game = db.relationship('Games', backref=db.backref('favorites', lazy=True))
 
     def __repr__(self):
         return f'<Favorite UserID {self.user_id} - GameID {self.game_id}>'
@@ -74,7 +84,7 @@ class SocialAccounts(db.Model):
     provider = db.Column(db.String(50))
     social_id = db.Column(db.String(100))
     access_token = db.Column(db.String(255))
-    user = db.relationship('Users', backref=db.backref('social_accounts', lazy=True))
+    #user = db.relationship('Users', backref=db.backref('social_accounts', lazy=True))
 
     def __repr__(self):
         return f'<SocialAccount {self.id} - Provider {self.provider}>'
@@ -116,7 +126,7 @@ class Media(db.Model):
     caption = db.Column(db.Text)
     type_media = db.Column(db.Enum('video', 'imagen', name='media_type_enum'), nullable=False)
     uploaded_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    game = db.relationship('Games', backref=db.backref('media', lazy=True))
+    #game = db.relationship('Games', backref=db.backref('media', lazy=True))
 
     def __repr__(self):
         return f'<Media {self.id} - {self.url}>'
@@ -139,6 +149,8 @@ class Games(db.Model):
     release_date = db.Column(db.Date)
     developer = db.Column(db.String(100))
     publisher = db.Column(db.String(100))
+    favourites_games = db.relationship('Favorites', backref=db.backref('favourites_games_per_user', lazy=True))
+    medias_game = db.relationship('Media', backref=db.backref('medias_per_game', lazy=True))
     comments = db.relationship("Comments", backref="comment", lazy=True)
     game_genders = db.relationship("GameGenders", backref="game_genders", lazy=True)
     game_characteristics = db.relationship("GameCharacteristics", backref="game_characteristics", lazy=True)
@@ -156,7 +168,17 @@ class Games(db.Model):
                 "description": self.description,
                 "release_date": self.release_date,
                 "developer": self.developer,
-                "publisher": self.publisher}
+                "publisher": self.publisher,
+                "favourites_games": self.favourites_games}
+
+    def serialize_data_games(self):
+        return{"id": self.id,
+                "title": self.title,
+                "is_active": self.is_active,
+                "description": self.description,
+                "favourites_games": self.favourites_games,
+                "medias_game":[row.serialize() for row in self.medias_game]
+        }
 
 
 class GameCharacteristics(db.Model):
