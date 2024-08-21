@@ -25,6 +25,7 @@ class Users(db.Model):
     social_accounts_user = db.relationship('SocialAccounts', backref=db.backref('social_account_user', lazy=True))
     favourites_user = db.relationship('Favorites', backref=db.backref('favourites_per_user', lazy=True))
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    comments = db.relationship("Comments", backref="user", lazy=True)
 
     def __repr__(self):
         return f'<User {self.id} - {self.email}>'
@@ -47,7 +48,8 @@ class Users(db.Model):
             "status": self.status,
             "bio": self.bio,
             "rol": self.rol,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "comments": [row.serialize() for row in self.comments]
         }
     
     def serialize_data():
@@ -102,8 +104,8 @@ class Comments(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
     body = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    user = db.relationship('Users', backref=db.backref('comments', lazy=True))
-    game = db.relationship('Games', backref=db.backref('comments', lazy=True))
+    # user = db.relationship('Users', backref=db.backref('comments', lazy=True))
+    # game = db.relationship('Games', backref=db.backref('comments', lazy=True))
 
     def __repr__(self):
         return f'<Comment {self.id} - User {self.user_id} - Game {self.game_id}>'
@@ -149,12 +151,18 @@ class Games(db.Model):
     publisher = db.Column(db.String(100))
     favourites_games = db.relationship('Favorites', backref=db.backref('favourites_games_per_user', lazy=True))
     medias_game = db.relationship('Media', backref=db.backref('medias_per_game', lazy=True))
+    comments = db.relationship("Comments", backref="comment", lazy=True)
+    game_genders = db.relationship("GameGenders", backref="game_genders", lazy=True)
+    game_characteristics = db.relationship("GameCharacteristics", backref="game_characteristics", lazy=True)
 
     def __repr__(self):
         return f'<Game {self.id} - {self.title}>'
       
     def serialize(self):
         return {"id": self.id,
+                "comments": [row.serialize() for row in self.comments],
+                "game_genders": [row.serialize() for row in self.game_genders],
+                "game_characteristics": [row.serialize() for row in self.game_characteristics],
                 "title": self.title,
                 "is_active": self.is_active,
                 "description": self.description,
@@ -170,7 +178,7 @@ class Games(db.Model):
                 "description": self.description,
                 "favourites_games": self.favourites_games,
                 "medias_game":[row.serialize() for row in self.medias_game]
-        }      
+        }
 
 
 class GameCharacteristics(db.Model):
@@ -216,6 +224,7 @@ class Stores(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(255))
     home_page = db.Column(db.String(255))
+    comparatives = db.relationship("Comparatives", backref="comparative", lazy=True)
     
     def __repr__(self):
         return f'<Store {self.id} - {self.url}>'
@@ -223,7 +232,8 @@ class Stores(db.Model):
     def serialize(self):
         return {"id": self.id,
                 "url": self.url,
-                "home_page": self.home_page}
+                "home_page": self.home_page,
+                "comparatives": [row.serialize() for row in self.comparatives],}
       
       
 class Comparatives(db.Model):
@@ -235,7 +245,7 @@ class Comparatives(db.Model):
     price = db.Column(db.Numeric)
     price_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     characteristic = db.relationship('GameCharacteristics', backref=db.backref('comparatives', lazy=True))
-    stores = db.relationship('Stores', backref=db.backref('comparatives', lazy=True))
+    # stores = db.relationship('Stores', backref=db.backref('comparatives', lazy=True))
     
     def __repr__(self):
         return f'<Comparative {self.id} - CharacteristicID {self.characteristic_id}>'
@@ -246,20 +256,23 @@ class Comparatives(db.Model):
                 "offert_slug": self.offert_slug,
                 "stores_id": self.stores_id,
                 "price": self.price,
-                "price_date": self.price_date}
+                "price_date": self.price_date,
+                "characteristic": [row.serialize() for row in self.characteristic]}
 
 
 class Genders(db.Model):
     __tablename__ = "genders"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
+    games_genders = db.relationship('GameGenders', backref=db.backref('games_gender', lazy=True))
 
     def __repr__(self):
         return f'<Gender {self.id} - {self.name}>'
 
     def serialize(self):
         return {"id": self.id,
-                "name": self.name}
+                "name": self.name,
+                "games_genders": [row.serialize() for row in self.games_genders]}
 
 
 class GameGenders(db.Model):
