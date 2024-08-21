@@ -177,8 +177,7 @@ class Games(db.Model):
                 "is_active": self.is_active,
                 "description": self.description,
                 "favourites_games": self.favourites_games,
-                "medias_game":[row.serialize() for row in self.medias_game]
-        }
+                "medias_game":[row.serialize() for row in self.medias_game]}
 
 
 class GameCharacteristics(db.Model):
@@ -191,6 +190,7 @@ class GameCharacteristics(db.Model):
     size = db.Column(db.Integer)
     minimun = db.Column(db.JSON)
     recomended = db.Column(db.JSON)
+    platform_games = db.relationship("Platforms", backref="platform_games", lazy=True)
     #backref a games
     def __repr__(self):
         return f'<GameCharacteristics {self.id} - GameID {self.game_id}>'
@@ -203,7 +203,8 @@ class GameCharacteristics(db.Model):
                 "filetype": self.filetype,
                 "size": self.size,
                 "minimun": self.minimun,
-                "recomended": self.recomended}
+                "recomended": self.recomended,
+                "platform_games":[row.serialize() for row in self.platform_games]}
 
 
 class Platforms(db.Model):
