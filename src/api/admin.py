@@ -1,7 +1,7 @@
 import os
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from .models import db, Users, Games, GameCharacteristics, Platforms, Favorites, SocialAccounts, Comments, Media, Stores, Comparatives
+from .models import db, Users, Games, GameCharacteristics, Platforms, Favorites, SocialAccounts, Comments, Media, Stores
 
 
 def setup_admin(app):
@@ -16,7 +16,6 @@ def setup_admin(app):
     admin.add_view(ModelView(GameCharacteristics, db.session))
     admin.add_view(ModelView(Platforms, db.session))
     admin.add_view(ModelView(Stores, db.session))
-    admin.add_view(ModelView(Comparatives, db.session))
     admin.add_view(ModelView(Favorites, db.session))
     admin.add_view(ModelView(SocialAccounts, db.session))
     admin.add_view(ModelView(Comments, db.session))

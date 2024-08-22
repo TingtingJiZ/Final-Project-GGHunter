@@ -170,17 +170,17 @@ class Games(db.Model):
 class GameCharacteristics(db.Model):
     __tablename__ = "game_characteristics"
     id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(255), nullable=False)
-    filetype = db.Column(db.String(50))
     size_mb = db.Column(db.Integer)
     minimun = db.Column(db.JSON)
     recomended = db.Column(db.JSON)
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
     platform_id = db.Column(db.Integer, db.ForeignKey('platforms.id'))
+    stores_id = db.Column(db.Integer, db.ForeignKey('stores.id'))
     platform_games = db.relationship("Platforms", backref="platform_games", lazy=True)
+    price_store = db.relationship("Stores", backref="price_store_games", lazy=True)
 
     def __repr__(self):
-        return f'<GameCharacteristics {self.id} - GameID {self.game_id}>'
+        return f'<PlatformId {self.platform_id} - GameID {self.game_id}>'
 
     def serialize(self):
         return {"id": self.id,
@@ -191,7 +191,8 @@ class GameCharacteristics(db.Model):
                 "size_mb": self.size_mb,
                 "minimun": self.minimun,
                 "recomended": self.recomended,
-                "platform_games":[row.serialize() for row in self.platform_games]}
+                "platform_games":[row.serialize() for row in self.platform_games],
+                "price_store":[row.serialize() for row in self.price_store]}
 
 
 class Platforms(db.Model):
@@ -212,8 +213,9 @@ class Stores(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(255))
     home_page = db.Column(db.String(255))
-    comparatives = db.relationship("Comparatives", backref="comparative", lazy=True)
-    
+    price = db.Column(db.Numeric)
+    price_date = db.Column(db.DateTime, default=db.func.current_timestamp())
+
     def __repr__(self):
         return f'<Store {self.id} - {self.url}>'
       
@@ -224,27 +226,27 @@ class Stores(db.Model):
                 "comparatives": [row.serialize() for row in self.comparatives],}
       
       
-class Comparatives(db.Model):
-    __tablename__ = "comparativas"
-    id = db.Column(db.Integer, primary_key=True)
-    offert_slug = db.Column(db.String(255))
-    price = db.Column(db.Numeric)
-    price_date = db.Column(db.DateTime, default=db.func.current_timestamp())
-    stores_id = db.Column(db.Integer, db.ForeignKey('stores.id'), nullable=False)
-    game_characteristic_id = db.Column(db.Integer, db.ForeignKey('game_characteristics.id'), nullable=False)
-    game_characteristic = db.relationship('GameCharacteristics', backref=db.backref('comparatives', lazy=True))
+# class Comparatives(db.Model):
+#     __tablename__ = "comparativas"
+#     id = db.Column(db.Integer, primary_key=True)
+#     offert_slug = db.Column(db.String(255))
+#     price = db.Column(db.Numeric)
+#     price_date = db.Column(db.DateTime, default=db.func.current_timestamp())
+#     stores_id = db.Column(db.Integer, db.ForeignKey('stores.id'), nullable=False)
+#     game_characteristic_id = db.Column(db.Integer, db.ForeignKey('game_characteristics.id'), nullable=False)
+#     game_characteristic = db.relationship('GameCharacteristics', backref=db.backref('comparatives', lazy=True))
     
-    def __repr__(self):
-        return f'<Comparative {self.id} - CharacteristicID {self.characteristic_id}>'
+#     def __repr__(self):
+#         return f'<Comparative {self.id} - CharacteristicID {self.characteristic_id}>'
       
-    def serialize(self):
-        return {"id": self.id,
-                "game_characteristic_id": self.game_characteristic_id,
-                "offert_slug": self.offert_slug,
-                "stores_id": self.stores_id,
-                "price": self.price,
-                "price_date": self.price_date,
-                "game_characteristic": [row.serialize() for row in self.game_characteristic]}
+#     def serialize(self):
+#         return {"id": self.id,
+#                 "game_characteristic_id": self.game_characteristic_id,
+#                 "offert_slug": self.offert_slug,
+#                 "stores_id": self.stores_id,
+#                 "price": self.price,
+#                 "price_date": self.price_date,
+#                 "game_characteristic": [row.serialize() for row in self.game_characteristic]}
 
 
 class Genders(db.Model):
