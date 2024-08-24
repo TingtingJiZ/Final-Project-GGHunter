@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: a8e4aae0033e
+Revision ID: ab98f9cd2b36
 Revises: 
-Create Date: 2024-08-21 19:18:10.822358
+Create Date: 2024-08-22 18:23:01.587047
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a8e4aae0033e'
+revision = 'ab98f9cd2b36'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -50,6 +50,8 @@ def upgrade():
     sa.Column('email', sa.String(length=50), nullable=False),
     sa.Column('password', sa.String(length=255), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('rol', sa.Enum('admin', 'user', 'premium', name='role_enum'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('alias', sa.String(length=50), nullable=True),
     sa.Column('lastname', sa.String(length=50), nullable=True),
     sa.Column('birth_day', sa.DateTime(), nullable=True),
@@ -58,11 +60,8 @@ def upgrade():
     sa.Column('country', sa.String(length=25), nullable=True),
     sa.Column('city', sa.String(length=50), nullable=True),
     sa.Column('zip_code', sa.String(length=10), nullable=True),
-    sa.Column('imagen', sa.String(length=50), nullable=True),
-    sa.Column('status', sa.Boolean(), nullable=True),
+    sa.Column('image', sa.String(length=50), nullable=True),
     sa.Column('bio', sa.Text(), nullable=True),
-    sa.Column('rol', sa.Enum('admin', 'user', 'premium', name='role_enum'), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
@@ -85,13 +84,13 @@ def upgrade():
     )
     op.create_table('game_characteristics',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('game_id', sa.Integer(), nullable=True),
-    sa.Column('platform_id', sa.Integer(), nullable=True),
     sa.Column('filename', sa.String(length=255), nullable=False),
     sa.Column('filetype', sa.String(length=50), nullable=True),
-    sa.Column('size', sa.Integer(), nullable=True),
+    sa.Column('size_mb', sa.Integer(), nullable=True),
     sa.Column('minimun', sa.JSON(), nullable=True),
     sa.Column('recomended', sa.JSON(), nullable=True),
+    sa.Column('game_id', sa.Integer(), nullable=True),
+    sa.Column('platform_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['game_id'], ['games.id'], ),
     sa.ForeignKeyConstraint(['platform_id'], ['platforms.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -107,8 +106,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('game_id', sa.Integer(), nullable=True),
     sa.Column('url', sa.String(length=255), nullable=False),
-    sa.Column('caption', sa.Text(), nullable=True),
     sa.Column('type_media', sa.Enum('video', 'imagen', name='media_type_enum'), nullable=False),
+    sa.Column('caption', sa.Text(), nullable=True),
     sa.Column('uploaded_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['game_id'], ['games.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -124,12 +123,12 @@ def upgrade():
     )
     op.create_table('comparativas',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('characteristic_id', sa.Integer(), nullable=False),
     sa.Column('offert_slug', sa.String(length=255), nullable=True),
-    sa.Column('stores_id', sa.Integer(), nullable=False),
     sa.Column('price', sa.Numeric(), nullable=True),
     sa.Column('price_date', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['characteristic_id'], ['game_characteristics.id'], ),
+    sa.Column('stores_id', sa.Integer(), nullable=False),
+    sa.Column('game_characteristic_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['game_characteristic_id'], ['game_characteristics.id'], ),
     sa.ForeignKeyConstraint(['stores_id'], ['stores.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
