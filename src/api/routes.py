@@ -8,6 +8,7 @@ from api.models import db, Users, Favorites, SocialAccounts, Comments, Media, Ga
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
+from datetime import datetime
 
 api = Blueprint('api', __name__)
 CORS(api)  # Allow CORS requests to this API
@@ -26,17 +27,21 @@ def handle_singup():
     data = request.json
     email = data.get("email", None).lower()
     password = data.get("password", None)
+    alias = data.get("alias", None)
+    lastname = data.get("lastname", None)
+    birth_day = data.get("birth_day", None)
     existing_user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
     
     if existing_user:
         return jsonify({"message": "El usuario con este correo ya existe."}), 409
     
-    new_user = Users(
-        email = email,
-        password = data.get("password"),
-        is_active = True,
-        rol = 'user'
-    )
+    new_user = Users(email = email,
+                    password = data.get("password"),
+                    is_active = True,
+                    rol = 'user',
+                    alias = alias,
+                    lastname = lastname,
+                    birth_day = birth_day)
     db.session.add(new_user)
     db.session.commit()
     user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
