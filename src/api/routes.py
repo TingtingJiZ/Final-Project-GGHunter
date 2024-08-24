@@ -47,13 +47,13 @@ def handle_all_games():
             game_genders=data.get('game_genders', True),
             game_characteristics=data.get('game_characteristics', True),
             release_date=data.get('release_date', True),
-            developer=data.get('developer', True),
+            # developer=data.get('developer', True),
             publisher=data.get('publisher', True),
             favourites_games=data.get('favourites', True),
             is_active=data.get('is_active', True),
             description=data.get('description', None),
             developer=data.get('developer', None),
-            publisher=data.get('publisher', None)
+            # publisher=data.get('publisher', None)
         )
         db.session.add(new_game)
         db.session.commit()
