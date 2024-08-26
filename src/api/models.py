@@ -12,7 +12,7 @@ class Users(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     rol = db.Column(db.Enum('admin', 'user', 'premium', name='role_enum'), nullable=False)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-     = db.Column(db.String(50))
+    alias = db.Column(db.String(50))
     lastname = db.Column(db.String(50))
     birth_day = db.Column(db.DateTime)
     mobile_phone = db.Column(db.String(20))

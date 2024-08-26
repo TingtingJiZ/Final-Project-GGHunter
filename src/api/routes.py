@@ -75,4 +75,40 @@ def handle_users():
     response_body['message'] = 'User logged'
     response_body['message'] = access_token
     return response_body, 201
+
+
+@api.route('/profile', methods=['PUT', 'DELETE'])
+@jwt_required()
+def handle_profile():
+    response_body = {}
+    current_user = get_jwt_identity()
+    user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
     
+    if not user:
+        response_body['results']= {}
+        response_body['message']= "User not found"
+        return jsonify(response_body), 404
+    
+    user_id = user.id
+    
+    if request.method == "PUT":
+        #editar campos de un usuario
+        pass
+
+    if request.method == "DELETE":
+        #hacer que el usuario este en false
+        pass
+
+
+@api.route('/favourites', methods=['GET', 'POST', 'DELETE'])
+@jwt_required()
+def handle_favourites():
+    #relacion entre user_id y game_id
+    pass
+
+
+@api.route('/media', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@jwt_required()
+def handle_favourites():
+    #relacion game_id para añadir la media de las imagenes
+    pass
