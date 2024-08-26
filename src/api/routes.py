@@ -108,3 +108,24 @@ def handle_comments():
         response_body["message"] = f"Comment deletede"
         return jsonify(response_body), 201
 
+@api.route("/stores", methods=["GET", "POST"])
+def handle_stores():
+    response_body = {}
+    rows = db.session.execute(db.select(Stores)).scalars()
+    results = [row.serialize() for row in rows]
+    if request.method == "GET":
+        response_body["results"] = results
+        response_body["message"] = "GET stores"
+        return response_body, 200
+    if request.method == "POST":
+        data = request.json
+        store_url = data.get("url")
+        if not store_url:
+            response_body["message"] = "Missing store url"
+            return response_body, 400
+        new_store = Stores(url=store_url)
+        db.session.add(new_store)
+        db.session.commit()
+        response_body["message"] = "POST stores"
+        return response_body, 200
+

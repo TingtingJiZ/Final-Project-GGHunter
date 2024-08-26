@@ -222,8 +222,7 @@ class Stores(db.Model):
     def serialize(self):
         return {"id": self.id,
                 "url": self.url,
-                "home_page": self.home_page,
-                "comparatives": [row.serialize() for row in self.comparatives],}
+                "home_page": self.home_page}
       
       
 # class Comparatives(db.Model):
