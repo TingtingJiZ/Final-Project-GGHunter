@@ -82,9 +82,9 @@ def handle_users():
 def handle_profile():
     response_body = {}
     current_user = get_jwt_identity()
-    user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
+    existing_user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
     
-    if not user:
+    if not existing_user:
         response_body['results']= {}
         response_body['message']= "User not found"
         return jsonify(response_body), 404
@@ -92,23 +92,110 @@ def handle_profile():
     user_id = user.id
     
     if request.method == "PUT":
-        #editar campos de un usuario
-        pass
+        data = request.json
+        user = Users(alias = data.get("alias"),
+                    lastname = data.get("lastname"),
+                    birth_day = data.get("birth_day"),
+                    mobile_phone = data.get("mobile_phone"),
+                    address = data.get("address"),
+                    country = data.get("country"),
+                    city = data.get("city"),
+                    zip_code = data.get("zip_code"),
+                    image = data.get("image"),
+                    bio = data.get("bio"))
+        db.session.add(user)
+        db.session.commit()
+        response_body = {'results': {}, 'message': "User modified"}
 
     if request.method == "DELETE":
-        #hacer que el usuario este en false
-        pass
+        user.is_active = False
+        db.session.commit()
+
+        response_body['results'] = {}
+        response_body['message'] = "User deactivated successfully"
+        return jsonify(response_body), 200
 
 
 @api.route('/favourites', methods=['GET', 'POST', 'DELETE'])
 @jwt_required()
 def handle_favourites():
-    #relacion entre user_id y game_id
-    pass
+    current_user = get_jwt_identity()
+    user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
+
+    if not user:
+        response_body = {'results': {}, 'message': "User not found"}
+        return jsonify(response_body), 404
+
+    if request.method == 'GET':
+        # Obtener los juegos favoritos del usuario
+        favourites = Favorites.query.filter_by(user_id=user.id).all()
+        response_body = {
+            'results': [favorite.serialize() for favorite in favourites],
+            'message': "User favourites retrieved successfully"
+        }
+        return jsonify(response_body), 200
+
+    if request.method == 'POST':
+        data = request.get_json()
+        game_id = data.get('game_id')
+
+        existing_favorite = db.session.execute(db.select(Users).where(user_id=user.id, game_id=game_id)).scalar()
+    
+        if existing_favorite:
+            response_body = {'results': {}, 'message': "Game already in favourites"}
+            return jsonify(response_body), 400
+
+        new_favorite = Favorites(user_id=user.id, 
+                                game_id=game_id)
+        db.session.add(new_favorite)
+        db.session.commit()
+
+        response_body = {
+            'results': new_favorite.serialize(),
+            'message': "Game added to favourites successfully"
+        }
+        return jsonify(response_body), 201
+
+    if request.method == 'DELETE':
+        data = request.get_json()
+        game_id = data.get('game_id')
+
+        favorite = Favorites.query.filter_by(user_id=user.id, game_id=game_id).first()
+        if not favorite:
+            response_body = {'results': {}, 'message': "Game not found in favourites"}
+            return jsonify(response_body), 404
+
+        db.session.delete(favorite)
+        db.session.commit()
+
+        response_body = {'results': {}, 'message': "Game removed from favourites successfully"}
+        return jsonify(response_body), 200
 
 
-@api.route('/media', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@jwt_required()
-def handle_favourites():
-    #relacion game_id para añadir la media de las imagenes
-    pass
+@api.route('/media/<int:game_id>', methods=['GET', 'POST'])
+def handle_media(game_id):
+
+    if request.method == "GET":
+        list_media = db.session.execute(db.select(Media)).scalars()
+        rows = [row.serialize() for row in list_media]
+        print(rows)
+        response_body['message'] = f"List of the game {game_id}"
+        response_body['result'] = rows
+        return jsonify(response_body), 200
+
+    if request.method == "POST":
+        data = request.json
+        type_media = data.get["type_media"]
+
+        if type_media == None:
+            type_media = "imagen"
+        
+        media = Media(game_id = game_id,
+                      url = data.get["url"],
+                      type_media = type_media,
+                      caption = data.get["caption"],
+                      uploaded_at = data.get["uploadaded_at"])
+        db.session.add(media)
+        db.session.commit()
+        response_body["message"] = f"Insertado la media de {media}, del juego {game_id}"
+        return response_body, 201
