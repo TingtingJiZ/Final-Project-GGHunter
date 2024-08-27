@@ -47,13 +47,11 @@ def handle_all_games():
             game_genders=data.get('game_genders', True),
             game_characteristics=data.get('game_characteristics', True),
             release_date=data.get('release_date', True),
-            # developer=data.get('developer', True),
             publisher=data.get('publisher', True),
             favourites_games=data.get('favourites', True),
             is_active=data.get('is_active', True),
             description=data.get('description', None),
             developer=data.get('developer', None),
-            # publisher=data.get('publisher', None)
         )
         db.session.add(new_game)
         db.session.commit()
@@ -62,3 +60,53 @@ def handle_all_games():
         return response_body, 201
 # en general no sé si esto esta bien...
 
+
+@api.route('/games/<int:game_id>', methods=['GET', 'PUT', 'DELETE'])
+def handle_game(game_id):
+    response_body = {}
+    if request.method == 'GET':
+        game = db.session.execute(db.select(Games).where(Games.id == game_id)).scalar()
+        if not game:
+            response_body['message'] = f'Game with id {game_id} not found'
+            response_body['results'] = {}
+            return response_body, 404
+        response_body['results'] = game.serialize()
+        response_body['message'] = f'Game {game_id} retrieved successfully'
+        return response_body, 200
+
+    if request.method == 'PUT':
+        data = request.json
+        game = db.session.execute(db.select(Games).where(Games.id == game_id)).scalar()
+        if not game:
+            response_body['message'] = f'Game with id {game_id} not found'
+            response_body['results'] = {}
+            return response_body, 404
+        title = data.get('title', None)
+
+        if title:
+            game_exist = db.session.execute(db.select(Games).where(Games.title == title, Games.id != game_id)).scalar()
+            if game_exist:
+                response_body['message'] = 'Game with this title already exists'
+                response_body['results'] = {}
+                return response_body, 409
+        game.title = title if title else game.title
+        game.is_active = data.get('is_active', game.is_active)
+        game.description = data.get('description', game.description)
+        game.release_date = data.get('release_date', game.release_date)
+        game.developer = data.get('developer', game.developer)
+        game.publisher = data.get('publisher', game.publisher)
+        db.session.commit()
+        response_body['message'] = f'Game {game_id} updated successfully'
+        response_body['results'] = game.serialize()
+        return response_body, 200
+
+    if request.method == 'DELETE':
+        game = db.session.execute(db.select(Games).where(Games.id == game_id)).scalar()
+        if not game:
+            response_body['message'] = f'Game with id {game_id} not found'
+            response_body['results'] = {}
+            return response_body, 404
+        db.session.delete(game)
+        db.session.commit()
+        response_body['message'] = f'Game {game_id} deleted successfully'
+        return response_body, 200
