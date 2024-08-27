@@ -223,7 +223,8 @@ class Stores(db.Model):
         return {"id": self.id,
                 "url": self.url,
                 "home_page": self.home_page,
-                "comparatives": [row.serialize() for row in self.comparatives],}
+                "price": self.price,
+                "price_date":self.price_date}
 
 
 class Genders(db.Model):
