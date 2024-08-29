@@ -176,7 +176,6 @@ class GameCharacteristics(db.Model):
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
     platform_id = db.Column(db.Integer, db.ForeignKey('platforms.id'))
     stores_id = db.Column(db.Integer, db.ForeignKey('stores.id'))
-    price_store = db.relationship("Stores", backref="price_store_games", lazy=True)
     store = db.relationship("Stores", backref="game_characteristics", lazy=True)
 
     def __repr__(self):
