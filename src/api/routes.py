@@ -240,16 +240,17 @@ def handle_comments():
 @api.route("/comments/<int:comment_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
 def handle_comment(comment_id):
-    print(comment_id)
     response_body = {}
     current_user = get_jwt_identity()
     if request.method == "GET":
-       comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id)).scalar()
-       if not comment:
-        response_body["message"] = "Comment ID not found"
-        response_body["results"] = {}
-        return response_body, 404
-    
+        comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id, Comments.user_id == current_user["user_id"])).scalar()
+        if not comment:
+            response_body["message"] = "Comment ID not found"
+            response_body["results"] = {}
+            return response_body, 404
+        response_body["message"] = "Get commmet"
+        response_body["results"] = comment.serialize()
+        return response_body, 200
     if request.method == "DELETE":
         delete_comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id)).scalar()
         if not delete_comment:
@@ -273,8 +274,8 @@ def handle_comment(comment_id):
             response_body["message"] = "Comment not updated"
             response_body["results"] = {}
             return response_body, 404
-        comment_to_update = Comments(game_id = game_id,
-                                     body=body)
+        comment_to_update.game_id = game_id
+        comment_to_update.body = body
         db.session.commit()
         response_body["message"] = "Comment updated"
         response_body["results"] = comment_to_update.serialize()
@@ -312,47 +313,53 @@ def handle_social_accounts():
         return response_body, 200
 
 
-"""
- @api.route("/social")
+@api.route("/social_accounts/<int:social_account_id>", methods=["GET", "PUT", "DELETE"])
+@jwt_required()
+def handle_social_account(social_account_id):
+    response_body = {}
+    current_user = get_jwt_identity()
+    if request.method == "GET":
+        account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_account_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
+        if not account:
+            response_body["message"] = "Account not found"
+            response_body["results"] = {}
+            return response_body, 404
+        response_body["message"] = "Get account"
+        response_body["results"] = account.serialize()
+        return response_body, 200
     if request.method == "DELETE":
-        data = request.json
-        provider = data.get("provider")
-        social_id = data.get("social_id")
-        access_token = data.get("access_token")
-        if not provider or not social_id or not access_token:
-            response_body["message"] = "Missing information"
+        delete_account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_account_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
+        if not delete_account:
+            response_body["message"] = "Account to delete not found"
+            response_body["results"] = {}
             return response_body, 404
-        social_account_delete = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"], SocialAccounts.provider == provider, SocialAccounts.social_id == social_id, SocialAccounts.access_token == access_token)).scalar()
-        if not social_account_delete:
-            response_body["message"] = "account not found"
-            return response_body, 404
-        db.session.delete(social_account_delete)
+        db.session.delete(delete_account)
         db.session.commit()
-        response_body["message"] = "Social account deleted"
+        response_body["message"] = "Account deleted"
         return response_body, 200
     if request.method == "PUT":
-        data = request.json
-        provider = data.get("provider")
-        social_id = data.get("social_id")
-        access_token = data.get("access_token")
-        user_id = data.get("user_id")
-        if not provider or not social_id or not access_token or not user_id:
-            response_body["message"] = "Missing items"
-            return response_body, 400
-        socials_account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"], SocialAccounts.provider == provider, SocialAccounts.social_id == social_id, SocialAccounts.access_token == access_token)).scalar()
-        if socials_account:
-            response_body["message"] = "User already exist"
+        data = request.get_json()
+        provider = data.get("provider", None)
+        social_id = data.get("social_id", None)
+        access_token = data.get("access_token", None)
+        if not provider or not social_id or not access_token:
+            response_body["message"] = "Missing provider, social ID or access_token"
             response_body["results"] = {}
-            return response_body, 409
-        socials_account.provider = provider
-        socials_account.social_id = social_id
-        socials_account.access_token = access_token
+            return response_body, 404
+        account_to_update = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_account_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
+        if not account_to_update:
+            response_body["message"] = "Account not updated"
+            response_body["results"] = {}
+            return response_body, 404
+        account_to_update.provider = provider
+        account_to_update.social_id = social_id
+        account_to_update.access_token = access_token
         db.session.commit()
-        response_body["message"] = "social account updated"
-        return response_body, 200 
-        """
-     
-    
+        response_body["message"] = "Account updated"
+        response_body["results"] = account_to_update.serialize()
+        return response_body, 200
+
+   
 @api.route("/stores", methods=["GET", "POST"])
 def handle_stores():
     response_body = {}
