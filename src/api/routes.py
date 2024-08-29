@@ -24,34 +24,42 @@ def handle_hello():
 @api.route('/game_characteristics', methods=['GET', 'POST'])
 def handle_all_game_characteristics():
     response_body = {}
+
     if request.method == 'GET':
         rows = db.session.execute(db.select(GameCharacteristics)).scalars()
+        serialized_rows = [row.serialize() for row in rows]
+        response_body['results'] = serialized_rows
+        response_body['message'] = "GET request received for all Game Characteristics"
+        return response_body, 200
+
+    """ if request.method == 'POST':
+        data = request.get_json() 
+
         game_id = data.get('game_id', None)
         platform_id = data.get('platform_id', None)
-        filename = data.get('filename', None)
-        filetype = data.get('filetype', '')
-        size = data.get('size', '')
-        minimun = data.get('minimun', '')
-        recomended = data.get('recomended', '')
-        if not game_id or not platform_id or not filename:
-            response_body['message'] = 'Missing data'
+        size_mb = data.get('size_mb', None)
+        minimun = data.get('minimun', None)
+        recomended = data.get('recomended', None)
+
+        if not game_id or not platform_id:
+            response_body['message'] = 'Missing game_id or platform_id'
             response_body['results'] = {}
             return response_body, 400
+
         row = GameCharacteristics(
             game_id=game_id,
             platform_id=platform_id,
-            filename=filename,
-            filetype=filetype,
-            size=size,
+            size_mb=size_mb,
             minimun=minimun,
             recomended=recomended,
         )
         db.session.add(row)
         db.session.commit()
-        response_body['message'] = "POST received"
+
+        response_body['message'] = "POST request received and Game Characteristic created"
         response_body['results'] = row.serialize()
         return response_body, 201
-
+ """
 
 @api.route('/game_characteristics/<int:characteristic_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_game_characteristic(characteristic_id):
@@ -59,48 +67,59 @@ def handle_game_characteristic(characteristic_id):
 
     if request.method == 'GET':
         row = db.session.execute(db.select(GameCharacteristics).where(GameCharacteristics.id == characteristic_id)).scalar()
-        
+
         if not row:
+            response_body['message'] = f'Game Characteristic {characteristic_id} does not exist'
             response_body['results'] = {}
-            response_body['message'] = f'No existe la característica del juego {characteristic_id}'
             return response_body, 404
-        response_body['results'] = row.serialize()
+
         response_body['message'] = f'GET request received for Game Characteristic {characteristic_id}'
+        response_body['results'] = row.serialize()
+        return response_body, 200
+
+    if request.method == 'PUT':
+        data = request.get_json() 
         game_id = data.get('game_id', None)
         platform_id = data.get('platform_id', None)
-        filename = data.get('filename', None)
-        
-        if not game_id or not platform_id or not filename:
-            response_body['message'] = 'Missing data'
+        size_mb = data.get('size_mb', None)
+        minimun = data.get('minimun', None)
+        recomended = data.get('recomended', None)
+
+        if not game_id or not platform_id:
+            response_body['message'] = 'Missing game_id or platform_id'
             response_body['results'] = {}
             return response_body, 400
+
         characteristic = db.session.execute(db.select(GameCharacteristics).where(GameCharacteristics.id == characteristic_id)).scalar()
-        
+
         if not characteristic:
             response_body['message'] = f'Game Characteristic {characteristic_id} does not exist'
             response_body['results'] = {}
             return response_body, 404
+
         characteristic.game_id = game_id
         characteristic.platform_id = platform_id
-        characteristic.filename = filename
-        characteristic.filetype = data.get('filetype', characteristic.filetype)
-        characteristic.size = data.get('size', characteristic.size)
-        characteristic.minimun = data.get('minimun', characteristic.minimun)
-        characteristic.recomended = data.get('recomended', characteristic.recomended)
+        characteristic.size_mb = size_mb
+        characteristic.minimun = minimun
+        characteristic.recomended = recomended
+
         db.session.commit()
+
         response_body['message'] = "Game Characteristic updated successfully"
         response_body['results'] = characteristic.serialize()
         return response_body, 200
 
     if request.method == 'DELETE':
         characteristic = db.session.execute(db.select(GameCharacteristics).where(GameCharacteristics.id == characteristic_id)).scalar()
-        
+
         if not characteristic:
             response_body['message'] = f'Game Characteristic {characteristic_id} does not exist'
             response_body['results'] = {}
             return response_body, 404
+
         db.session.delete(characteristic)
         db.session.commit()
+
         response_body['message'] = f'Game Characteristic {characteristic_id} deleted successfully'
         return response_body, 200
  
