@@ -207,55 +207,152 @@ def handle_game(game_id):
         return response_body, 200   
 
 
-@api.route("/comments", methods=["GET", "POST", "PUT", "DELETE"])
+@api.route("/comments", methods=["GET", "POST"])
 @jwt_required()
 def handle_comments():
     response_body = {}
     current_user = get_jwt_identity()
     user = db.session.execute(db.select(Users).where(Users.id == current_user["user_id"])).scalar()
-
     if not user:
         response_body["results"] = {}
         response_body["message"] = "User not found"
         return jsonify(response_body), 404
-
     if request.method == "POST":
         data = request.json
         comment_text = data.get("comment")
         game_id = data.get("game_id")
-
         if not comment_text:
             response_body["message"] = "Missing comment"
             return jsonify(response_body), 400
-
         new_comment = Comments(user_id=current_user["user_id"], body=comment_text, game_id=game_id)
         db.session.add(new_comment)
         db.session.commit()
         response_body["message"] = "comment added successfully"
         return jsonify(response_body), 201
-
     if request.method == "GET":
         comments = db.session.execute(db.select(Comments).where(Comments.user_id == current_user["user_id"])).scalars()
         results = [{"id": row.id, "comment": row.body} for row in comments]
         response_body["results"] = results
         response_body["message"] = f'Comments for user {current_user} retrieved successfully'
         return jsonify(response_body), 200
+
+
+@api.route("/comments/<int:comment_id>", methods=["GET", "PUT", "DELETE"])
+@jwt_required()
+def handle_comment(comment_id):
+    print(comment_id)
+    response_body = {}
+    current_user = get_jwt_identity()
+    if request.method == "GET":
+       comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id)).scalar()
+       if not comment:
+        response_body["message"] = "Comment ID not found"
+        response_body["results"] = {}
+        return response_body, 404
     
     if request.method == "DELETE":
-        data = request.json
-        comment_user = data.get("comment_text")
-
-        delete_comment = db.session.execute(db.select(Comments).where(Comments.user_id == user_id, Comments.comment_text == comment_user)).scalar()
+        delete_comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id)).scalar()
         if not delete_comment:
-            response_body["message"] = f"Delete comment not found"
-            return jsonify(response_body), 404
-
+            response_body["message"] = "Comment to delete not found"
+            response_body["results"] = {}
+            return response_body, 404
         db.session.delete(delete_comment)
-        de.session.commit()
-        response_body["message"] = f"Comment deletede"
+        db.session.commit()
+        response_body["message"] = f"Comment deleted"
         return jsonify(response_body), 201
+    if request.method == "PUT":
+        data = request.get_json()
+        game_id = data.get("game_id", None)
+        body = data.get("body", None)
+        if not game_id or not body:
+            response_body["message"] = "Missing game ID or body"
+            response_body["results"] = {}
+            return response_body, 400
+        comment_to_update = db.session.execute(db.select(Comments).where(Comments.id == comment_id, Comments.user_id == current_user["user_id"])).scalar()
+        if not comment_to_update:
+            response_body["message"] = "Comment not updated"
+            response_body["results"] = {}
+            return response_body, 404
+        comment_to_update = Comments(game_id = game_id,
+                                     body=body)
+        db.session.commit()
+        response_body["message"] = "Comment updated"
+        response_body["results"] = comment_to_update.serialize()
+        return response_body, 200
 
-      
+
+@api.route("/social_accounts", methods=["GET", "POST"])
+@jwt_required()
+def handle_social_accounts():
+    response_body = {}
+    current_user = get_jwt_identity()
+    user = db.session.execute(db.select(Users).where(Users.id == current_user["user_id"])).scalar()
+    if not user:
+        response_body["results"] = {}
+        response_body["message"] = "User not found"
+        return response_body, 404
+    if request.method == "GET":
+        accounts = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"])).scalars()
+        results = [{"id": row.id, "social": row.social_id, "provider": row.provider, "access": row.access_token} for row in accounts]
+        response_body["results"] = results
+        response_body["message"] = f"Social account for user {current_user} retrieved successfully"
+        return response_body, 200
+    if request.method == "POST":
+        data = request.json
+        providers = data.get("provider")
+        socials_id = data.get("social_id")
+        access_tokens = data.get("access_token")
+        if not providers and socials_id:
+            response_body["message"] = "Missing provider"
+            return response_body, 400
+        new_account = SocialAccounts(user_id=current_user["user_id"], social_id=socials_id, provider=providers, access_token=access_tokens)
+        db.session.add(new_account)
+        db.session.commit()
+        response_body["message"] = "Successfully posted"
+        return response_body, 200
+
+
+"""
+ @api.route("/social")
+    if request.method == "DELETE":
+        data = request.json
+        provider = data.get("provider")
+        social_id = data.get("social_id")
+        access_token = data.get("access_token")
+        if not provider or not social_id or not access_token:
+            response_body["message"] = "Missing information"
+            return response_body, 404
+        social_account_delete = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"], SocialAccounts.provider == provider, SocialAccounts.social_id == social_id, SocialAccounts.access_token == access_token)).scalar()
+        if not social_account_delete:
+            response_body["message"] = "account not found"
+            return response_body, 404
+        db.session.delete(social_account_delete)
+        db.session.commit()
+        response_body["message"] = "Social account deleted"
+        return response_body, 200
+    if request.method == "PUT":
+        data = request.json
+        provider = data.get("provider")
+        social_id = data.get("social_id")
+        access_token = data.get("access_token")
+        user_id = data.get("user_id")
+        if not provider or not social_id or not access_token or not user_id:
+            response_body["message"] = "Missing items"
+            return response_body, 400
+        socials_account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"], SocialAccounts.provider == provider, SocialAccounts.social_id == social_id, SocialAccounts.access_token == access_token)).scalar()
+        if socials_account:
+            response_body["message"] = "User already exist"
+            response_body["results"] = {}
+            return response_body, 409
+        socials_account.provider = provider
+        socials_account.social_id = social_id
+        socials_account.access_token = access_token
+        db.session.commit()
+        response_body["message"] = "social account updated"
+        return response_body, 200 
+        """
+     
+    
 @api.route("/stores", methods=["GET", "POST"])
 def handle_stores():
     response_body = {}
@@ -281,74 +378,7 @@ def handle_stores():
         response_body["message"] = "POST stores"
         return response_body, 200
 
-      
-@api.route("/social_accounts", methods=["GET", "POST", "PUT", "DELETE"])
-@jwt_required()
-def handle_social_accounts():
-    response_body = {}
-    current_user = get_jwt_identity()
-    user = db.session.execute(db.select(Users).where(Users.id == current_user["user_id"])).scalar()
 
-    if not user:
-        response_body["results"] = {}
-        response_body["message"] = "User not found"
-        return response_body, 404
-
-    if request.method == "GET":
-        accounts = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"])).scalars()
-        results = [{"id": row.id, "social": row.social_id, "provider": row.provider, "access": row.access_token} for row in accounts]
-        response_body["results"] = results
-        response_body["message"] = f"Social account for user {current_user} retrieved successfully"
-        return response_body, 200
-
-    if request.method == "POST":
-        data = request.json
-        providers = data.get("provider")
-        socials_id = data.get("social_id")
-        access_tokens = data.get("access_token")
-
-        if not providers and socials_id:
-            response_body["message"] = "Missing provider"
-            return response_body, 400
-
-        new_account = SocialAccounts(user_id=current_user["user_id"], social_id=socials_id, provider=providers, access_token=access_tokens)
-        db.session.add(new_account)
-        db.session.commit()
-        response_body["message"] = "Successfully posted"
-        return response_body, 200
-
-    if request.method == "DELETE":
-        data = request.json
-        account_id = data.get("aprovider")
-        social_account_delete = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"], SocialAccounts.id == provider)).scalar()
-        
-        if not social_account_delete:
-            response_body["message"] = "account not found"
-            return response_body, 404
-
-        db.session.delete(social_account_delete)
-        db.session.commit()
-        response_body["message"] = "Deleted"
-        return response_body, 201
-
-    if request.method == "PUT":
-        data = request.json
-        social_id = data.get("social_id")
-
-        if not social_id:
-            response_body["message"] = "Missing ID"
-            return response_body, 404
-        social_account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
-        
-        if not social_account:
-            response_body["message"] = "social account not found"
-            return response_body, 404
-
-        db.session.commit()
-        response_body["message"] = "social account updated"
-        return response_body, 200
-     
-    
     @api.route('/signup', methods=['POST'])
     def handle_singup():
         response_body = {}
