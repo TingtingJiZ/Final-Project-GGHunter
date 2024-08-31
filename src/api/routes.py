@@ -276,7 +276,7 @@ def handle_game(game_id):
         return response_body, 200   
 
 
-@api.route("/comments", methods=["GET", "POST", "PUT", "DELETE"])
+@api.route("/comments", methods=["GET", "POST"])
 @jwt_required()
 def handle_comments():
     response_body = {}
@@ -315,31 +315,54 @@ def handle_comments():
         de.session.commit()
         response_body["message"] = f"Comment deletede"
         return jsonify(response_body), 201
+  
 
-      
-@api.route("/stores", methods=["GET", "POST"])
-def handle_stores():
+@api.route("/comments/<int:comment_id>", methods=["GET", "PUT", "DELETE"])
+@jwt_required()
+def handle_comment(comment_id):
     response_body = {}
-    rows = db.session.execute(db.select(Stores)).scalars()
-    results = [row.serialize() for row in rows]
+    current_user = get_jwt_identity()
     if request.method == "GET":
-        response_body["results"] = results
-        response_body["message"] = "GET stores"
+        comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id, Comments.user_id == current_user["user_id"])).scalar()
+        if not comment:
+            response_body["message"] = "Comment ID not found"
+            response_body["results"] = {}
+            return response_body, 404
+        response_body["message"] = "Get commmet"
+        response_body["results"] = comment.serialize()
         return response_body, 200
-    if request.method == "POST":
-        data = request.json
-        store_url = data.get("url")
-        if not store_url:
-            response_body["message"] = "Missing store url"
-            return response_body, 400
-        new_store = Stores(url=store_url)
-        db.session.add(new_store)
+    if request.method == "DELETE":
+        delete_comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id)).scalar()
+        if not delete_comment:
+            response_body["message"] = "Comment to delete not found"
+            response_body["results"] = {}
+            return response_body, 404
+        db.session.delete(delete_comment)
         db.session.commit()
-        response_body["message"] = "POST stores"
+        response_body["message"] = f"Comment deleted"
+        return jsonify(response_body), 201
+    if request.method == "PUT":
+        data = request.get_json()
+        game_id = data.get("game_id", None)
+        body = data.get("body", None)
+        if not game_id or not body:
+            response_body["message"] = "Missing game ID or body"
+            response_body["results"] = {}
+            return response_body, 400
+        comment_to_update = db.session.execute(db.select(Comments).where(Comments.id == comment_id, Comments.user_id == current_user["user_id"])).scalar()
+        if not comment_to_update:
+            response_body["message"] = "Comment not updated"
+            response_body["results"] = {}
+            return response_body, 404
+        comment_to_update.game_id = game_id
+        comment_to_update.body = body
+        db.session.commit()
+        response_body["message"] = "Comment updated"
+        response_body["results"] = comment_to_update.serialize()
         return response_body, 200
 
-      
-@api.route("/social_accounts", methods=["GET", "POST", "PUT", "DELETE"])
+
+@api.route("/social_accounts", methods=["GET", "POST"])
 @jwt_required()
 def handle_social_accounts():
     response_body = {}
@@ -368,40 +391,131 @@ def handle_social_accounts():
         db.session.commit()
         response_body["message"] = "Successfully posted"
         return response_body, 200
-    if request.method == "DELETE":
-        data = request.json
-        account_id = data.get("aprovider")
-        social_account_delete = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.user_id == current_user["user_id"], SocialAccounts.id == provider)).scalar()
-        if not social_account_delete:
-            response_body["message"] = "account not found"
+      
+      
+@api.route("/social_accounts/<int:social_account_id>", methods=["GET", "PUT", "DELETE"])
+@jwt_required()
+def handle_social_account(social_account_id):
+    response_body = {}
+    current_user = get_jwt_identity()
+    if request.method == "GET":
+        account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_account_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
+        if not account:
+            response_body["message"] = "Account not found"
+            response_body["results"] = {}
             return response_body, 404
-        db.session.delete(social_account_delete)
+        response_body["message"] = "Get account"
+        response_body["results"] = account.serialize()
+        return response_body, 200
+    if request.method == "DELETE":
+        delete_account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_account_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
+        if not delete_account:
+            response_body["message"] = "Account to delete not found"
+            response_body["results"] = {}
+            return response_body, 404
+        db.session.delete(delete_account)
         db.session.commit()
-        response_body["message"] = "Deleted"
-        return response_body, 201
+        response_body["message"] = "Account deleted"
+        return response_body, 200
+    if request.method == "PUT":
+        data = request.get_json()
+        provider = data.get("provider", None)
+        social_id = data.get("social_id", None)
+        access_token = data.get("access_token", None)
+        if not provider or not social_id or not access_token:
+            response_body["message"] = "Missing provider, social ID or access_token"
+            response_body["results"] = {}
+            return response_body, 404
+        account_to_update = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_account_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
+        if not account_to_update:
+            response_body["message"] = "Account not updated"
+            response_body["results"] = {}
+            return response_body, 404
+        account_to_update.provider = provider
+        account_to_update.social_id = social_id
+        account_to_update.access_token = access_token
+        db.session.commit()
+        response_body["message"] = "Account updated"
+        response_body["results"] = account_to_update.serialize()
+        return response_body, 200
+
+   
+@api.route("/stores", methods=["GET", "POST"])
+def handle_stores():
+    response_body = {}
+    rows = db.session.execute(db.select(Stores)).scalars()
+    results = [row.serialize() for row in rows]
+
+    if request.method == "GET":
+        response_body["results"] = results
+        response_body["message"] = "GET stores"
+        return response_body, 200
+
+    if request.method == "POST":
+        data = request.json
+        store_url = data.get("url")
+
+        if not store_url:
+            response_body["message"] = "Missing store url"
+            return response_body, 400
+
+        new_store = Stores(url=store_url)
+        db.session.add(new_store)
+        db.session.commit()
+        response_body["message"] = "POST stores"
+        return response_body, 200
+
+
+@api.route('/profile', methods=['PUT', 'DELETE'])
+@jwt_required()
+def handle_profile():
+    response_body = {}
+    current_user = get_jwt_identity()
+    existing_user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
+    
+    if not existing_user:
+        response_body['results']= {}
+        response_body['message']= "User not found"
+        return jsonify(response_body), 404
+    
+    user_id = user.id
+    
     if request.method == "PUT":
         data = request.json
-        social_id = data.get("social_id")
-        if not social_id:
-            response_body["message"] = "Missing ID"
-            return response_body, 404
-        social_account = db.session.execute(db.select(SocialAccounts).where(SocialAccounts.id == social_id, SocialAccounts.user_id == current_user["user_id"])).scalar()
-        if not social_account:
-            response_body["message"] = "social account not found"
-            return response_body, 404
+        user = Users(alias = data.get("alias"),
+                    lastname = data.get("lastname"),
+                    birth_day = data.get("birth_day"),
+                    mobile_phone = data.get("mobile_phone"),
+                    address = data.get("address"),
+                    country = data.get("country"),
+                    city = data.get("city"),
+                    zip_code = data.get("zip_code"),
+                    image = data.get("image"),
+                    bio = data.get("bio"))
+        db.session.add(user)
         db.session.commit()
-        response_body["message"] = "social account updated"
-        return response_body, 200
-     
-    
+        response_body = {'results': {}, 'message': "User modified"}
+        return response_body, 201
+
+    if request.method == "DELETE":
+        user.is_active = False
+        db.session.commit()
+
+        response_body['results'] = {}
+        response_body['message'] = "User deactivated successfully"
+        return jsonify(response_body), 200
+      
+
 @api.route('/favourites', methods=['GET', 'POST', 'DELETE'])
 @jwt_required()
 def handle_favourites():
     current_user = get_jwt_identity()
     user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
+
     if not user:
         response_body = {'results': {}, 'message': "User not found"}
         return jsonify(response_body), 404
+
     if request.method == 'GET':
         # Obtener los juegos favoritos del usuario
         favourites = Favorites.query.filter_by(user_id=user.id).all()
@@ -410,29 +524,36 @@ def handle_favourites():
             'message': "User favourites retrieved successfully"
         }
         return jsonify(response_body), 200
+
     if request.method == 'POST':
         data = request.get_json()
         game_id = data.get('game_id')
         existing_favorite = db.session.execute(db.select(Users).where(user_id=user.id, game_id=game_id)).scalar()
+    
         if existing_favorite:
             response_body = {'results': {}, 'message': "Game already in favourites"}
             return jsonify(response_body), 400
+
         new_favorite = Favorites(user_id=user.id, 
                                 game_id=game_id)
         db.session.add(new_favorite)
         db.session.commit()
+
         response_body = {
             'results': new_favorite.serialize(),
             'message': "Game added to favourites successfully"
         }
         return jsonify(response_body), 201
+
     if request.method == 'DELETE':
         data = request.get_json()
         game_id = data.get('game_id')
         favorite = Favorites.query.filter_by(user_id=user.id, game_id=game_id).first()
+
         if not favorite:
             response_body = {'results': {}, 'message': "Game not found in favourites"}
             return jsonify(response_body), 404
+
         db.session.delete(favorite)
         db.session.commit()
         response_body = {'results': {}, 'message': "Game removed from favourites successfully"}
@@ -441,17 +562,22 @@ def handle_favourites():
 
 @api.route('/media/<int:game_id>', methods=['GET', 'POST'])
 def handle_media(game_id):
+
     if request.method == "GET":
         list_media = db.session.execute(db.select(Media)).scalars()
         rows = [row.serialize() for row in list_media]
+        print(rows)
         response_body['message'] = f"List of the game {game_id}"
         response_body['result'] = rows
         return jsonify(response_body), 200
+
     if request.method == "POST":
         data = request.json
         type_media = data.get["type_media"]
+
         if type_media == None:
             type_media = "imagen"
+        
         media = Media(game_id = game_id,
                       url = data.get["url"],
                       type_media = type_media,
