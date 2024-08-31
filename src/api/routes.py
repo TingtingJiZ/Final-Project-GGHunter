@@ -13,42 +13,119 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 CORS(api)  # Allow CORS requests to this API
 
-
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+@api.route('/login', methods=['GET'])
+def handle_users():
     response_body = {}
-    response_body['message'] = "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    return response_body, 200
-  
-  
+    data = request.json
+    email = data.get("email", None).lower()
+    password = data.get("password", None)
+    user = db.session.execute(db.select(Users).where(Users.email == email, Users.password == password, Users.is_active == True)).scalar()
+    
+    if not user:
+        response_body["message"] =f"El usuario {email} es desconocido para el sistema"
+        return response_body, 404
+    
+    if not user.is_active:
+        response_body["message"] =f"El usuario {email} no esta activo en la página web"
+        return response_body, 404
+    
+    access_token = create_access_token(identity={'email':email, 'user_id':user.id, 'is_rol':user.rol})
+    response_body['results'] = user.serialize()
+    response_body['message'] = 'User logged'
+    response_body['message'] = access_token
+    return response_body, 201
+
+
+@api.route('/signup', methods=['POST'])
+def handle_singup():
+    response_body = {}
+    data = request.json
+    email = data.get("email", None).lower()
+    password = data.get("password", None)
+    existing_user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
+    if existing_user:
+        return jsonify({"message": "El usuario con este correo ya existe."}), 409
+    new_user = Users(email = email,
+        password = data.get("password"),
+        is_active = True,
+        rol = 'user')
+    db.session.add(new_user)
+    db.session.commit()
+    user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
+    access_token = create_access_token(identity={'email': user.email,
+                                                'user_id': user.id,
+                                                'rol': user.rol})
+    response_body['results'] = user.serialize()
+    response_body['message'] = 'User registrado y logeado'
+    response_body['access_token'] = access_token
+    return response_body, 201
+
+
+@api.route('/profile', methods=['PUT', 'DELETE'])
+@jwt_required()
+def handle_profile():
+    response_body = {}
+    current_user = get_jwt_identity()
+    existing_user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
+    if not existing_user:
+        response_body['results']= {}
+        response_body['message']= "User not found"
+        return jsonify(response_body), 404
+    user_id = user.id   
+    if request.method == "PUT":
+        data = request.json
+        user = Users(alias = data.get("alias"),
+                    lastname = data.get("lastname"),
+                    birth_day = data.get("birth_day"),
+                    mobile_phone = data.get("mobile_phone"),
+                    address = data.get("address"),
+                    country = data.get("country"),
+                    city = data.get("city"),
+                    zip_code = data.get("zip_code"),
+                    image = data.get("image"),
+                    bio = data.get("bio"))
+        db.session.add(user)
+        db.session.commit()
+        response_body = {'results': {}, 'message': "User modified"}
+        return response_body, 201
+    if request.method == "DELETE":
+        user.is_active = False
+        db.session.commit()
+        response_body['results'] = {}
+        response_body['message'] = "User deactivated successfully"
+        return jsonify(response_body), 200
+
+
 @api.route('/game_characteristics', methods=['GET', 'POST'])
 def handle_all_game_characteristics():
     response_body = {}
     if request.method == 'GET':
         rows = db.session.execute(db.select(GameCharacteristics)).scalars()
+        serialized_rows = [row.serialize() for row in rows]
+        response_body['results'] = serialized_rows
+        response_body['message'] = "GET request received for all Game Characteristics"
+        return response_body, 200
+    if request.method == 'POST':
+        data = request.get_json() 
         game_id = data.get('game_id', None)
         platform_id = data.get('platform_id', None)
-        filename = data.get('filename', None)
-        filetype = data.get('filetype', '')
-        size = data.get('size', '')
-        minimun = data.get('minimun', '')
-        recomended = data.get('recomended', '')
-        if not game_id or not platform_id or not filename:
-            response_body['message'] = 'Missing data'
+        size_mb = data.get('size_mb', None)
+        minimun = data.get('minimun', None)
+        recomended = data.get('recomended', None)
+        if not game_id or not platform_id:
+            response_body['message'] = 'Missing game_id or platform_id'
             response_body['results'] = {}
             return response_body, 400
         row = GameCharacteristics(
             game_id=game_id,
             platform_id=platform_id,
-            filename=filename,
-            filetype=filetype,
-            size=size,
+            size_mb=size_mb,
             minimun=minimun,
             recomended=recomended,
         )
         db.session.add(row)
         db.session.commit()
-        response_body['message'] = "POST received"
+        response_body['message'] = "POST request received and Game Characteristic created"
         response_body['results'] = row.serialize()
         return response_body, 201
 
@@ -56,45 +133,51 @@ def handle_all_game_characteristics():
 @api.route('/game_characteristics/<int:characteristic_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_game_characteristic(characteristic_id):
     response_body = {}
-
     if request.method == 'GET':
         row = db.session.execute(db.select(GameCharacteristics).where(GameCharacteristics.id == characteristic_id)).scalar()
-        
         if not row:
+            response_body['message'] = f'Game Characteristic {characteristic_id} does not exist'
             response_body['results'] = {}
-            response_body['message'] = f'No existe la característica del juego {characteristic_id}'
             return response_body, 404
-        response_body['results'] = row.serialize()
         response_body['message'] = f'GET request received for Game Characteristic {characteristic_id}'
+        response_body['results'] = row.serialize()
+        return response_body, 200
+    if request.method == 'PUT':
+        data = request.get_json() 
         game_id = data.get('game_id', None)
         platform_id = data.get('platform_id', None)
-        filename = data.get('filename', None)
-        
-        if not game_id or not platform_id or not filename:
-            response_body['message'] = 'Missing data'
+        size_mb = data.get('size_mb', None)
+        minimun = data.get('minimun', None)
+        recomended = data.get('recomended', None)
+        if not game_id or not platform_id:
+            response_body['message'] = 'Missing game_id or platform_id'
             response_body['results'] = {}
             return response_body, 400
         characteristic = db.session.execute(db.select(GameCharacteristics).where(GameCharacteristics.id == characteristic_id)).scalar()
-        
         if not characteristic:
             response_body['message'] = f'Game Characteristic {characteristic_id} does not exist'
             response_body['results'] = {}
             return response_body, 404
-        characteristic.game_id = game_id
+        characteristic = GameCharacteristics(
+            game_id = game_id,
+            platform_id = platform_id,
+            size_mb = size_mb,
+            minimun = minimun,
+            recomended = recomended
+        )
+        """ characteristic.game_id = game_id
         characteristic.platform_id = platform_id
-        characteristic.filename = filename
-        characteristic.filetype = data.get('filetype', characteristic.filetype)
-        characteristic.size = data.get('size', characteristic.size)
-        characteristic.minimun = data.get('minimun', characteristic.minimun)
-        characteristic.recomended = data.get('recomended', characteristic.recomended)
+        characteristic.size_mb = size_mb
+        characteristic.minimun = minimun
+        characteristic.recomended = recomended 
+        Esto funciona pero es más antiguo"""
+
         db.session.commit()
         response_body['message'] = "Game Characteristic updated successfully"
         response_body['results'] = characteristic.serialize()
         return response_body, 200
-
     if request.method == 'DELETE':
         characteristic = db.session.execute(db.select(GameCharacteristics).where(GameCharacteristics.id == characteristic_id)).scalar()
-        
         if not characteristic:
             response_body['message'] = f'Game Characteristic {characteristic_id} does not exist'
             response_body['results'] = {}
@@ -108,38 +191,33 @@ def handle_game_characteristic(characteristic_id):
 @api.route('/games', methods=['GET', 'POST'])
 def handle_all_games():
     response_body = {}
-    
     if request.method == 'GET':
         rows = db.session.execute(db.select(Games)).scalars()
         results = [row.serialize() for row in rows]
         response_body['results'] = results
         response_body['message'] = "GET received"
         return response_body, 200
-
     if request.method == 'POST':
         data = request.json
         title = data.get('title', None)
-        
         if not title: 
             response_body['message'] = 'Does not exist'
             response_body['results'] = {}
             return response_body, 400
-          
+        game_exist = db.session.execute(db.select(Games).where(Games.title == title)).scalar() 
         if game_exist:
-            game_exist = db.session.execute(db.select(Games).where(Games.title == title)).scalar() # No sé si esto va aquí o en la linea 37.
             response_body['message'] = 'Game already exists'
             response_body['results'] = {}
             return response_body, 409
         new_game = Games(
-            # Los true y none, no creo que esten bien...
-            title=data.get('title', True),
-            comments=data.get('comments', True),
-            game_genders=data.get('game_genders', True),
-            game_characteristics=data.get('game_characteristics', True),
-            release_date=data.get('release_date', True),
-            publisher=data.get('publisher', True),
-            favourites_games=data.get('favourites', True),
-            is_active=data.get('is_active', True),
+            title=data.get('title'),
+            comments=data.get('comments', []),
+            game_genders=data.get('game_genders', []),
+            game_characteristics=data.get('game_characteristics',[]),
+            release_date=data.get('release_date'),
+            publisher=data.get('publisher'),
+            favourites_games=data.get('favourites',[]),
+            is_active=data.get('is_active'),
             description=data.get('description', None),
             developer=data.get('developer', None),
         )
@@ -153,10 +231,8 @@ def handle_all_games():
 @api.route('/games/<int:game_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_game(game_id):
     response_body = {}
-    
     if request.method == 'GET':
         game = db.session.execute(db.select(Games).where(Games.id == game_id)).scalar()
-        
         if not game:
             response_body['message'] = f'Game with id {game_id} not found'
             response_body['results'] = {}
@@ -164,25 +240,20 @@ def handle_game(game_id):
         response_body['results'] = game.serialize()
         response_body['message'] = f'Game {game_id} retrieved successfully'
         return response_body, 200
-
     if request.method == 'PUT':
         data = request.json
         game = db.session.execute(db.select(Games).where(Games.id == game_id)).scalar()
-        
         if not game:
             response_body['message'] = f'Game with id {game_id} not found'
             response_body['results'] = {}
             return response_body, 404
         title = data.get('title', None)
-
         if title:
             game_exist = db.session.execute(db.select(Games).where(Games.title == title, Games.id != game_id)).scalar()
-            
             if game_exist:
                 response_body['message'] = 'Game with this title already exists'
                 response_body['results'] = {}
                 return response_body, 409
-            
         game.title = title if title else game.title
         game.is_active = data.get('is_active', game.is_active)
         game.description = data.get('description', game.description)
@@ -193,10 +264,8 @@ def handle_game(game_id):
         response_body['message'] = f'Game {game_id} updated successfully'
         response_body['results'] = game.serialize()
         return response_body, 200
-
     if request.method == 'DELETE':
         game = db.session.execute(db.select(Games).where(Games.id == game_id)).scalar()
-        
         if not game:
             response_body['message'] = f'Game with id {game_id} not found'
             response_body['results'] = {}
@@ -235,7 +304,18 @@ def handle_comments():
         response_body["results"] = results
         response_body["message"] = f'Comments for user {current_user} retrieved successfully'
         return jsonify(response_body), 200
-
+    if request.method == "DELETE":
+        data = request.json
+        comment_user = data.get("comment_text")
+        delete_comment = db.session.execute(db.select(Comments).where(Comments.user_id == user_id, Comments.comment_text == comment_user)).scalar()
+        if not delete_comment:
+            response_body["message"] = f"Delete comment not found"
+            return jsonify(response_body), 404
+        db.session.delete(delete_comment)
+        de.session.commit()
+        response_body["message"] = f"Comment deletede"
+        return jsonify(response_body), 201
+  
 
 @api.route("/comments/<int:comment_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
@@ -311,8 +391,8 @@ def handle_social_accounts():
         db.session.commit()
         response_body["message"] = "Successfully posted"
         return response_body, 200
-
-
+      
+      
 @api.route("/social_accounts/<int:social_account_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
 def handle_social_account(social_account_id):
@@ -386,62 +466,6 @@ def handle_stores():
         return response_body, 200
 
 
-    @api.route('/signup', methods=['POST'])
-    def handle_singup():
-        response_body = {}
-        data = request.json
-        email = data.get("email", None).lower()
-        password = data.get("password", None)
-        alias = data.get("alias", None)
-        lastname = data.get("lastname", None)
-        birth_day = data.get("birth_day", None)
-        existing_user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
-        
-        if existing_user:
-            return jsonify({"message": "El usuario con este correo ya existe."}), 409
-        
-        new_user = Users(email = email,
-                        password = data.get("password"),
-                        is_active = True,
-                        rol = 'user',
-                        alias = alias,
-                        lastname = lastname,
-                        birth_day = birth_day)
-        db.session.add(new_user)
-        db.session.commit()
-        user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
-        access_token = create_access_token(identity={'email': user.email,
-                                                    'user_id': user.id,
-                                                    'rol': user.rol})
-        response_body['results'] = user.serialize()
-        response_body['message'] = 'User registrado y logeado'
-        response_body['access_token'] = access_token
-        return response_body, 201
-
-
-@api.route('/login', methods=['GET'])
-def handle_users():
-    response_body = {}
-    data = request.json
-    email = data.get("email", None).lower()
-    password = data.get("password", None)
-    user = db.session.execute(db.select(Users).where(Users.email == email, Users.password == password, Users.is_active == True)).scalar()
-    
-    if not user:
-        response_body["message"] =f"El usuario {email} es desconocido para el sistema"
-        return response_body, 404
-    
-    if not user.is_active:
-        response_body["message"] =f"El usuario {email} no esta activo en la página web"
-        return response_body, 404
-    
-    access_token = create_access_token(identity={'email':email, 'user_id':user.id, 'is_rol':user.rol})
-    response_body['results'] = user.serialize()
-    response_body['message'] = 'User logged'
-    response_body['message'] = access_token
-    return response_body, 201
-
-
 @api.route('/profile', methods=['PUT', 'DELETE'])
 @jwt_required()
 def handle_profile():
@@ -480,7 +504,7 @@ def handle_profile():
         response_body['results'] = {}
         response_body['message'] = "User deactivated successfully"
         return jsonify(response_body), 200
-
+      
 
 @api.route('/favourites', methods=['GET', 'POST', 'DELETE'])
 @jwt_required()
