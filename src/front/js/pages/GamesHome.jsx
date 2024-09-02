@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext.js";
+import React from "react";
 import { Card, Row, Col } from 'react-bootstrap';
 
 const GameCard = ({ image, title, rank }) => {
@@ -13,9 +12,7 @@ const GameCard = ({ image, title, rank }) => {
     );
 };
 
-export const HomePage = () => {
-    const { store, actions } = useContext(Context);
-
+const GamesList = () => {
     const mostPlayed = [
         { image: 'link_to_image1', title: 'Juego 1', rank: 1 },
         { image: 'link_to_image2', title: 'Juego 2', rank: 2 },
@@ -31,10 +28,12 @@ export const HomePage = () => {
         { image: 'link_to_image4', title: 'Juego 4', rank: 4 },
         { image: 'link_to_image5', title: 'Juego 5', rank: 5 },
     ];
+}
+export const GamesHome = () => {
 
     return (
         <div>
-            <h3 className="neon">Los más jugados</h3>
+            <h3>Most Played</h3>
             <Row>
                 {mostPlayed.map(game => (
                     <Col key={game.rank}>
@@ -42,7 +41,7 @@ export const HomePage = () => {
                     </Col>
                 ))}
             </Row>
-            <h3 className="neon">últimas ofertas</h3>
+            <h3>More Discount</h3>
             <Row>
                 {moreDiscount.map(game => (
                     <Col key={game.rank}>
@@ -51,5 +50,6 @@ export const HomePage = () => {
                 ))}
             </Row>
         </div>
-    );
-};
+
+    )
+}
