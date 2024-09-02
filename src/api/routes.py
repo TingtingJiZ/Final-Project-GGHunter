@@ -61,41 +61,6 @@ def handle_singup():
     return response_body, 201
 
 
-@api.route('/profile', methods=['PUT', 'DELETE'])
-@jwt_required()
-def handle_profile():
-    response_body = {}
-    current_user = get_jwt_identity()
-    existing_user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
-    if not existing_user:
-        response_body['results']= {}
-        response_body['message']= "User not found"
-        return jsonify(response_body), 404
-    user_id = user.id   
-    if request.method == "PUT":
-        data = request.json
-        user = Users(alias = data.get("alias"),
-                    lastname = data.get("lastname"),
-                    birth_day = data.get("birth_day"),
-                    mobile_phone = data.get("mobile_phone"),
-                    address = data.get("address"),
-                    country = data.get("country"),
-                    city = data.get("city"),
-                    zip_code = data.get("zip_code"),
-                    image = data.get("image"),
-                    bio = data.get("bio"))
-        db.session.add(user)
-        db.session.commit()
-        response_body = {'results': {}, 'message': "User modified"}
-        return response_body, 201
-    if request.method == "DELETE":
-        user.is_active = False
-        db.session.commit()
-        response_body['results'] = {}
-        response_body['message'] = "User deactivated successfully"
-        return jsonify(response_body), 200
-
-
 @api.route('/game_characteristics', methods=['GET', 'POST'])
 def handle_all_game_characteristics():
     response_body = {}
