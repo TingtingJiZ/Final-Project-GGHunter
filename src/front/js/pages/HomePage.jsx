@@ -1,23 +1,15 @@
+// src/pages/HomePage.js
 import React, { useContext } from "react";
 import { Context } from "../store/appContext.js";
-import { Card, Row, Col } from 'react-bootstrap';
-
-const GameCard = ({ image, title, rank }) => {
-    return (
-        <Card className="mb-4" style={{ width: '12rem' }}>
-            <Card.Img variant="top" src={image} />
-            <Card.Body>
-                <Card.Title>{rank}. {title}</Card.Title>
-            </Card.Body>
-        </Card>
-    );
-};
+import { Row, Col } from 'react-bootstrap';
+import { GameCard } from '../component/GameCard.jsx';
 
 export const HomePage = () => {
     const { store, actions } = useContext(Context);
 
     const mostPlayed = [
-        { image: 'link_to_image1', title: 'Juego 1', rank: 1 },
+        { image: 'https://www.universalpictures.es/tl_files/content/movies/super_mario_bros/super-mario-bros_header-mobile.jpg', 
+         rank: 'Nº1' },
         { image: 'link_to_image2', title: 'Juego 2', rank: 2 },
         { image: 'link_to_image3', title: 'Juego 3', rank: 3 },
         { image: 'link_to_image4', title: 'Juego 4', rank: 4 },
@@ -34,7 +26,7 @@ export const HomePage = () => {
 
     return (
         <div>
-            <h3 className="neon">Los más jugados</h3>
+            <h3 className="neon">Most Played</h3>
             <Row>
                 {mostPlayed.map(game => (
                     <Col key={game.rank}>
@@ -42,7 +34,7 @@ export const HomePage = () => {
                     </Col>
                 ))}
             </Row>
-            <h3 className="neon">últimas ofertas</h3>
+            <h3 className="neon">Latest Offers</h3>
             <Row>
                 {moreDiscount.map(game => (
                     <Col key={game.rank}>
