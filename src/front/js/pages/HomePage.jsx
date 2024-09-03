@@ -1,8 +1,11 @@
 // src/pages/HomePage.js
 import React, { useContext } from "react";
 import { Context } from "../store/appContext.js";
+import { Carousel } from "./Carousel.jsx";
+import { TopSellers } from "./TopSellers.jsx";
 import { Row, Col } from 'react-bootstrap';
 import { GameCard } from '../component/GameCard.jsx';
+
 
 export const HomePage = () => {
     const { store, actions } = useContext(Context);
@@ -27,6 +30,12 @@ export const HomePage = () => {
     return (
         <div className="container py-3 bg-light-subtle">
             <h3 className="neon">Most Played</h3>
+      <Row>
+           <Carousel/>
+      </Row>
+      <Row> 
+          <TopSellers/>
+      </Row>
             <Row>
                 {mostPlayed.map(game => (
                     <Col key={game.rank}>

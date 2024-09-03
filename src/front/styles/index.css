@@ -1,3 +1,24 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+body {
+   /*  display: flex;
+    justify-content: center; */
+    align-items: center;
+    height: 100vh;
+    background-color: rgb(19, 22, 22);
+    margin: 0;
+}
+.neon {
+    font-size: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px rgb(255, 0, 60),
+        0 0 30px rgb(255, 0, 119),
+        0 0 40px rgb(255, 0, 115),
+        0 0 50px rgb(255, 0, 204),
+        0 0 60px #00f;
+}
