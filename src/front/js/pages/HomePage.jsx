@@ -29,13 +29,14 @@ export const HomePage = () => {
 
     return (
         <div className="container py-3 bg-light-subtle">
-            <h3 className="neon">Most Played</h3>
+            
       <Row>
            <Carousel/>
       </Row>
       <Row> 
           <TopSellers/>
       </Row>
+            <h3 className="neon">Most Played</h3>
             <Row>
                 {mostPlayed.map(game => (
                     <Col key={game.rank}>
