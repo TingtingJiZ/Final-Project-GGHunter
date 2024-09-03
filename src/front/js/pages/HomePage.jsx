@@ -25,7 +25,7 @@ export const HomePage = () => {
     ];
 
     return (
-        <div>
+        <div className="container py-3 bg-light-subtle">
             <h3 className="neon">Most Played</h3>
             <Row>
                 {mostPlayed.map(game => (
