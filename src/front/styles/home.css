@@ -1,7 +1,110 @@
-/*
-    home.css: This website contains selectors only used in home.css
+body {
+    
+    height: 100vh;
+    background-image: URL(https://png.pngtree.com/thumb_back/fh260/background/20220831/pngtree-dark-and-neon-gamer-background-image_1462969.jpg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: repeat; 
+    margin: 0;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.neon {
+    font-size: 20px;
+    color: #080808;
+    text-transform: uppercase;
+    font-family: 'Impact', fantasy;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #00f,
+        0 0 30px #00f,
+        0 0 40px #00f,
+        0 0 50px #00f,
+        0 0 60px #00f;
+}
+
+.atropos-card {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.atropos-img {
+    width: 100%;
+    height: auto;
+}
+
+.atropos-body {
+    padding: 10px;
+}
+
+.atropos-title {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.rank-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #3235d3;
+    color: #fff;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border: 2px solid #408fda;
+    font-size: 2px; 
+    z-index: 10;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background: #222;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.footer-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.socials {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.socials li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.socials li a {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+}
+
+.footer-bottom span {
+    color: #e44d26;
+    font-weight: bold;
+}
