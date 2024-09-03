@@ -1,27 +1,12 @@
 body {
     
     height: 100vh;
-    background-image: URL(https://png.pngtree.com/thumb_back/fh260/background/20220831/pngtree-dark-and-neon-gamer-background-image_1462969.jpg);
-    background-size: cover; 
+    background-color: #222;
     background-position: center; 
     background-repeat: repeat; 
     margin: 0;
 }
 
-.neon {
-    font-size: 20px;
-    color: #080808;
-    text-transform: uppercase;
-    font-family: 'Impact', fantasy;
-    text-shadow: 
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 20px #00f,
-        0 0 30px #00f,
-        0 0 40px #00f,
-        0 0 50px #00f,
-        0 0 60px #00f;
-}
 
 .atropos-card {
     background-color: #1a1a1a;
