@@ -8,7 +8,7 @@ export const GameCard = ({ image, title, rank }) => {
     return (
         <Atropos 
             className="atropos-card mb-4" 
-            style={{ width: '12rem', height: '14rem' }}
+            style={{ width: '10rem', height: '12rem' }}
             activeOffset={40}
             shadowScale={1.05}
         >
