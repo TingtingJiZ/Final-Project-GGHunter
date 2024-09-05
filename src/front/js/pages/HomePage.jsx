@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext.js";
 import { Carousel } from "./Carousel.jsx";
-import { TopSellers } from "./TopSellers.jsx";
 import { Row, Col } from 'react-bootstrap';
 import { GameCard } from '../component/GameCard.jsx';
 
@@ -28,30 +27,30 @@ export const HomePage = () => {
     ];
 
     return (
-        <div className="container py-3 bg-light-subtle">
-            
+        <div className="container py-3 ">
+
       <Row>
            <Carousel/>
       </Row>
-      <Row> 
-          <TopSellers/>
-      </Row>
-            <h3 className="neon">Most Played</h3>
+      <Row className="card-body">
+
+            <h2>Most Played</h2>
             <Row>
                 {mostPlayed.map(game => (
-                    <Col key={game.rank}>
+                    <Col key={game.rank} className="card-row mt-3">
                         <GameCard image={game.image} title={game.title} rank={game.rank} />
                     </Col>
                 ))}
             </Row>
-            <h3 className="neon">Latest Offers</h3>
+            <h2>Latest Offers</h2>
             <Row>
                 {moreDiscount.map(game => (
-                    <Col key={game.rank}>
+                    <Col key={game.rank} className="card-row">
                         <GameCard image={game.image} title={game.title} rank={game.rank} />
                     </Col>
                 ))}
             </Row>
+      </Row>
         </div>
     );
 };
