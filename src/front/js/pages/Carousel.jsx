@@ -8,7 +8,8 @@ export const Carousel = () => {
     const Navigate = useNavigate()
 
     return (
-        <div className="container bg-dark mb-3 mt-5">
+        <div className="container">
+            <div className="row">
                 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner mb-3">
                         <div className="carousel-item active" data-bs-interval="10000">
@@ -31,6 +32,6 @@ export const Carousel = () => {
                     </button>
                 </div>
             </div>
-        
+        </div>
     )
 }

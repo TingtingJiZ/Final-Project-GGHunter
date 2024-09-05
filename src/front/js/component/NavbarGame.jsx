@@ -13,7 +13,7 @@ export const NavbarGame = () => {
 		
 	}
 	return (
-		<Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
+		<Navbar expand="lg" className="navbarGame" data-bs-theme="dark">
 			<Container fluid>
 				<Navbar.Brand as={Link} to="/">Tienda </Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
