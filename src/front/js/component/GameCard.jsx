@@ -7,7 +7,7 @@ export const GameCard = ({ image, title, price }) => {
     return (
         <Atropos 
             className="atropos-card mb-4" 
-            style={{ width: '12rem', height: '16rem' }} // Ajusta el tamaño total de la tarjeta
+            style={{ width: '12rem', height: '16rem' }} 
             activeOffset={40}
             shadowScale={1.05}
         >
@@ -16,11 +16,11 @@ export const GameCard = ({ image, title, price }) => {
                     variant="top" 
                     src={image} 
                     className="atropos-img" 
-                    style={{ height: '70%', objectFit: 'cover' }} // Ajusta el tamaño de la imagen
+                    style={{ height: '70%', objectFit: 'cover' }} 
                 />
                 <Card.Body 
                     className="atropos-body" 
-                    style={{ height: '30%', padding: '0.5rem' }} // Ajusta el tamaño del cuerpo
+                    style={{ height: '30%', padding: '0.5rem' }} 
                 >
                     <Card.Title className="atropos-title" style={{ fontSize: '1rem' }}>
                         {title}
