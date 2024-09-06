@@ -1,56 +1,47 @@
-// src/pages/HomePage.js
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
 import { Carousel } from "./Carousel.jsx";
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { GameCard } from '../component/GameCard.jsx';
-
 
 export const HomePage = () => {
     const { store, actions } = useContext(Context);
+    const gamesPc = store.gamesPc;
 
-    const mostPlayed = [
-        { image: 'https://www.universalpictures.es/tl_files/content/movies/super_mario_bros/super-mario-bros_header-mobile.jpg', 
-         rank: 'Nº1' },
-        { image: 'link_to_image2', title: 'Juego 2', rank: 2 },
-        { image: 'link_to_image3', title: 'Juego 3', rank: 3 },
-        { image: 'link_to_image4', title: 'Juego 4', rank: 4 },
-        { image: 'link_to_image5', title: 'Juego 5', rank: 5 },
-    ];
+    useEffect(() => {
+        actions.getGamesPc();
+    }, []); 
 
-    const moreDiscount = [
-        { image: 'link_to_image1', title: 'Juego 1', rank: 1 },
-        { image: 'link_to_image2', title: 'Juego 2', rank: 2 },
-        { image: 'link_to_image3', title: 'Juego 3', rank: 3 },
-        { image: 'link_to_image4', title: 'Juego 4', rank: 4 },
-        { image: 'link_to_image5', title: 'Juego 5', rank: 5 },
-    ];
+    useEffect(() => {
+        console.log("gamesPc:", gamesPc);
+    }, [gamesPc]);
 
     return (
         <div className="container py-3 ">
-
-      <Row>
-           <Carousel/>
-      </Row>
-      <Row className="card-body">
-
-            <h2>Most Played</h2>
             <Row>
-                {mostPlayed.map(game => (
-                    <Col key={game.rank} className="card-row mt-3">
-                        <GameCard image={game.image} title={game.title} rank={game.rank} />
-                    </Col>
-                ))}
+                <Carousel />
             </Row>
-            <h2>Latest Offers</h2>
-            <Row>
-                {moreDiscount.map(game => (
-                    <Col key={game.rank} className="card-row">
-                        <GameCard image={game.image} title={game.title} rank={game.rank} />
-                    </Col>
-                ))}
+            <Row className="card-body">
+                <h2>PC</h2>
+                <Row>
+                    {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
+                        Object.keys(gamesPc).map(key => {
+                            const game = gamesPc[key].info;
+                            const price = gamesPc[key].cheapestPriceEver.price;
+                            return (
+                                <GameCard 
+                                    key={game.steamAppID} 
+                                    image={game.thumb} 
+                                    title={game.title} 
+                                    price={price} 
+                                />
+                            );
+                        })
+                    ) : (
+                        <p>No hay juegos</p>
+                    )}
+                </Row>
             </Row>
-      </Row>
         </div>
     );
 };

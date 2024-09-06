@@ -15,7 +15,7 @@ export const Footer = () => {
 			</ul>
 		</div>
 		<div class="footer-bottom">
-			<p>&copy; 2024 GG-Hunter</p> 
+			<p>4&copy; 202 GG-Hunter</p> 
 			<p>Diseñado por Andrea Muñiz Salvadores, Francisco Javier Carrillo Carrillo & Tingting Ji Zhou</p>
 		</div>
 	</footer>
