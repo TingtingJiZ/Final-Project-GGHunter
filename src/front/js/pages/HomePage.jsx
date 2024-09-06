@@ -22,7 +22,7 @@ export const HomePage = () => {
                 <Carousel />
             </Row>
             <Row className="card-body">
-                <h2>PC</h2>
+                <h2>PC</h2> {/* Hacer un onClik para ir a plataforma PC */}
                 <Row>
                     {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
                         Object.keys(gamesPc).map(key => {
