@@ -6,6 +6,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			topSellers: [],
 			currentTopSellers: [],
+			
+			currentUser:null,
+			isLoged: false
 		},
 		actions: {
 			getMessage: async () => {
@@ -34,6 +37,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({topSellers: data.results});
 			},
 			setCurrentTopSellers: (topSellers) => {setStore({setCurrentTopSellers: topSellers})},
+			setCurrentUser: (user) =>{setStore({currentUser:user})},
+			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},
 		}
 	};
 };
