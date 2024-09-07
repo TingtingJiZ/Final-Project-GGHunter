@@ -30,7 +30,7 @@ export const HomePage = () => {
             </Row>
             <Row className="card-body">
                 <button className="button-pc" onClick={() => handlePc()}>PC</button> {/* Hacer un navigate para ir a plataforma PC */}
-                <div className="d-flex align-items-center ms-3 mb-4">
+                <div className="card-row d-flex align-items-center ms-3 mb-4">
                     {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
                         Object.keys(gamesPc).map(key => {
                             const game = gamesPc[key].info;
@@ -47,7 +47,9 @@ export const HomePage = () => {
                     ) : (
                         <p>No hay juegos</p>
                     )}
-                    <span className="ms-3"><i className="fa-solid fa-circle-arrow-right fs-1"></i></span>
+                    <span on onClick={() => handlePc()} className="ms-3">
+                    <i className="fa-solid fa-circle-arrow-right fs-1"></i>
+                    </span>
                 </div>
             </Row>
         </div>
