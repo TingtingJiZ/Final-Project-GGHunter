@@ -12,6 +12,8 @@ import { Error404 } from "./pages/Error404.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 import { Profile } from "./pages/Profile.jsx";
 import { Signup } from "./pages/Signup.jsx";
+import { PCGames } from "./pages/PCGames.jsx";
+
 
 
 // Create your first component
@@ -31,6 +33,7 @@ const Layout = () => {
                         <Route element={<HomePage />} path="/" />
                         <Route element={<Profile />} path="/profile"/>
                         <Route element={<Signup />} path="/signup"/>
+                        <Route element={<PCGames />} path="PCgames" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
