@@ -51,6 +51,7 @@ export const NavbarGame = () => {
 					<Nav className="justify-content-end flex-grow-1 pe-3">
 						<Nav.Link as={Link} to="/">Home</Nav.Link>
 						<Nav.Link as={Link} to="/category">Explorador de productos</Nav.Link>
+						<Nav.Link as={Link} to="/pcgames">PC</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>
