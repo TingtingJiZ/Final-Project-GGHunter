@@ -23,7 +23,7 @@ export const HomePage = () => {
     }, [gamesPc]);
 
     return (
-        <div className="container py-3 ">
+        <div className="container py-3">
             <Row>
                 <Carousel />
             </Row>

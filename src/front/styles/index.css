@@ -107,6 +107,8 @@ footer {
     background-color: #362D2D;
     border: none;
     cursor: pointer;
+    font-size: 40px;
+    margin-right: 20px;
  }
 .signup {
     font-family: 'Roboto';font-size: 18px;
