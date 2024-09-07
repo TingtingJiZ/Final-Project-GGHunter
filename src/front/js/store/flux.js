@@ -4,9 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			topSellers: [],
 			currentTopSellers: [],
-			
 			currentUser:null,
-			isLoged: false
+			isLoged: false,
 			pcGames: [],
 			currentPcGames: [],
 		},
@@ -36,31 +35,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data)
 				setStore({pcGames: data})
 			},
+			getGamesPc: async () => {
+		                const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
+		                const options = {
+		                    method: "GET",
+		                }
+		                const response = await fetch(uri, options)
+		                if(!response.ok) {
+		                    console.log("Error: ", response.status, response.statusText)
+		                    return;
+		                }
+		                const data = await response.json()
+		                console.log(data.status)
+		                setStore({ gamesPc: data });
+            		},
 			setCurrentpcGames: (pcGames) => {setStore({setCurrentpcGames: pcGames})},
 			setCurrentTopSellers: (topSellers) => {setStore({setCurrentTopSellers: topSellers})},
 			setCurrentUser: (user) =>{setStore({currentUser:user})},
 			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},
+			setcurrentGamesPc: (gamesPc) => { setStore({ currentGamesPc: gamesPc }) }
 		}
 	};
-};
-            // Aquí movemos getGamesPc dentro de las acciones
-            getGamesPc: async () => {
-                const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
-                const options = {
-                    method: "GET",
-                }
-                const response = await fetch(uri, options)
-                if(!response.ok) {
-                    console.log("Error: ", response.status, response.statusText)
-                    return;
-                }
-                const data = await response.json()
-                console.log(data.status)
-                setStore({ gamesPc: data });
-            },
-            setcurrentGamesPc: (gamesPc) => { setStore({ currentGamesPc: gamesPc }) }
-        }
-    };
 };
 
 export default getState;
