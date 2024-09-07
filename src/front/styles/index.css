@@ -36,8 +36,63 @@ body {
 .card-body {
     background-color: #858585;
     padding: 3% 1% 1% 3%;
+    border-radius: 10px;
 }
 .card-row {
     background-color: #362D2D;
     padding: 3% 3% 1% 3%;
+    border-radius: 10px;
 }
+.card-body .d-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 70px;
+}
+.button-pc {
+    font-size: 50px;
+    background-color: #858585;
+    border: none;
+    cursor: pointer; 
+    display: flex;
+    justify-content: flex-start;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+  }
+  
+  .footer-body {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #424242;
+  }
+  
+  .footer-body div {
+    flex: 1;
+    margin: 0 10px;
+    background-color: #362D2D;
+    font-family: 'Roboto';font-size: 22px;
+  }
+  .title-footer {
+      padding: 20px;
+      font-size: 12px;
+      margin-top: 30px;
+  }
+  .p-footer {
+    font-size: 8px;
+    padding: 5px;
+  }
+  .icon-discord {
+    font-size: 50px;
+    background-color: #362D2D;
+    border: none;
+    cursor: pointer;
+  }
+ .icon-social {
+    background-color: #362D2D;
+    border: none;
+    cursor: pointer;
+ }

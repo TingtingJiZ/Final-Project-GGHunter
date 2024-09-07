@@ -1,5 +1,3 @@
-
-
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -21,20 +19,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ message: data.message })
 				return data;
 			},
-			getTopSellers: async () => {
-				const uri = `${process.env.URIBACK}/api/games`
-				const options = {
-					method: "GET",
-				}
-				const response = await fetch(uri, options)
-				if(!response.ok) {
-					console.log("Error: ", response.status, response.statusText)
-					return;
-				}
-				const data = await response.json()
-				console.log(data.status)
-				setStore({topSellers: data.results});
-			},
 			getPcGames: async () => {
 				const uri = `${process.env.URIPC}/api/1.0/deals?storeID=1&upperPrice=15`
 				const options = {
@@ -54,6 +38,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 		}
 	};
 };
-
+            // Aquí movemos getGamesPc dentro de las acciones
+            getGamesPc: async () => {
+                const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
+                const options = {
+                    method: "GET",
+                }
+                const response = await fetch(uri, options)
+                if(!response.ok) {
+                    console.log("Error: ", response.status, response.statusText)
+                    return;
+                }
+                const data = await response.json()
+                console.log(data.status)
+                setStore({ gamesPc: data });
+            },
+            setcurrentGamesPc: (gamesPc) => { setStore({ currentGamesPc: gamesPc }) }
+        }
+    };
+};
 
 export default getState;
+

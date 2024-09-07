@@ -3,22 +3,30 @@ import React from "react";
 export const Footer = () => {
 
 	return (
-	<footer>
-		<div class="footer-content">
-			<h3>GG-Hunter</h3>
-			<p>Compara los precios de tu juegos favoritos para encontrar el mejor precio. ¡Únete a nuestra comunidad!</p>
-			<ul class="socials">
-				<li><a href="#"><i class="fab fa-facebook"></i></a></li>
-				<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-				<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-				<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-			</ul>
+		<footer>
+		<div className="footer-body">
+		  <div>
+			<h3 className="title-footer">ÚNETE A NUESTRO DISCORD</h3>
+			<p className="p-footer">Ven al servidor oficial de GG-Hunter y chatea con otros usuarios.</p>
+			<button className="icon-discord" onClick={() => window.location.href='https://discord.com/channels/1281719709527572592/1281719709527572594'}>
+            <i className="fa-brands fa-discord"></i>
+            </button>
+		  </div>
+		  <div>
+			<h3 className="title-footer">SÍGUENOS</h3>
+			<p className="p-footer">¡Mantente conectado y sigue nuestra páginas oficial para más noticias!</p>
+			<button className="icon-social" href="#"><i className="fab fa-facebook-f"></i></button>
+			<button className="icon-social" href="#"><i className="fab fa-twitter"></i></button>
+			<button className="icon-social" href="#"><i className="fab fa-instagram"></i></button>
+		  </div>
+		  <div>
+			<h3 className="title-footer fs-5">GG-Hunter</h3>
+			<p className="p-footer">Compara los precios de tu juegos favoritos para encontrar el mejor precio. ¡Únete a nuestra comunidad!</p>
+			<p className="p-footer">&copy; 2024 GG-Hunter. Todos los derechos reservados.</p>
+		  </div>
 		</div>
-		<div class="footer-bottom">
-			<p>&copy; 2024 GG-Hunter</p> 
-			<p>Diseñado por Andrea Muñiz Salvadores, Francisco Javier Carrillo Carrillo & Tingting Ji Zhou</p>
-		</div>
-	</footer>
+	  </footer>
+	  
 	);
 }
 	
