@@ -143,7 +143,7 @@ export const NavbarGame = () => {
 											<Button onClick={login} variant="outline-success">Login</Button>
 										</NavDropdown.Item>
 										<NavDropdown.Item as="div">
-											<Button onClick={() => register()} variant="outline-success">PLataforma 2</Button>
+											<Button onClick={() => register()} variant="outline-success">Regristrarse</Button>
 										</NavDropdown.Item>
 									</>
 								) : (
@@ -152,7 +152,6 @@ export const NavbarGame = () => {
 									</NavDropdown.Item>
 								)}
 							</NavDropdown>
-							{/* <Button onClick={() => handleClick()} variant="outline-primary"><FontAwesomeIcon icon={faUser} style={{color: "#2d0bce",}} /></Button>{' '} */}
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

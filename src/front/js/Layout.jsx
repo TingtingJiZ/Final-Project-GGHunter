@@ -11,6 +11,7 @@ import { Home } from "./pages/Home.jsx";
 import { Error404 } from "./pages/Error404.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 import { Profile } from "./pages/Profile.jsx";
+import { Signup } from "./pages/Signup.jsx";
 
 
 // Create your first component
@@ -29,6 +30,7 @@ const Layout = () => {
                         <Route element={<Error404 />} path="*" />
                         <Route element={<HomePage />} path="/" />
                         <Route element={<Profile />} path="/profile"/>
+                        <Route element={<Signup />} path="/signup"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>

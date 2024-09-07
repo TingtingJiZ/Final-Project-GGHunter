@@ -47,3 +47,12 @@ body {
     color:white;
     text-align: center;
 }
+
+.signup {
+    font-family: 'Roboto';font-size: 18px;
+    color: white;
+}
+.signup-grey {
+    font-size: 15px;
+    color: lavenderblush;
+}
