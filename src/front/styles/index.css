@@ -22,7 +22,7 @@ body {
     padding: 10px;
 }
 .atropos-title {
-    font-size: 1rem;
+    font-size: 18px;
     margin-bottom: 5px;
     color: #fff;
 }
@@ -59,13 +59,13 @@ body {
     justify-content: flex-start;
 }
 .carousel-item-img {
-    width: 100%;             /* Las imágenes ocuparán todo el ancho del contenedor */
-    max-height: 500px;       /* Limitar la altura para evitar que se estiren verticalmente */
+    width: 100%;             
+    max-height: 500px;       
 }
 
 .carousel {
-    max-width: 100%;         /* Asegura que el carrusel ocupe todo el ancho disponible */
-    overflow: hidden;        /* Asegura que nada salga del contenedor del carrusel */
+    max-width: 100%;         
+    overflow: hidden;        
 }
 
 footer {
