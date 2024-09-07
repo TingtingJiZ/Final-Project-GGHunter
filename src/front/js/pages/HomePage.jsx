@@ -8,11 +8,10 @@ import { useNavigate } from "react-router-dom";
 export const HomePage = () => {
     const { store, actions } = useContext(Context);
     const gamesPc = store.gamesPc;
-    const navigate = useNavigate
+    const navigate = useNavigate();
 
-    const handlePc = async (uid) => {
-        await actions.
-        navigate("/platform-pc")
+    const handlePc = () => {
+        navigate("/PCgames")
     }
 
     useEffect(() => {
@@ -29,7 +28,7 @@ export const HomePage = () => {
                 <Carousel />
             </Row>
             <Row className="card-body">
-                <button className="button-pc" onClick={() => handlePc()}>PC</button> {/* Hacer un navigate para ir a plataforma PC */}
+                <button className="button-pc" onClick={() => handlePc()}>PC</button>
                 <div className="card-row d-flex align-items-center ms-3 mb-4">
                     {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
                         Object.keys(gamesPc).map(key => {
@@ -47,7 +46,7 @@ export const HomePage = () => {
                     ) : (
                         <p>No hay juegos</p>
                     )}
-                    <span on onClick={() => handlePc()} className="ms-3">
+                    <span onClick={() => handlePc()} className="button-arrow ms-3">
                     <i className="fa-solid fa-circle-arrow-right fs-1"></i>
                     </span>
                 </div>

@@ -50,6 +50,24 @@ body {
     display: flex;
     justify-content: flex-start;
 }
+.button-arrow {
+    font-size: 50px;
+    background-color: #362D2D;
+    border: none;
+    cursor: pointer; 
+    display: flex;
+    justify-content: flex-start;
+}
+.carousel-item-img {
+    width: 100%;             /* Las imágenes ocuparán todo el ancho del contenedor */
+    max-height: 500px;       /* Limitar la altura para evitar que se estiren verticalmente */
+}
+
+.carousel {
+    max-width: 100%;         /* Asegura que el carrusel ocupe todo el ancho disponible */
+    overflow: hidden;        /* Asegura que nada salga del contenedor del carrusel */
+}
+
 footer {
     background-color: #333;
     color: #fff;
