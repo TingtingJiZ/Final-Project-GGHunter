@@ -13,7 +13,7 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 CORS(api)  # Allow CORS requests to this API
 
-@api.route('/login', methods=['GET'])
+@api.route('/login', methods=['POST'])
 def handle_users():
     response_body = {}
     data = request.json

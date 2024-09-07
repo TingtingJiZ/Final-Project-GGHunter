@@ -4,6 +4,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			topSellers: [],
 			currentTopSellers: [],
+			
+			currentUser:null,
+			isLoged: false
 			pcGames: [],
 			currentPcGames: [],
 		},
@@ -35,6 +38,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setCurrentpcGames: (pcGames) => {setStore({setCurrentpcGames: pcGames})},
 			setCurrentTopSellers: (topSellers) => {setStore({setCurrentTopSellers: topSellers})},
+			setCurrentUser: (user) =>{setStore({currentUser:user})},
+			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},
 		}
 	};
 };
