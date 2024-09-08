@@ -1,8 +1,27 @@
 [
     {
-
-    },
-    {
-
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "Nintendo",
+        "game_characteristics": [
+        {
+            "game_id": 2,
+            "id": 2,
+            "minimun": {},
+            "platform_id": 2,
+            "recomended": {},
+            "size_mb": 15264,
+            "store": {
+                "home_page": "https://www.nintendo.com/es-es/",
+                "id":2,
+                "price":39.9,
+                "url":"https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-Wonder-2404150.html"
+            }
+        }
+        ],
+        "game_genders": [],
+        "id": 2,
+        "is_active": true,
+        "publisher": "Nintendo",
+        "title": "SUPER MARIO BROS. WONDER"
     }
 ]
