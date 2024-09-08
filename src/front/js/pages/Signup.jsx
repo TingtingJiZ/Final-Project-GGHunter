@@ -4,12 +4,18 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 
 export const Signup = () => {
+    const { actions, store } = useContext(Context);
+    const navigate = useNavigate();
     const [userLogin, setUserLogin] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [showPassword, setshowPassword] = useState('');
@@ -20,7 +26,7 @@ export const Signup = () => {
         uppercase: false
     });
 
-    const navigate = useNavigate()
+    
 
     const handlePasswordChange = (event) => {
         const password = event.target.value;
@@ -37,12 +43,16 @@ export const Signup = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        console.log(userLogin, userPassword, userPasswordConfirm);
+        console.log(userLogin, userPassword);
         const dataToSend = {
             "email": userLogin,
             "password": userPassword
         };
-        const uri = process.env.BACKEND_URL + 'api/signup';
+        if (!passwordCriteria.length || !passwordCriteria.lowercase || !passwordCriteria.uppercase || !passwordCriteria.specialCharOrDigit) {
+            console.log('Error: La contraseña no cumple con todos los criterios');
+            return;
+        }
+        const uri = process.env.BACKEND_URL + '/api/signup';
         const options = {
             method: 'POST',
             body: JSON.stringify(dataToSend),
@@ -86,21 +96,63 @@ export const Signup = () => {
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Escriba su contraseña contraseña</Form.Label>
-                                    <Form.Control type="password" placeholder="" value={userPassword} onChange={(event) => setUserPassword(event.target.value)} />
+                                    <Form.Control type="password" placeholder="" value={userPassword} onChange={handlePasswordChange} />
                                 </Form.Group>
                                 <Form.Group>
                                     <Container>
                                         <Row className="">
                                             <Col md={6}>
-                                            {userPassword === ""?(<span>Sin datos</span>):
-                                            (<span>Con cosas
-                                            {/* passwordCriteria.length
-                                            ? 
-                                            <FontAwesomeIcon icon="fa-solid fa-circle-xmark" style={{color: "#ff0000",}} />:
-                                            <FontAwesomeIcon icon="fa-solid fa-circle-check" style={{color: "#ff8040",}} />) */}
-                                            </span>)
+                                            {userPassword === ""?(<span><FontAwesomeIcon icon={faCircleInfo} style={{color: "#000000",}} /></span>):
+                                            (!passwordCriteria.length
+                                            ? (
+                                            <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
+                                            )
+                                           :(
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            )
                                             }
                                             Introduce al menos 8 caracteres
+                                            </Col>
+                                            <Col md={6}>
+                                            {userPassword === ""?(<span><FontAwesomeIcon icon={faCircleInfo} style={{color: "#000000",}} /></span>):
+                                            (!passwordCriteria.specialCharOrDigit
+                                            ? (
+                                            <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
+                                            )
+                                           :(
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            )
+                                            }
+                                            Introduce al menos un caracter especial
+                                            </Col>
+                                            <Col md={6}>
+                                            {userPassword === ""?(<span><FontAwesomeIcon icon={faCircleInfo} style={{color: "#000000",}} /></span>):
+                                            (!passwordCriteria.lowercase
+                                            ? (
+                                            <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
+                                            )
+                                           :(
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            )
+                                            }
+                                            Introduce al menos 1 caracter en minúsculas
+                                            </Col>
+                                            <Col md={6}>
+                                            {userPassword === ""?(<span><FontAwesomeIcon icon={faCircleInfo} style={{color: "#000000",}} /></span>):
+                                            (!passwordCriteria.uppercase
+                                            ? (
+                                            <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
+                                            )
+                                           :(
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            )
+                                            }
+                                            Introduce al menos 1 caracter en mayúsculas
+                                            </Col>
+                                        </Row>
+                                        <Row className="justify-content-md-center mt-4">
+                                            <Col md={6}>
+                                                <Button className="w-100" variant="primary" type="summit" onClick={handleRegister}>Crear una cuenta</Button>
                                             </Col>
                                         </Row>
                                     </Container>
