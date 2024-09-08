@@ -1,45 +1,88 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext.js";
-import { Carousel } from "./Carousel.jsx";
 import { Row } from 'react-bootstrap';
-import { GameCard } from '../component/GameCard.jsx';
-import { useNavigate } from "react-router-dom";
+
 
 export const CommentsGames = () => {
     const { store, actions } = useContext(Context);
     const gamesPc = store.gamesPc;
-    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        username: "",
+        rating: "",
+        review: ""
+    });
 
-   
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        actions.createComments(formData);
+        setFormData({ username: "", rating: "", review: "" });
+    };
+
     return (
-        <div className="row row-cols-1 row-cols-md-3 row-cols-xl-5 g-2 justify-content-center card-body">
-                {store.pcGames && store.pcGames.map((item) => (
-                    <div key={item.gameID}>
-                        <div className="atropos-card card-row text-white h-100 border-0" style={{ height: "18rem" }}>
-                            <img src={item.thumb} className="atropos-img" alt="..." />
-                            <div>
-                                <h5>{item.title || item.external}</h5>
-                                 {/* <div className="d-flex justify-content-between align-items-center">
-                                    <div className="d-flex align-items-center mb-2">
-                                        <span className="badge bg-danger me-2">{Math.round(item.savings)}%</span>
-                                    </div>
-                                    <div className="d-flex flex-column text-end ms-auto me-2">
-                                        <small className="text-white text-decoration-line-through">€{item.normalPrice}</small>
-                                        <strong>€{item.salePrice}</strong>
-                                    </div>
-                                </div>  */}
-                                <strong>€{item.salePrice}</strong>
-                               {/*  <div className="text-end">
-                                    <p href={item.metacriticLink} className="btn btn-outline-light btn-sm">Metacritic</p>
-                                    <div>
-                                        <span className="badge bg-success">{item.steamRatingText}</span>
-                                        <span className="text-muted">({item.steamRatingPercent}%)</span>
-                                    </div>
-                                </div> */}
-                            </div>
+        <div className="container py-3">
+            <h2>Reseñas</h2>
+            <Row className="card-body">
+                <h1>Escribe tu Reseña</h1>
+                <form id="reviewForm" onSubmit={handleSubmit}>
+                    <label htmlFor="username">Tu nombre:</label>
+                    <input type="text" id="username" name="username" value={formData.username} onChange={handleChange}
+                    />
+                    {/* <div>
+                        <h4>Calificación (1-5):</h4>
+                        <div className="qualification">
+                            <button>
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button>
+                                <i class="fas fa-star"></i>
+                            </button>
+                            <button>
+                                <i class="fas fa-star"></i>
+                            </button>
+
+                            
+                            <button>
+                                <i class="fas fa-star"></i>
+                            </button>
+
+                
+                            <button>
+                                <i class="fas fa-star"></i>
+                            </button>
+
                         </div>
+                    </div> */}
+
+
+                    <div>
+                        <h4>Tu reseña:</h4>
+                        <textarea style={{ width: "100%" }} name="review" value={formData.review}
+                            onChange={handleChange} rows="4"></textarea>
                     </div>
-                ))}
-            </div>
+
+                    <button type="submit">Enviar Reseña</button>
+                </form>
+
+                <div id="reviews">
+                    <h2>Reseñas:</h2>
+                    <ul id="reviewsList">
+                        {store.comments.map((review, index) => (
+                            <li key={index}>
+                                <strong>{review.username}</strong> ({review.rating}/5):<br />
+                                {review.review}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </Row>
+        </div>
     );
-};
+}      

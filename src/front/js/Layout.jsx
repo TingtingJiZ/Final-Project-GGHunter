@@ -14,6 +14,7 @@ import { Profile } from "./pages/Profile.jsx";
 import { Signup } from "./pages/Signup.jsx";
 import { PCGames } from "./pages/PCGames.jsx";
 import { CommentsGames } from "./pages/CommentsGames.jsx";
+import { RequirementsGames } from "./pages/RequirementsGames.jsx";
 
 
 
@@ -35,7 +36,8 @@ const Layout = () => {
                         <Route element={<Profile />} path="/profile"/>
                         <Route element={<Signup />} path="/signup"/>
                         <Route element={<PCGames />} path="/PCgames"/>
-                        <Route element={<CommentsGames />} path="/commentsgames"/>
+                        <Route element={<CommentsGames />} path="/comments-games"/>
+                        <Route element={<RequirementsGames />} path="/requirements-games"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>
