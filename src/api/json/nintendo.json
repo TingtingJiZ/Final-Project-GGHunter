@@ -1,27 +1,102 @@
 [
     {
-        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
-        "developer": "Nintendo",
-        "game_characteristics": [
-        {
-            "game_id": 2,
-            "id": 2,
-            "minimun": {},
-            "platform_id": 2,
-            "recomended": {},
-            "size_mb": 15264,
-            "store": {
-                "home_page": "https://www.nintendo.com/es-es/",
-                "id":2,
-                "price":39.9,
-                "url":"https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-Wonder-2404150.html"
-            }
-        }
-        ],
-        "game_genders": [],
-        "id": 2,
+        brotato --> https://www.google.com/search?client=firefox-b-d&sca_esv=d9bb93ffaae04d80&sca_upv=1&sxsrf=ADLYWIJKWUpVYCMP8DxtiV9gTLS8N6PoUg:1725917735635&q=brotato+plataformas&stick=H4sIAAAAAAAAAOPgE-LVT9c3NCyqrDDLqzA30FLOTrbSTy5L10_Ozy0oLUktii_LTEnNT0_MTbUqyEksScsvyl3EKpxUlF-SWJKvABJKBIklFgMAceDc7UwAAAA&sa=X&ved=2ahUKEwiR5KzM6LaIAxWkRfEDHWlWHSgQ44YBKAN6BAgiEAU&biw=1600&bih=805&dpr=1.2
         "is_active": true,
         "publisher": "Nintendo",
-        "title": "SUPER MARIO BROS. WONDER"
-    }
+        "title": "SUPER MARIO BROS. WONDER",
+        "id": 2,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "Nintendo",
+        "game_genders": ["adventuras","PLataformas"]
+    },
+    {
+        Forager --> https://www.google.com/search?q=Forager+plataformas&client=firefox-b-d&sca_esv=d9bb93ffaae04d80&sca_upv=1&biw=1600&bih=805&sxsrf=ADLYWILoa8hemxqRwGbKBudlGg5emRr77Q%3A1725917742040&ei=LmrfZomTAvmM7NYPodSNqA8&ved=0ahUKEwiJ4rPP6LaIAxV5BtsEHSFqA_UQ4dUDCA8&uact=5&oq=Forager+plataformas&gs_lp=Egxnd3Mtd2l6LXNlcnAiE0ZvcmFnZXIgcGxhdGFmb3JtYXMyBRAAGIAEMggQABiABBiiBDIIEAAYgAQYogQyCBAAGIAEGKIEMggQABiABBiiBEiblgJQzo4CWM6OAnAEeAGQAQCYAYABoAGAAaoBAzAuMbgBA8gBAPgBAvgBAZgCBaACkgHCAgoQABiwAxjWBBhHmAMAiAYBkAYEkgcDNC4xoAfkAg&sclient=gws-wiz-serp
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        DRAGON QUEST XI S: Ecos de un pasado perdido --> https://www.google.com/search?client=firefox-b-d&q=DRAGON+QUEST+XI+S%3A+Ecos+de+un+pasado+perdido
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        Ark: Survival Evolved --> https://www.google.com/search?client=firefox-b-d&q=ark
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        Red Dead Redemption --> https://www.google.com/search?q=Red+Dead+Redemption&client=firefox-b-d&sca_esv=a70b42618ebf6605&sca_upv=1&sxsrf=ADLYWIIB95ZOZOBjHciiBkSpWSMeMFXuRA%3A1725914107607&ei=-1vfZoLPJPWrxc8PtJXPmAk&ved=0ahUKEwjCuK-K27aIAxX1VfEDHbTKE5MQ4dUDCA8&uact=5&oq=Red+Dead+Redemption&gs_lp=Egxnd3Mtd2l6LXNlcnAiE1JlZCBEZWFkIFJlZGVtcHRpb24yChAjGIAEGCcYigUyCBAuGIAEGLEDMgoQABiABBhDGIoFMgsQLhiABBixAxjUAjIKEC4YgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIXEC4YgAQYsQMYlwUY3AQY3gQY4ATYAQNI2A1QjglY7QpwAXgBkAEAmAFpoAHQAaoBAzAuMrgBA8gBAPgBAZgCA6AC5wHCAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICDhAAGLADGOQCGNYE2AEBwgITEC4YgAQYsAMYQxjIAxiKBdgBApgDAIgGAZAGE7oGBggBEAEYCboGBggCEAEYCLoGBggDEAEYFJIHAzEuMqAHnBw&sclient=gws-wiz-serp
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        hollow knight --> https://www.google.com/search?client=firefox-b-d&sca_esv=a70b42618ebf6605&sca_upv=1&sxsrf=ADLYWILPQUrYp_tG1ALB9_un2i4f6yi8VA:1725916523028&q=hollow+knight+plataformas&stick=H4sIAAAAAAAAAOPgE-LVT9c3NEypSKlIT88o1FLOTrbSTy5L10_Ozy0oLUktii_LTEnNT0_MTbUqyEksScsvyl3EKpmRn5OTX66QnZeZnlGiAJJIBMkkFgMAfXf_ulIAAAA&sa=X&ved=2ahUKEwi1lpGK5LaIAxVlk_0HHYKMHooQ44YBKAN6BAgaEAU&biw=1600&bih=805&dpr=1.2
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        unpacking --> https://www.google.com/search?client=firefox-b-d&sca_esv=d9bb93ffaae04d80&sca_upv=1&sxsrf=ADLYWIJPWK7inzU_QgEaY2sChEFhB_GpFg:1725916806006&q=unpacking+plataformas&stick=H4sIAAAAAAAAAOPgE-LVT9c3NMwprqwoS08v01LOTrbSTy5L10_Ozy0oLUktii_LTEnNT0_MTbUqyEksScsvyl3EKlqaV5CYnJ2Zl64AEkwEiSYWAwAoKPAgTgAAAA&sa=X&ved=2ahUKEwik6IiR5baIAxVonP0HHU7VDBgQ44YBKAN6BAgpEAU&biw=1600&bih=805&dpr=1.2
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        MINECRAFT -->https://www.google.com/search?q=MINECRAFT+plataformas&client=firefox-b-d&sca_esv=d9bb93ffaae04d80&sca_upv=1&biw=1600&bih=805&sxsrf=ADLYWIJLsy4g9A1dDDDxPQnpFk9W9JZUTA%3A1725916811202&ei=i2bfZuSEDLD-7_UPu5LKqAs&ved=0ahUKEwik9sWT5baIAxUw_7sIHTuJErUQ4dUDCA8&uact=5&oq=MINECRAFT+plataformas&gs_lp=Egxnd3Mtd2l6LXNlcnAiFU1JTkVDUkFGVCBwbGF0YWZvcm1hczIFEAAYgAQyBhAAGAcYHjIGEAAYBxgeMgYQABgHGB4yBhAAGAcYHjIGEAAYBxgeMgYQABgHGB4yBRAAGIAEMgYQABgHGB4yBBAAGB5IpeMCUM7RAljV4QJwBHgBkAEAmAFhoAHLBqoBAjEwuAEDyAEA-AEBmAIOoAKHB8ICChAAGLADGNYEGEfCAg0QABiABBiwAxhDGIoFwgIOEAAYsAMY5AIY1gTYAQHCAhMQLhiABBiwAxhDGMgDGIoF2AECwgIZEC4YgAQYsAMY0QMYQxjHARjIAxiKBdgBAsICChAAGIAEGLEDGA3CAg0QLhiABBjHARgNGK8BwgIHEAAYgAQYDcICDRAAGIAEGLEDGIMBGA3CAgoQABgHGAoYHhgPmAMAiAYBkAYTugYGCAEQARgJugYGCAIQARgIkgcEMTMuMaAHxUo&sclient=gws-wiz-serp
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        Celeste -->https://www.google.com/search?q=Celeste+plataformas&client=firefox-b-d&sca_esv=a70b42618ebf6605&sca_upv=1&biw=1600&bih=805&sxsrf=ADLYWIK9b2cLsQUq2YTjHq6UD65D0rfKwg%3A1725916538929&ei=emXfZuCvOML97_UP0rT0qAg&ved=0ahUKEwjg1NuR5LaIAxXC_rsIHVIaHYUQ4dUDCA8&uact=5&oq=Celeste+plataformas&gs_lp=Egxnd3Mtd2l6LXNlcnAiE0NlbGVzdGUgcGxhdGFmb3JtYXMyChAAGIAEGEMYigUyBhAAGAcYHjIIEAAYgAQYogQyCBAAGIAEGKIEMggQABiABBiiBDIIEAAYgAQYogQyCBAAGIAEGKIESNP8ElCK-RJYivkScAF4AZABAJgBWqABWqoBATG4AQPIAQD4AQL4AQGYAgKgAmfCAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICDhAAGLADGOQCGNYE2AEBwgITEC4YgAQYsAMYQxjIAxiKBdgBApgDAIgGAZAGE7oGBggBEAEYCboGBggCEAEYCJIHATKgB88D&sclient=gws-wiz-serp
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
+    {
+        PowerWash Simulator -->https://www.google.com/search?q=PowerWash+Simulator+plataformas&client=firefox-b-d&sca_esv=a70b42618ebf6605&sca_upv=1&biw=1600&bih=805&sxsrf=ADLYWILavxTVRGjrRwafkv9q4xat_hfDuw%3A1725917146447&ei=2mffZqr7GoKH7NYP0ojq2AE&ved=0ahUKEwiq0LOz5raIAxWCA9sEHVKEGhsQ4dUDCA8&uact=5&oq=PowerWash+Simulator+plataformas&gs_lp=Egxnd3Mtd2l6LXNlcnAiH1Bvd2VyV2FzaCBTaW11bGF0b3IgcGxhdGFmb3JtYXMyBBAAGB4yCBAAGIAEGKIEMggQABiABBiiBDIIEAAYgAQYogQyCBAAGIAEGKIEMggQABiABBiiBEjRBVCcAVicAXABeAGQAQCYAWqgAWqqAQMwLjG4AQPIAQD4AQL4AQGYAgKgAnDCAgoQABiwAxjWBBhHmAMAiAYBkAYIkgcDMS4xoAfcAw&sclient=gws-wiz-serp
+        "is_active": true,
+        "publisher": "Humble Indie Bundle",
+        "title": "Forager",
+        "id": 3,
+        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "developer": "HopFrog",
+        "game_genders": ["adventure","Disparos","Simulación"]
+    },
 ]

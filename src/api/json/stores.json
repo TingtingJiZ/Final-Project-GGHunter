@@ -1,0 +1,58 @@
+[
+    [
+        {
+            "size_mb": 15264,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 1,
+            "platform_id": 1,
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-Wonder-2404150.html",
+            "home_page": "https://www.STORE1.com/es-es/",
+            "price": 39.9
+        },
+        {
+            "size_mb": 15264,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 2,
+            "platform_id": 1,
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-Wonder-2404150.html",
+            "home_page": "https://www.STORE1.com/es-es/",
+            "price": 39.9
+        },
+        {
+            "size_mb": 15264,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 3,
+            "platform_id": 1,
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-Wonder-2404150.html",
+            "home_page": "https://www.STORE1.com/es-es/",
+            "price": 39.9 
+        }
+    ],
+    [
+        {
+            "size_mb": 15264,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 3,
+            "platform_id": 2,
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-2404150.html",
+            "home_page": "https://www.nintendo.com/es-es/",
+            "price": 39.9
+        }
+    ],
+    [
+        {
+            "size_mb": 15264,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 3,
+            "platform_id": 3,
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-2404150.html",
+            "home_page": "https://www.nintendo.com/es-es/",
+            "price": 39.9
+        }
+    ]
+]

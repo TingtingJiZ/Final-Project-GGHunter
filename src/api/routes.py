@@ -596,78 +596,15 @@ def load_data_from_api_nintendo():
         data = json.load(json_file)
         charact = []
         games_to_add = []
-        characteristics_to_add = []
-        store_to_add = []
-        platform_to_add = []
         #Falta hacer comprobaciones de datos si el juego existe etc etc
         for row in data:
-            description = row['description']
-            developer = row['developer']
-            characteristics = row['game_characteristics']
-            game_genders = row['game_genders']
-            id = row['id']
             is_active = row['is_active']
             publisher = row["publisher"]
             title = row["title"]
-            for i in range(len(characteristics)):
-                charact.append(characteristics[i])
-            for characteristic in charact:
-                #game_characteristic
-                game_id = characteristic.get('game_id')
-                id = characteristic.get('id')
-                minimun = characteristic.get('minimun')
-                platform_id = characteristic.get('platform_id')
-                recomended = characteristic.get('recomended')
-                size_mb = characteristic.get('size_mb')
-                #store
-                store = characteristic.get('store')
-                home_page = store.get('home_page')
-                id_store = store.get('id')
-                price = store.get('price')
-                url = store.get('url')
-                existing_store = Stores.query.get(id_store) 
-                if not existing_store:
-                    store_game = Stores(
-                        home_page=home_page,
-                        price=price,
-                        id=id_store,
-                        url=url
-                    )
-                    store_to_add.append(store_game)
-                store_to_add.append(store_game)
-                """
-                platforms = store.get('platforms')
-                print(f"El dato de la store es {store}, home {home_page}, plataformas {platforms}, precio {price} y url {url}")
-                print(type(f"El tipo de platform es {platforms}"))
-                for platform in platforms:
-                    print(f"{platform}")
-                    id = platform.get('id')
-                    name = platform.get('name')
-                    store_id = platform.get('store_id')
-                    platform_game = Platforms(
-                        id=id,
-                        name=name,
-                        store_id=id_store
-                    )
-                    platform_to_add.append(platform_game)
-                print(f"Plataformaaaaaaaaaaaaaaaaaaa {platform_to_add}")
-                """
-                print(type(store_to_add))
-                id = row['id']
-                characteristic_game = GameCharacteristics(
-                    game_id=game_id,
-                    id=id,
-                    minimun=minimun,
-                    platform_id=platform_id,
-                    recomended=recomended,
-                    size_mb=size_mb,
-                    store=store_to_add
-                )
-                
-                characteristics_to_add.append(characteristic_game)
-                print(f"El id del juego es {game_id}")
-            print(characteristics)
-
+            description = row['description']
+            id = row['id']
+            developer = row['developer']
+            game_genders = row['game_genders']
             game = Games(
                 id=id,
                 is_active=is_active,
@@ -692,28 +629,59 @@ def load_data_from_api_nintendo():
             })
     
         db.session.add_all(games_to_add)
-        db.session.add_all(characteristics_to_add)
-        #db.session.add_all(store_to_add)
-        #db.session.add_all(platform_to_add)
         db.session.commit()
-    return response_body, 500
-            # db.session.add(game)
-            # db.session.commit()
-            # response_body['results'].append({
-            #     'datos_juego': {
-            #         "id":id,
-            #         "is_active":is_active,
-            #         "publisher":publisher,
-            #         "title":title,
-            #         "developer":developer,
-            #         "description":description
-
-            # },
-            #     'message': f"Usuario {title} añadido"
-            # })
-    
     return response_body,201
 
+
+@api.route("/load-json-store", methods=["GET"])
+def load_data_from_api_store():
+    response_body = {
+        'results': [],
+        'message': "Usuarios añadidos exitosamente"
+    }
+    with open('src/api/json/stores.json') as json_file:
+        data = json.load(json_file)
+        response_body['results'].append({
+                "datos":data
+            ,
+                'message': f"Estos son los datos"
+            })
+        for block in data:
+            #print(f" El block es {block}")
+            for row in block:
+                #print(f" a row esl {row}")
+                size_mb = row['size_mb']
+                minimun = row['minimun']
+                recomended = row['recomended']
+                game_id = row['game_id']
+                platform_id = row['platform_id']
+                url = row['url']
+                home_page = row['home_page']
+                price = row['price']
+
+                store = Stores.query.filter_by(url=url, home_page=home_page).first()
+                if not store:
+                    store = Stores(url=url, home_page=home_page, price=price)
+                    db.session.add(store)
+                    db.session.commit() 
+            
+                game_characteristics = GameCharacteristics(
+                    size_mb=size_mb,
+                    minimun=minimun,
+                    recomended=recomended,
+                    game_id=game_id,
+                    platform_id=platform_id,
+                    stores_id=store.id 
+                )
+                
+                db.session.add(game_characteristics)
+        db.session.commit()
+        
+        response_body['results'].append({
+            "datos": data,
+            'message': "Datos añadidos exitosamente"
+        })
+    return response_body,200
 
 @api.route("/load-json-platforms", methods=["GET"])
 def load_data_from_api_platforms():
