@@ -119,4 +119,35 @@ footer {
     font-size: 15px;
     color: lavenderblush;
 }
+.button-container {
+            position: relative;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+            padding: 2px;
+            background: linear-gradient(to top, #362D2D, #362D2D);
+            border-radius: 16px;
+        }
 
+        .button-container:hover {
+            opacity: 1;
+        }
+
+        .button-container:active {
+            transform: scale(0.95);
+        }
+
+        .button-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 12px 12px;
+            color: white;
+            border-radius: 14px;
+            background: linear-gradient(to top, #362D2D, #362D2D);
+        }
+
+        .button-content svg {
+            width: 80px;
+            height: 80px;
+        }

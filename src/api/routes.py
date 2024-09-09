@@ -277,7 +277,7 @@ def handle_comments():
             response_body["message"] = f"Delete comment not found"
             return jsonify(response_body), 404
         db.session.delete(delete_comment)
-        de.session.commit()
+        db.session.commit()
         response_body["message"] = f"Comment deletede"
         return jsonify(response_body), 201
   
