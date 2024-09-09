@@ -51,12 +51,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ gamesPc: data });
 			},
 			createComments: async (comments) => {
+				const token = localStorage.getItem('token');
                 const uri = `${process.env.BACKEND_URL}/api/comments`;
                 const dataToSend = comments;
                 const options = {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(dataToSend)
                 };
