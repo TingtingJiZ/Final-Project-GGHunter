@@ -62,7 +62,7 @@ export const NavbarGame = () => {
 		}
 		const data = await response.json()
 		// Almaceno los datos en localStorage y en flux (store)
-		localStorage.setItem("token", data.access_token);
+		localStorage.setItem("token", data.message);
 		localStorage.setItem("user", JSON.stringify(data.results));
 		actions.setCurrentUser(data.results);
 		actions.setIsLoged(true)
@@ -76,10 +76,11 @@ export const NavbarGame = () => {
 	const login = () => {
 		handleShow();
 	}
+	const register = () => {
+		navigate('/Signup')
+	}
 	const handleLogout = () => {
 		try {
-			console.log("Principio Logout");
-			
 			// Eliminar items específicos de localStorage
 			localStorage.removeItem("token");
 			localStorage.removeItem("user");
@@ -87,7 +88,7 @@ export const NavbarGame = () => {
 			// Limpieza del estado global
 			actions.setIsLoged(false);
 			actions.setCurrentUser(null);
-			console.log("Final Logout");
+			//console.log("Usuario deslogado de la web");
 			// Redirigir al usuario a la página de inicio
 		} catch (error) {
 			console.error('Error al intentar desloguear:', error);
@@ -108,13 +109,16 @@ export const NavbarGame = () => {
 							className="mx-5 d-flex justify-content-center"
 						>
 							<NavDropdown.Item as="div">
-								<Button onClick={() => handleClick("PLataforma 1")} variant="outline-success">PLataforma 1</Button>
+								<Nav.Link href="/PCGames">PC</Nav.Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Button onClick={() => handleClick("PLataforma 2")} variant="outline-success">PLataforma 2</Button>
+								<Nav.Link href="/profile">Xbox</Nav.Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Button onClick={() => handleClick("PLataforma 3")} variant="outline-success">PLataforma 3</Button>
+								<Nav.Link href="/profile">PlayStation</Nav.Link>
+							</NavDropdown.Item>
+							<NavDropdown.Item as="div">
+								<Nav.Link href="/profile">Nintendo</Nav.Link>
 							</NavDropdown.Item>
 						</NavDropdown>
 						<NavDropdown
@@ -123,13 +127,13 @@ export const NavbarGame = () => {
 							className="mx-5 d-flex justify-content-center"
 						>
 							<NavDropdown.Item as="div">
-								<Button onClick={() => handleClick("PLataforma 1")} variant="outline-success">PLataforma 1</Button>
+								<Nav.Link href="/">Home</Nav.Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Button onClick={() => handleClick("PLataforma 2")} variant="outline-success">PLataforma 2</Button>
+								<Nav.Link href="/">Home</Nav.Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Button onClick={() => handleClick("PLataforma 3")} variant="outline-success">PLataforma 3</Button>
+								<Nav.Link href="/">Home</Nav.Link>
 							</NavDropdown.Item>
 						</NavDropdown>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
