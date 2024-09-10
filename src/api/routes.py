@@ -244,9 +244,12 @@ def handle_game(game_id):
 @api.route("/comments", methods=["GET", "POST"])
 @jwt_required()
 def handle_comments():
+    print("*************")
     response_body = {}
     current_user = get_jwt_identity()
+    print(current_user)
     user = db.session.execute(db.select(Users).where(Users.id == current_user["user_id"])).scalar()
+    print(user)
     if not user:
         response_body["results"] = {}
         response_body["message"] = "User not found"
@@ -255,6 +258,7 @@ def handle_comments():
         data = request.json
         comment_text = data.get("comment")
         game_id = data.get("game_id")
+        print(comment_text, game_id)
         if not comment_text:
             response_body["message"] = "Missing comment"
             return jsonify(response_body), 400
@@ -277,7 +281,7 @@ def handle_comments():
             response_body["message"] = f"Delete comment not found"
             return jsonify(response_body), 404
         db.session.delete(delete_comment)
-        de.session.commit()
+        db.session.commit()
         response_body["message"] = f"Comment deletede"
         return jsonify(response_body), 201
   

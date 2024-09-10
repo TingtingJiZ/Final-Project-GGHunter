@@ -6,6 +6,7 @@ import ScrollToTop from "./component/ScrollToTop.jsx";
 import { BackendURL } from "./component/BackendURL.jsx";
 import { NavbarGame } from "./component/NavbarGame.jsx";
 import { Footer } from "./component/Footer.jsx";
+import { Premium } from "./component/Premium.jsx"
 // Custom pages
 import { Home } from "./pages/Home.jsx";
 import { Error404 } from "./pages/Error404.jsx";
@@ -13,6 +14,10 @@ import { HomePage } from "./pages/HomePage.jsx";
 import { Profile } from "./pages/Profile.jsx";
 import { Signup } from "./pages/Signup.jsx";
 import { PCGames } from "./pages/PCGames.jsx";
+import { CommentsGames } from "./pages/CommentsGames.jsx";
+import { RequirementsGames } from "./pages/RequirementsGames.jsx";
+import { PayPremium } from "./pages/PayPremium.jsx";
+import { PayReady } from "./pages/PayReady.jsx";
 
 
 
@@ -33,7 +38,12 @@ const Layout = () => {
                         <Route element={<HomePage />} path="/" />
                         <Route element={<Profile />} path="/profile"/>
                         <Route element={<Signup />} path="/signup"/>
-                        <Route element={<PCGames />} path="PCgames" />
+                        <Route element={<PCGames />} path="/PCgames"/>
+                        <Route element={<CommentsGames />} path="/comments-games"/>
+                        <Route element={<RequirementsGames />} path="/requirements-games"/>
+                        <Route element={<Premium />} path="/premium"/>
+                        <Route element={<PayPremium />} path="/pay-premium"/>
+                        <Route element={<PayReady />} path="/pay-ready"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>
