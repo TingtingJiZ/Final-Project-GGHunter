@@ -62,7 +62,7 @@ export const NavbarGame = () => {
 		}
 		const data = await response.json()
 		// Almaceno los datos en localStorage y en flux (store)
-		localStorage.setItem("token", data.access_token);
+		localStorage.setItem("token", data.message);
 		localStorage.setItem("user", JSON.stringify(data.results));
 		actions.setCurrentUser(data.results);
 		actions.setIsLoged(true)
