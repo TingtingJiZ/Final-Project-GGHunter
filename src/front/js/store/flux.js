@@ -52,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		        setStore({ gamesPc: data });
             },
 			getPcGameDetails: async () => {
-				const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
+				const uri = `${process.env.URIBACK}/api/game_characteristics`
 				const options = {
 					method: "GET",
 				}
@@ -63,7 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const data = await response.json()
 				console.log(data)
-				setStore({currentGamesPc: data})
+				setStore({currentPcGames: data})
 			},
 			getIsStores: async () => {
 				const uri = `https://www.cheapshark.com/api/1.0/stores`
@@ -95,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			setDeals: (deals) => {setDeals({deals: deals})},
 			setIsStores: (isStores) => {setStore({isStores: isStores})},
-			setCurrentpcGames: (pcGames) => {setStore({setCurrentpcGames: pcGames})},
+			setCurrentPcGames: (pcGames) => {setStore({setCurrentPcGames: pcGames})},
 			setCurrentTopSellers: (topSellers) => {setStore({setCurrentTopSellers: topSellers})},
 			setCurrentUser: (user) =>{setStore({currentUser:user})},
 			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},

@@ -15,19 +15,19 @@ export const PcGameDetails = () => {
     }, [])
     return (
         <div className="container my-4 w-75">
-            <ul className="nav nav-tabs">
+            <ul className="nav nav-underline">
                 <li className="nav-item">
-                    <a className="nav-link active" href="#">PC</a>
+                    <p className="nav-link active" aria-current="page" href="#">PC</p>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Xbox One</a>
+                    <p className="nav-link" href="#">PlayStation</p>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">PS4</a>
+                    <p className="nav-link" href="#">Nintendo</p>
                 </li>
             </ul>
-            <div className="container">
-                <div className="row bg-white p-3">
+            <div className="characteristic w-100">
+                <div className="row rounded card-body p-3">
                     <div className="col-12 col-md-4 text-center">
                         <img src="https://image.api.playstation.com/vulcan/img/rnd/202011/0204/kK0Z7D3DChDmP3WCowrezihC.png" className="img-fluid my-3" alt="Game Image" />
                     </div>
@@ -37,10 +37,10 @@ export const PcGameDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className="container">
+            <div className="shop mt-3">
                 {store.isStores && store.isStores.length > 0 ? (
                     store.isStores.map((item) => (
-                        <div className="row price-item mt-3 bg-white py-2" key={item.storeID}>
+                        <div className="row rounded price-item bg-dark text-white py-2 mb-1" key={item.storeID}>
                             <div className="col-md-2 store-logo d-flex align-items-center">
                                 <img src={`https://www.cheapshark.com${item.images.logo}`} alt={`${item.storeName} Logo`} className="img-fluid" style={{ maxHeight: '40px' }} />
                             </div>
@@ -55,7 +55,6 @@ export const PcGameDetails = () => {
                                 <button className="btn btn-shop py-1 px-2 btn-success">Shop Now</button>
                             </div>
                         </div>
-
                     ))
                 ) : (
                     <p>Loading stores...</p>

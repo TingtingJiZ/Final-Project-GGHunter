@@ -34,8 +34,8 @@ const Layout = () => {
                         <Route element={<HomePage />} path="/" />
                         <Route element={<Profile />} path="/profile"/>
                         <Route element={<Signup />} path="/signup"/>
-                        <Route element={<PCGames />} path="PCgames" />
-                        <Route element={<PcGameDetails />} path="PcGameDetails" />
+                        <Route element={<PCGames />} path="/pcgames" />
+                        <Route element={<PcGameDetails />} path="/pcgamedetails" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
