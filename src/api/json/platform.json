@@ -1,18 +1,18 @@
 [
     {
         "id":1,
-        "Name":"PC"
+        "name":"PC"
     },
     {
         "id":2,
-        "Name":"Nintendo"
+        "name":"Nintendo"
     },
     {
         "id":3,
-        "Name":"Xbox"
+        "name":"Xbox"
     },
     {
         "id":4,
-        "Name":"PlayStation"
+        "name":"PlayStation"
     }
 ]
