@@ -190,7 +190,7 @@ export const NavbarGame = () => {
 					<Button variant="secondary" onClick={handleClose}>
 						Cerrar
 					</Button>
-					<Button variant="primary" type="summit" onClick={handleLogin}>Inciar sesión</Button>
+					<Button variant="primary" onClick={handleLogin}>Inciar sesión</Button>
 				</Modal.Footer>
 			</Modal>
 		</>

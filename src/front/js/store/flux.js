@@ -8,20 +8,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			isLoged: false,
 			pcGames: [],
 			currentPcGames: [],
+			isStores: [],
+			deals: [],
 			comments: [],
 		},
 		actions: {
-			getMessage: async () => {
-				const options = { headers: { 'Content-Type': 'application/json' } }
-				const response = await fetch(process.env.BACKEND_URL + "/api/hello", options)
-				if (!response.ok) {
-					console.log("Error loading message from backend", response.status, response.statusText)
-					return
-				}
-				const data = await response.json()
-				setStore({ message: data.message })
-				return data;
-			},
 			getPcGames: async () => {
 				const uri = `${process.env.URIPC}/api/1.0/deals?storeID=1&upperPrice=15`
 				const options = {
@@ -37,20 +28,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ pcGames: data })
 			},
 			getGamesPc: async () => {
-				const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
+		        const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
+		        const options = {
+		            method: "GET",
+		            }
+		        const response = await fetch(uri, options)
+		        if(!response.ok) {
+		            console.log("Error: ", response.status, response.statusText)
+		            return;
+		            }
+		        const data = await response.json()
+		        console.log(data.status)
+		        setStore({ gamesPc: data });
+            },
+			getPcGameDetails: async () => {
+				const uri = `${process.env.URIBACK}/api/game_characteristics`
 				const options = {
 					method: "GET",
 				}
 				const response = await fetch(uri, options)
-				if (!response.ok) {
+				if(!response.ok) {
 					console.log("Error: ", response.status, response.statusText)
+					return
+				}
+				const data = await response.json()
+				console.log(data)
+				setStore({currentPcGames: data})
+			},
+			getIsStores: async () => {
+				const uri = `https://www.cheapshark.com/api/1.0/stores`
+				const options = {
+					method: "GET",
+				}
+				const response = await fetch(uri, options)
+				if(!response.ok) {
+					console.log("Error:" , response.status, response.statusText)
 					return;
 				}
 				const data = await response.json()
-				console.log(data.status)
-				setStore({ gamesPc: data });
+				console.log(data)
+				setStore({isStores: data});
 			},
-			createComments: async (comments) => {
+			getDeals: async () => {
+				const uri = `https://www.cheapshark.com/api/1.0/deals`
+				const options = {
+					method: "GET",
+				}
+				const response = await fetch(uri, options)
+				if(!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return
+				}
+				const data = await response.json()
+				console.log(data)
+				setStore({deals: data})
+			},
+      			createComments: async (comments) => {
 				const token = localStorage.getItem('token');
 				const uri = `${process.env.BACKEND_URL}/api/comments`;
 				const options = {
@@ -120,14 +153,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const updatedComments = store.comments.filter(comment => comment.id !== commentId);
 				setStore({ comments: updatedComments });
 			},
-			
-            setCurrentpcGames: (pcGames) => { setStore({ currentpcGames: pcGames }) },
-            setCurrentTopSellers: (topSellers) => { setStore({ currentTopSellers: topSellers }) },
-            setCurrentUser: (user) => { setStore({ currentUser: user }) },
-            setIsLoged: (isLogin) => { setStore({ isLoged: isLogin }) },
-            setcurrentGamesPc: (gamesPc) => { setStore({ currentGamesPc: gamesPc }) }
-        }
-    };
+			setDeals: (deals) => {setDeals({deals: deals})},
+			setIsStores: (isStores) => {setStore({isStores: isStores})},
+			setCurrentPcGames: (pcGames) => {setStore({setCurrentPcGames: pcGames})},
+			setCurrentTopSellers: (topSellers) => {setStore({setCurrentTopSellers: topSellers})},
+			setCurrentUser: (user) =>{setStore({currentUser:user})},
+			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},
+			setcurrentGamesPc: (gamesPc) => { setStore({ currentGamesPc: gamesPc }) },
+		}
+	};
 };
 
 export default getState;
