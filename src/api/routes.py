@@ -713,3 +713,107 @@ def load_data_from_api_platforms():
                 })
         db.session.commit()
     return response_body,201
+
+
+@api.route("/load-json-image", methods=["GET"])
+def load_data_from_api_image():
+    response_body = {
+        'results': [],
+        'message': "Usuarios añadidos exitosamente"
+    }
+    with open('src/api/json/imagen.json') as json_file:
+        data = json.load(json_file)
+        response_body['results'].append({
+                "datos":data
+            ,
+                'message': f"Estos son los datos"
+            })
+        for block in data:
+            print(f" El block es {block}")
+            for row in block:
+                print(f" a row esl {row}")
+                url = row['url']
+                type_media = row['type_media']
+                caption = row['caption']
+                game_id = row['game_id']
+                games = Games.query.filter_by(id=game_id).first()
+                media = Media(
+                    url=url,
+                    type_media=type_media,
+                    caption=caption,
+                    game_id=games.id 
+                )
+                
+                db.session.add(media)
+        db.session.commit()
+        
+        response_body['results'].append({
+            "datos": data,
+            'message': "Datos añadidos exitosamente"
+        })
+    return response_body,200
+
+
+"""
+@api.route("/genres", methods=["GET", "POST"])
+def handle_genres():
+    response_body = {}
+    rows = db.session.execute(db.select(Genders)).scalars()
+    results = [row.serialize() for row in rows]
+
+    if request.method == "GET":
+        response_body["results"] = results
+        response_body["message"] = "GET stores"
+        return response_body, 200
+
+    if request.method == "POST":
+        data = request.json
+        store_url = data.get("url")
+
+        if not store_url:
+            response_body["message"] = "Missing store url"
+            return response_body, 400
+
+        new_store = Stores(url=store_url)
+        db.session.add(new_store)
+        db.session.commit()
+        response_body["message"] = "POST stores"
+        return response_body, 200
+
+
+#buscador
+@api.route('/games', methods=['GET'])
+def search_games():
+    response_body = {}
+
+    # Leemos los distintos argumentos que podria traer la URL.
+    title = request.args.get('title')
+
+    # Crear la base de la consulta SQL, Si, SQL crudo.
+    sql_query = "SELECT * FROM games WHERE"
+    params = {}
+
+    # Añadimos las condiciones si existe el parametro o no.
+    if title:
+        sql_query += " LOWER(title) LIKE :title"
+        params['title'] = f'%{title.lower()}%'
+
+    # Imprimir la consulta y parámetros para depuración
+    print(sql_query)
+    print(params)
+
+    # Ejecutar la consulta SQL
+    results = db.session.execute(sql_query, params).fetchall()
+
+    # Convertir los resultados a JSON
+    games = [
+        {
+            "id": row.id,
+            "name": row.title,
+        }
+        for row in results
+    ]
+
+    response_body["results"] = games
+    return response_body, 200
+"""
