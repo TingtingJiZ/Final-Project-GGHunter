@@ -10,5 +10,9 @@
     {
         "id":3,
         "Name":"Xbox"
+    },
+    {
+        "id":4,
+        "Name":"PlayStation"
     }
 ]
