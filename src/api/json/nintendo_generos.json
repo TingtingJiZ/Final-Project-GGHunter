@@ -6,7 +6,7 @@
         "id": 1,
         "description": "Brotato es un roguelite de disparos en el que te moverás de arriba abajo del escenario. Encarna a una patata con 6 armas simultáneas para hacer frente a los alienígenas. Elige entre una variedad de características y objetos para crear combinaciones únicas y sobrevivir hasta que acudan los refuerzos.",
         "developer": "Blobfish",
-        "game_genders": []
+        "game_genders": ["Disparos"]
     },
     {
         "is_active": true,
@@ -15,16 +15,16 @@
         "id": 2,
         "description": "El popular y estrafalario 'juego idle que no quieres dejar de jugar'. Explora, craftea, junta y administra recursos, encuentra tesoros y secretos y construye tu base desde la nada! ¡Compra tierras para explorar y expandirte!",
         "developer": "HopFrog",
-        "game_genders": []
+        "game_genders": ["Aventuras","Disparos","Simulación", "Indie","Construccion"]
     },
     {
         "is_active": true,
         "publisher": "Square Enix",
-        "title": "DRAGON QUEST XI S: Ecos de un pasado perdido",
+        "title": " QUEST DRAGONXI S: Ecos de un pasado perdido",
         "id": 3,
         "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
         "developer": "Square Enix",
-        "game_genders": []
+        "game_genders": ["Combate por turnos","Rol","Aventuras"]
     },
     {
         "is_active": true,
@@ -33,7 +33,7 @@
         "id": 4,
         "description": "Juega como un hombre o una mujer desnudo, congelándote y muriéndote de hambre en una isla misteriosa. Debes cazar, cosechar, crear objetos, cultivar, y construir refugios para sobrevivir. Usa tu habilidad y astucia para matar, domesticar, criar y cabalgar dinosaurios y otras criaturas primitivas.",
         "developer": "Studio Wilcard",
-        "game_genders": []
+        "game_genders": ["Aventuras","Disparos","Simulación","Construccion"]
     },
     {
         "is_active": true,
@@ -42,7 +42,7 @@
         "id": 5,
         "description": "Un juego de socialización local o en línea de trabajo en equipo y traición para 4 a 15 jugadores... ¡ambientado en el espacio! ",
         "developer": "Innersloth",
-        "game_genders": []
+        "game_genders": ["RPG","Disparos","Simulación", "Indie","2D"]
     },
     {
         "is_active": true,
@@ -51,7 +51,7 @@
         "id": 6,
         "description": "¡Forja tu propio camino en Hollow Knight! Una aventura épica a través de un vasto reino de insectos y héroes que se encuentra en ruinas. Explora cavernas tortuosas, combate contra criaturas corrompidas y entabla amistad con extraños insectos, todo en un estilo clásico en 2D dibujado a mano. ",
         "developer": "HopFrog",
-        "game_genders": []
+        "game_genders": ["Aventuras","Disparos","Simulación","2D"]
     },
     {
         "is_active": true,
@@ -60,7 +60,7 @@
         "id": 7,
         "description": "Unpacking es un juego relajante de lógica acerca de la sensación familiar de sacar pertenencias de cajas para colocarlas en un nuevo hogar. Mitad juego de bloques, mitad juego de decoración, podrás crear habitaciones agradables mientras descubres pistas de la vida que estás desempacando.",
         "developer": "Witch Beam",
-        "game_genders": []
+        "game_genders": ["Aventuras","Disparos","Simulación"]
     },
     {
         "is_active": true,
@@ -69,7 +69,7 @@
         "id": 8,
         "description": "Minecraft es un videojuego sandbox enfocado en permitirle al jugador explorar y modificar un mundo generado dinámicamente hecho de bloques de un metro cúbico.",
         "developer": "Mojang Studios",
-        "game_genders": []
+        "game_genders": ["Aventuras","Simulación","Construccion"]
     },
     {
         "is_active": true,
@@ -78,7 +78,7 @@
         "id": 9,
         "description": "Ayuda a Madeline a sobrevivir a los demonios de su interior en su viaje hasta la cima de la montaña Celeste, en este ajustadísimo plataforma, obra de los creadores de TowerFall. Enfréntate a cientos de desafíos diseñados a mano, devela retorcidos secretos y, y reconstruye el misterio de la montaña.",
         "developer": "Maddy Makes Games Inc.",
-        "game_genders": []
+        "game_genders": ["Aventuras","2D","Indie", "Puzles"]
     },
     {
         
@@ -88,6 +88,6 @@
         "id": 10,
         "description": "PowerWash Simulator va de lavar a presión, ¡pero presión no tendrás ninguna! Haz que los relajantes sonidos del agua se lleven todas tus preocupaciones. Enciente tu hidrolimpiadora y elimina hasta la última mota de suciedad y mugre que encuentres para dejarlo todo como los chorros",
         "developer": "FuturLab",
-        "game_genders": []
+        "game_genders": ["Casual","Multijugador","Simulación","3D"]
     }
 ]
