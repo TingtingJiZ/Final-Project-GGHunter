@@ -698,16 +698,18 @@ def load_data_from_api_platforms():
         
         for row in data:
             id = row['id']
-            name = row['Name']
+            name = row['name']
             print(f"El id {id} el nombre {name}")
             existing_store = Platforms.query.get(id)
             if not existing_store:
                 platform = Platforms(
                     id=id,
-                    Name=Name
+                    name=name
                 )
+                db.session.add(platform)
             else:
                 response_body['results'].append({
                     'result':f"Ya existe la plataforma {name}"
                 })
+        db.session.commit()
     return response_body,201

@@ -13,7 +13,6 @@ export const PCGames = () => {
     const handlePcDetails = async (game_id) => {
         await actions.getPcGameDetails(game_id);
         navigate("/pcgamedetails");
-        console.log(hola);
     };
 
     useEffect(() => {
