@@ -1,0 +1,23 @@
+[
+    {
+        "email":"javier@gghunter.com",
+        "password":"123456",
+        "is_active":"True",
+        "rol":"admin",
+        "alias":"Javi"
+    },
+    {
+        "email":"andrea@gghunter.com",
+        "password":"123456",
+        "is_active":"True",
+        "rol":"admin",
+        "alias":"Andrea"
+    },
+    {
+        "email":"tinting@gghunter.com",
+        "password":"123456",
+        "is_active":"True",
+        "rol":"admin",
+        "alias":"Tingting"
+    }
+]

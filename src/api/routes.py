@@ -4,11 +4,12 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-from api.models import db, Users, Favorites, SocialAccounts, Comments, Media, Games, GameCharacteristics, Stores
+from api.models import db, Users, Favorites, SocialAccounts, Comments, Media, Games, GameCharacteristics, Stores, Platforms
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from datetime import datetime
 from flask_jwt_extended import jwt_required
+import json
 
 api = Blueprint('api', __name__)
 CORS(api)  # Allow CORS requests to this API
@@ -20,15 +21,15 @@ def handle_users():
     email = data.get("email", None).lower()
     password = data.get("password", None)
     user = db.session.execute(db.select(Users).where(Users.email == email, Users.password == password, Users.is_active == True)).scalar()
-    
+
     if not user:
         response_body["message"] =f"El usuario {email} es desconocido para el sistema"
         return response_body, 404
-    
+
     if not user.is_active:
         response_body["message"] =f"El usuario {email} no esta activo en la página web"
         return response_body, 404
-    
+
     access_token = create_access_token(identity={'email':email, 'user_id':user.id, 'is_rol':user.rol})
     response_body['results'] = user.serialize()
     response_body['message'] = 'User logged'
@@ -71,7 +72,7 @@ def handle_all_game_characteristics():
         response_body['message'] = "GET request received for all Game Characteristics"
         return response_body, 200
     if request.method == 'POST':
-        data = request.get_json() 
+        data = request.get_json()
         game_id = data.get('game_id', None)
         platform_id = data.get('platform_id', None)
         size_mb = data.get('size_mb', None)
@@ -108,7 +109,7 @@ def handle_game_characteristic(characteristic_id):
         response_body['results'] = row.serialize()
         return response_body, 200
     if request.method == 'PUT':
-        data = request.get_json() 
+        data = request.get_json()
         game_id = data.get('game_id', None)
         platform_id = data.get('platform_id', None)
         size_mb = data.get('size_mb', None)
@@ -134,7 +135,7 @@ def handle_game_characteristic(characteristic_id):
         characteristic.platform_id = platform_id
         characteristic.size_mb = size_mb
         characteristic.minimun = minimun
-        characteristic.recomended = recomended 
+        characteristic.recomended = recomended
         Esto funciona pero es más antiguo"""
 
         db.session.commit()
@@ -151,7 +152,7 @@ def handle_game_characteristic(characteristic_id):
         db.session.commit()
         response_body['message'] = f'Game Characteristic {characteristic_id} deleted successfully'
         return response_body, 200
- 
+
 
 @api.route('/games', methods=['GET', 'POST'])
 def handle_all_games():
@@ -165,11 +166,11 @@ def handle_all_games():
     if request.method == 'POST':
         data = request.json
         title = data.get('title', None)
-        if not title: 
+        if not title:
             response_body['message'] = 'Does not exist'
             response_body['results'] = {}
             return response_body, 400
-        game_exist = db.session.execute(db.select(Games).where(Games.title == title)).scalar() 
+        game_exist = db.session.execute(db.select(Games).where(Games.title == title)).scalar()
         if game_exist:
             response_body['message'] = 'Game already exists'
             response_body['results'] = {}
@@ -238,7 +239,7 @@ def handle_game(game_id):
         db.session.delete(game)
         db.session.commit()
         response_body['message'] = f'Game {game_id} deleted successfully'
-        return response_body, 200   
+        return response_body, 200
 
 
 @api.route("/comments", methods=["GET", "POST"])
@@ -284,7 +285,7 @@ def handle_comments():
         db.session.commit()
         response_body["message"] = f"Comment deletede"
         return jsonify(response_body), 201
-  
+
 
 @api.route("/comments/<int:comment_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
@@ -360,8 +361,8 @@ def handle_social_accounts():
         db.session.commit()
         response_body["message"] = "Successfully posted"
         return response_body, 200
-      
-      
+
+
 @api.route("/social_accounts/<int:social_account_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
 def handle_social_account(social_account_id):
@@ -408,7 +409,7 @@ def handle_social_account(social_account_id):
         response_body["results"] = account_to_update.serialize()
         return response_body, 200
 
-   
+
 @api.route("/stores", methods=["GET", "POST"])
 def handle_stores():
     response_body = {}
@@ -441,14 +442,14 @@ def handle_profile():
     response_body = {}
     current_user = get_jwt_identity()
     existing_user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
-    
+
     if not existing_user:
         response_body['results']= {}
         response_body['message']= "User not found"
         return jsonify(response_body), 404
-    
+
     user_id = user.id
-    
+
     if request.method == "PUT":
         data = request.json
         user = Users(alias = data.get("alias"),
@@ -473,7 +474,7 @@ def handle_profile():
         response_body['results'] = {}
         response_body['message'] = "User deactivated successfully"
         return jsonify(response_body), 200
-      
+
 
 @api.route('/favourites', methods=['GET', 'POST', 'DELETE'])
 @jwt_required()
@@ -498,12 +499,12 @@ def handle_favourites():
         data = request.get_json()
         game_id = data.get('game_id')
         existing_favorite = db.session.execute(db.select(Users).where(user_id=user.id, game_id=game_id)).scalar()
-    
+
         if existing_favorite:
             response_body = {'results': {}, 'message': "Game already in favourites"}
             return jsonify(response_body), 400
 
-        new_favorite = Favorites(user_id=user.id, 
+        new_favorite = Favorites(user_id=user.id,
                                 game_id=game_id)
         db.session.add(new_favorite)
         db.session.commit()
@@ -546,7 +547,7 @@ def handle_media(game_id):
 
         if type_media == None:
             type_media = "imagen"
-        
+
         media = Media(game_id = game_id,
                       url = data.get["url"],
                       type_media = type_media,
@@ -556,3 +557,157 @@ def handle_media(game_id):
         db.session.commit()
         response_body["message"] = f"Insertado la media de {media}, del juego {game_id}"
         return response_body, 201
+
+
+@api.route("/load-json-user", methods=["GET"])
+def load_data_from_api_user():
+    response_body = {
+        'results': [],
+        'message': "Usuarios añadidos exitosamente"
+    }
+    with open('src/api/json/user.json') as json_file:
+        data = json.load(json_file)
+        print(data)
+        for row in data:
+            email = row['email']
+            password = row['password']
+            is_active = row['is_active'].lower() == 'true'
+            rol = row['rol']
+            alias = row['alias']
+            user = Users(
+                email=email,
+                password=password,
+                is_active=is_active,
+                rol=rol,
+                alias=alias
+            )
+            db.session.add(user)
+            db.session.commit()
+            response_body['results'].append({
+                'email': email,
+                'message': f"Usuario {email} añadido"
+            })
+    return response_body,200
+
+
+@api.route("/load-json-nintendo", methods=["GET"])
+def load_data_from_api_nintendo():
+    response_body = {
+        'results': [],
+        'message': "Usuarios añadidos exitosamente"
+    }
+    with open('src/api/json/nintendo.json') as json_file:
+        data = json.load(json_file)
+        charact = []
+        games_to_add = []
+        #Falta hacer comprobaciones de datos si el juego existe etc etc
+        for row in data:
+            is_active = row['is_active']
+            publisher = row["publisher"]
+            title = row["title"]
+            description = row['description']
+            id = row['id']
+            developer = row['developer']
+            game_genders = row['game_genders']
+            game = Games(
+                id=id,
+                is_active=is_active,
+                publisher=publisher,
+                title=title,
+                developer=developer,
+                description=description,
+
+            )
+            games_to_add.append(game)
+            response_body['results'].append({
+                'datos_juego': {
+                   "id":id,
+                   "is_active":is_active,
+                    "publisher":publisher,
+                    "title":title,
+                    "developer":developer,
+                    "description":description
+
+            },
+                'message': f"Usuario {title} añadido"
+            })
+    
+        db.session.add_all(games_to_add)
+        db.session.commit()
+    return response_body,201
+
+
+@api.route("/load-json-store", methods=["GET"])
+def load_data_from_api_store():
+    response_body = {
+        'results': [],
+        'message': "Usuarios añadidos exitosamente"
+    }
+    with open('src/api/json/stores.json') as json_file:
+        data = json.load(json_file)
+        response_body['results'].append({
+                "datos":data
+            ,
+                'message': f"Estos son los datos"
+            })
+        for block in data:
+            #print(f" El block es {block}")
+            for row in block:
+                #print(f" a row esl {row}")
+                size_mb = row['size_mb']
+                minimun = row['minimun']
+                recomended = row['recomended']
+                game_id = row['game_id']
+                platform_id = row['platform_id']
+                url = row['url']
+                home_page = row['home_page']
+                price = row['price']
+
+                store = Stores.query.filter_by(url=url, home_page=home_page).first()
+                if not store:
+                    store = Stores(url=url, home_page=home_page, price=price)
+                    db.session.add(store)
+                    db.session.commit() 
+            
+                game_characteristics = GameCharacteristics(
+                    size_mb=size_mb,
+                    minimun=minimun,
+                    recomended=recomended,
+                    game_id=game_id,
+                    platform_id=platform_id,
+                    stores_id=store.id 
+                )
+                
+                db.session.add(game_characteristics)
+        db.session.commit()
+        
+        response_body['results'].append({
+            "datos": data,
+            'message': "Datos añadidos exitosamente"
+        })
+    return response_body,200
+
+@api.route("/load-json-platforms", methods=["GET"])
+def load_data_from_api_platforms():
+    response_body = {
+        'results': [],
+        'message': "Usuarios añadidos exitosamente"
+    }
+    with open('src/api/json/platform.json') as json_file:
+        data = json.load(json_file)
+        
+        for row in data:
+            id = row['id']
+            name = row['Name']
+            print(f"El id {id} el nombre {name}")
+            existing_store = Platforms.query.get(id)
+            if not existing_store:
+                platform = Platforms(
+                    id=id,
+                    Name=Name
+                )
+            else:
+                response_body['results'].append({
+                    'result':f"Ya existe la plataforma {name}"
+                })
+    return response_body,201
