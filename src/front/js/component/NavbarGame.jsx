@@ -104,21 +104,21 @@ export const NavbarGame = () => {
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<NavDropdown
-							title="Platform"
+							title="Plataformas"
 							id={`offcanvasNavbarDropdown-expand`}
 							className="mx-5 d-flex justify-content-center"
 						>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/PCGames">PC</Nav.Link>
+								<Nav.Link href="/pcgames">PC</Nav.Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/profile">Xbox</Nav.Link>
+								<Nav.Link href="/xbox">Xbox</Nav.Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/profile">PlayStation</Nav.Link>
+								<Nav.Link href="/playstation">PlayStation</Nav.Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/profile">Nintendo</Nav.Link>
+								<Nav.Link href="/nintendo">Nintendo</Nav.Link>
 							</NavDropdown.Item>
 						</NavDropdown>
 						<NavDropdown
