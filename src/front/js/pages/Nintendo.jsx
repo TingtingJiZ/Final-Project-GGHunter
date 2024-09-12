@@ -2,26 +2,26 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const PCGames = () => {
+export const Nintendo = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
 
-    const pcData = async () => {
-        await actions.getPC();
+    const nintendoData = async () => {
+        await actions.getNintendo();
     };
 
-    const handlePcDetails = async (game_id) => {
-        await actions.getPcGameDetails(game_id);
-        navigate("/pcgamedetails");
+    const handleNintendoDetails = async (game_id) => {
+        //await actions.get(game_id);
+       // navigate("/");
     };
 
     useEffect(() => {
-        pcData();
+        nintendoData();
     }, []);
 
     return (
         <div className="container w-75">
-            <h1>PC Games</h1>
+            <h1>Nintendo Games</h1>
             <div className="row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner mb-3">
@@ -46,14 +46,14 @@ export const PCGames = () => {
                 </div>
             </div>
             <div className="row row-cols-1 row-cols-md-3 row-cols-xl-5 g-2 justify-content-center card-body">
-                {store.pc && store.pc.map((item) => (
+                {store.nintendo && store.nintendo.map((item) => (
                     <div key={item.id}>
                         <div className="atropos-card card-row text-white h-100 border-0" style={{ height: "18rem" }}>
-                            <img src={item.medias_game[0].url} className="atropos-img" alt="..." />
+                             <img src={item.medias_game[0].url} className="atropos-img" alt="..." />
                             <div>
                                 <h5>{item.title}</h5>
                                 <strong>€{item.game_characteristics[1].store.price}</strong>
-                                <button href="#" onClick={() => handlePcDetails(item.game_id)} className="btn btn-primary">Detalles</button>
+                                <button href="#" onClick={() => handleNintendoDetails(item.game_id)} className="btn btn-primary">Detalles</button>
                             </div>
                         </div>
                     </div>
