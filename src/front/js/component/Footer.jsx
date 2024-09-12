@@ -15,11 +15,14 @@ export const Footer = () => {
 				<div>
 					<h3 className="title-footer fs-5">SÍGUENOS</h3>
 					<p className="p-footer">¡Mantente conectado y sigue nuestra páginas oficial para más noticias!</p>
-					<button className="icon-social" onClick={() => window.location.href = 'https://www.facebook.com/profile.php?id=61565137364035'}>
+					<a className="icon-social" href='https://www.facebook.com/profile.php?id=61565137364035' target="_blank">
 						<i className="fab fa-facebook-f"></i>
-					</button>
-					<button className="icon-social" onClick={() => window.location.href = 'https://x.com/home'}><i className="fab fa-twitter"></i></button>
-					<button className="icon-social" onClick={() => window.location.href = 'https://www.instagram.com/_gg_hunter_/'}><i className="fab fa-instagram"></i></button>
+					</a>
+					<a className="icon-social" href='https://x.com/home' target="_blank">
+						<i className="fab fa-twitter"></i>
+						</a>
+					<a className="icon-social" href= 'https://www.instagram.com/_gg_hunter_/' target="_blank">
+					<i className="fab fa-instagram"></i></a>
 				</div>
 				<div>
 					<h3 className="title-footer fs-4">GG-Hunter</h3>

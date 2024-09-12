@@ -134,7 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 			
-				const uri = `${process.env.BACKEND_URL}/api/comments/${delete_comment}`;
+				const uri = `${process.env.BACKEND_URL}/api/comments/${commentId}`;
 				const options = {
 					method: 'DELETE',
 					headers: {
