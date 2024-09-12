@@ -156,7 +156,8 @@ class Games(db.Model):
                 "release_date": self.release_date,
                 "developer": self.developer,
                 "publisher": self.publisher,
-                "favourites_games": self.favourites_games}
+                "favourites_games": self.favourites_games,
+                "medias_game":[row.serialize() for row in self.medias_game]}
 
     def serialize_data_games(self):
         return{"id": self.id,

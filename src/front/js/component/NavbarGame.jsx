@@ -169,24 +169,25 @@ export const NavbarGame = () => {
 				aria-labelledby="contained-modal-title-vcenter"
 				centered
 				keyboard={false}
+				className="card-register"
 
 			>
-				<Modal.Header closeButton className="modal-login">
-					<Modal.Title>Login</Modal.Title>
+				<Modal.Header closeButton className="card-modal">
+					<Modal.Title><strong>Login</strong></Modal.Title>
 				</Modal.Header>
-				<Modal.Body className="modal-login">
+				<Modal.Body className="card-modal">
 					<Form onSubmit={handleLogin}>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
-							<Form.Label>Dirección de correo</Form.Label>
+							<Form.Label><strong>Dirección de correo</strong></Form.Label>
 							<Form.Control type="email" placeholder="" value={userLogin} onChange={(event) => setUserLogin(event.target.value)} />
 						</Form.Group>
 						<Form.Group className="mb-3" controlId="formBasicPassword">
-							<Form.Label>Contraseña</Form.Label>
+							<Form.Label><strong>Contraseña</strong></Form.Label>
 							<Form.Control type="password" placeholder="" value={userPassword} onChange={(event) => setUserPassword(event.target.value)} />
 						</Form.Group>
 					</Form>
 				</Modal.Body>
-				<Modal.Footer className="modal-login">
+				<Modal.Footer className="card-modal">
 					<Button variant="secondary" onClick={handleClose}>
 						Cerrar
 					</Button>
