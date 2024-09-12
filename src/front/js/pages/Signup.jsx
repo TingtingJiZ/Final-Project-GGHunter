@@ -108,7 +108,7 @@ export const Signup = () => {
                                             <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
                                             )
                                            :(
-                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#40ff90",}} />)
                                             )
                                             }
                                             Introduce al menos 8 caracteres
@@ -120,7 +120,7 @@ export const Signup = () => {
                                             <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
                                             )
                                            :(
-                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#40ff90",}} />)
                                             )
                                             }
                                             Introduce al menos un caracter especial
@@ -132,7 +132,7 @@ export const Signup = () => {
                                             <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
                                             )
                                            :(
-                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#40ff90",}} />)
                                             )
                                             }
                                             Introduce al menos 1 caracter en minúsculas
@@ -144,7 +144,7 @@ export const Signup = () => {
                                             <FontAwesomeIcon icon={faCircleXmark} style={{color: "#ff0000",}} />
                                             )
                                            :(
-                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#ff8040",}} />)
+                                            <FontAwesomeIcon icon={faCircleCheck} style={{color: "#40ff90",}} />)
                                             )
                                             }
                                             Introduce al menos 1 caracter en mayúsculas

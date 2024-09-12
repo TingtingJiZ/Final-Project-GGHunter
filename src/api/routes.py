@@ -731,6 +731,7 @@ def load_data_from_api_platforms():
         db.session.commit()
     return response_body,201
 
+ 
 @api.route("/load-json-image", methods=["GET"])
 def load_data_from_api_image():
     response_body = {
@@ -768,3 +769,4 @@ def load_data_from_api_image():
             'message': "Datos añadidos exitosamente"
         })
     return response_body,200
+
