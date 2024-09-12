@@ -19,6 +19,9 @@ import { CommentsGames } from "./pages/CommentsGames.jsx";
 import { RequirementsGames } from "./pages/RequirementsGames.jsx";
 import { PayPremium } from "./pages/PayPremium.jsx";
 import { PayReady } from "./pages/PayReady.jsx";
+import { Nintendo } from "./pages/Nintendo.jsx";
+import { PlayStation } from "./pages/PlayStation.jsx";
+import { Xbox } from "./pages/Xbox.jsx";
 
 
 // Create your first component
@@ -40,7 +43,10 @@ const Layout = () => {
                         <Route element={<Signup />} path="/signup"/>
                         <Route element={<PCGames />} path="/pcgames" />
                         <Route element={<PcGameDetails />} path="/pcgamedetails" />
-                        <Route element={<PCGames />} path="/PCgames"/>
+                        <Route element={<PCGames />} path="/pcgames"/>
+                        <Route element={<Nintendo/>} path="/nintendo" />
+                        <Route element={<PlayStation/>} path="/playstation"/>
+                        <Route element={<Xbox/>} path="xbox"/>
                         <Route element={<CommentsGames />} path="/comments-games"/>
                         <Route element={<RequirementsGames />} path="/requirements-games"/>
                         <Route element={<Premium />} path="/premium"/>

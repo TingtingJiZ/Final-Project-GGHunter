@@ -160,6 +160,8 @@ def handle_all_games():
     if request.method == 'GET':
         rows = db.session.execute(db.select(Games)).scalars()
         results = [row.serialize() for row in rows]
+        results2 = [row.serialize_data_games() for row in rows]
+        response_body['results'] = results2
         response_body['results'] = results
         response_body['message'] = "GET received"
         return response_body, 200
@@ -565,76 +567,91 @@ def load_data_from_api_user():
         'results': [],
         'message': "Usuarios añadidos exitosamente"
     }
+    
+    # Open the JSON file
     with open('src/api/json/user.json') as json_file:
         data = json.load(json_file)
         print(data)
+        
         for row in data:
             email = row['email']
             password = row['password']
             is_active = row['is_active'].lower() == 'true'
             rol = row['rol']
             alias = row['alias']
-            user = Users(
-                email=email,
-                password=password,
-                is_active=is_active,
-                rol=rol,
-                alias=alias
-            )
-            db.session.add(user)
-            db.session.commit()
-            response_body['results'].append({
-                'email': email,
-                'message': f"Usuario {email} añadido"
-            })
-    return response_body,200
+            
+            # Check if the email already exists in the database
+            existing_user = Users.query.filter_by(email=email).first()
+
+            if existing_user:
+                response_body['results'].append({'email': email,'message': f"Usuario {email} ya existe"})
+            else:
+                # If the email doesn't exist, create a new user
+                user = Users(
+                    email=email,
+                    password=password,
+                    is_active=is_active,
+                    rol=rol,
+                    alias=alias)
+                db.session.add(user)
+                db.session.commit()
+                response_body['results'].append({
+                    'email': email,
+                    'message': f"Usuario {email} añadido"})
+    return response_body, 200
+
 
 
 @api.route("/load-json-nintendo", methods=["GET"])
 def load_data_from_api_nintendo():
     response_body = {
         'results': [],
-        'message': "Usuarios añadidos exitosamente"
-    }
+        'message': "Juegos añadidos exitosamente"}
     with open('src/api/json/nintendo.json') as json_file:
         data = json.load(json_file)
-        charact = []
         games_to_add = []
-        #Falta hacer comprobaciones de datos si el juego existe etc etc
         for row in data:
             is_active = row['is_active']
             publisher = row["publisher"]
             title = row["title"]
             description = row['description']
-            id = row['id']
+            game_id = row['id']
             developer = row['developer']
             game_genders = row['game_genders']
-            game = Games(
-                id=id,
-                is_active=is_active,
-                publisher=publisher,
-                title=title,
-                developer=developer,
-                description=description,
-
-            )
-            games_to_add.append(game)
-            response_body['results'].append({
-                'datos_juego': {
-                   "id":id,
-                   "is_active":is_active,
-                    "publisher":publisher,
-                    "title":title,
-                    "developer":developer,
-                    "description":description
-
-            },
-                'message': f"Usuario {title} añadido"
-            })
-    
-        db.session.add_all(games_to_add)
-        db.session.commit()
-    return response_body,201
+            existing_game = Games.query.filter_by(id=game_id).first() or Games.query.filter_by(title=title).first()
+            if existing_game:
+                response_body['results'].append({
+                    'data': {
+                        "id": game_id,
+                        "is_active": is_active,
+                        "publisher": publisher,
+                        "title": title,
+                        "developer": developer,
+                        "description": description
+                    },
+                    'message': f"Juego {title} ya existe"})
+            else:
+                game = Games(
+                    id=game_id,
+                    is_active=is_active,
+                    publisher=publisher,
+                    title=title,
+                    developer=developer,
+                    description=description)
+                games_to_add.append(game)
+                response_body['results'].append({
+                    'data': {
+                        "id": game_id,
+                        "is_active": is_active,
+                        "publisher": publisher,
+                        "title": title,
+                        "developer": developer,
+                        "description": description},
+                    'message': f"Juego {title} añadido"})
+        if games_to_add:
+            db.session.add_all(games_to_add)
+            db.session.commit()
+    return response_body, 201
 
 
 @api.route("/load-json-store", methods=["GET"])
@@ -698,16 +715,56 @@ def load_data_from_api_platforms():
         
         for row in data:
             id = row['id']
-            name = row['Name']
+            name = row['name']
             print(f"El id {id} el nombre {name}")
             existing_store = Platforms.query.get(id)
             if not existing_store:
                 platform = Platforms(
                     id=id,
-                    Name=Name
+                    name=name
                 )
+                db.session.add(platform)
             else:
                 response_body['results'].append({
                     'result':f"Ya existe la plataforma {name}"
                 })
+        db.session.commit()
     return response_body,201
+
+@api.route("/load-json-image", methods=["GET"])
+def load_data_from_api_image():
+    response_body = {
+        'results': [],
+        'message': "Usuarios añadidos exitosamente"
+    }
+    with open('src/api/json/image.json') as json_file:
+        data = json.load(json_file)
+        response_body['results'].append({
+                "datos":data
+            ,
+                'message': f"Estos son los datos"
+            })
+        for block in data:
+            print(f" El block es {block}")
+            for row in block:
+                print(f" a row esl {row}")
+                url = row['url']
+                type_media = row['type_media']
+                caption = row['caption']
+                game_id = row['game_id']
+                games = Games.query.filter_by(id=game_id).first()
+                media = Media(
+                    url=url,
+                    type_media=type_media,
+                    caption=caption,
+                    game_id=games.id 
+                )
+                
+                db.session.add(media)
+        db.session.commit()
+        
+        response_body['results'].append({
+            "data": data,
+            'message': "Datos añadidos exitosamente"
+        })
+    return response_body,200
