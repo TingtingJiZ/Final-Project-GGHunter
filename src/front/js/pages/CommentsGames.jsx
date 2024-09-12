@@ -27,7 +27,7 @@ export const CommentsGames = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        formData.game_id = store.;  // Este valor hay que tomarlo del store.
+        formData.game_id = 1;  // Este valor hay que tomarlo del store.
         actions.createComments(formData);
         setFormData({ comment: "" });
     };
