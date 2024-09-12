@@ -152,3 +152,12 @@ footer {
             width: 80px;
             height: 80px;
         }
+
+.card-register {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card-modal{
+    background-color: rgba(18, 54, 90, 1);
+    color:black;
+}
