@@ -1,0 +1,18 @@
+[
+    {
+        "id":1,
+        "name":"PC"
+    },
+    {
+        "id":2,
+        "name":"Nintendo"
+    },
+    {
+        "id":3,
+        "name":"Xbox"
+    },
+    {
+        "id":4,
+        "name":"PlayStation"
+    }
+]

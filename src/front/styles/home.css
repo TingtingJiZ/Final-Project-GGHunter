@@ -1,7 +1,50 @@
-/*
-    home.css: This website contains selectors only used in home.css
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+
+footer {
+    background: #424242;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-content h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.footer-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.socials {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.socials li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.socials li a {
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+}
+
+.footer-bottom span {
+    color: #e44d26;
+    font-weight: bold;
+}
