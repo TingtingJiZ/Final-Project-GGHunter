@@ -150,6 +150,9 @@ export const PcGameDetails = () => {
             <div className="container">
                 <CommentsGames />
             </div>
+            <div className="container">
+                <CommentsGames />
+            </div>
         </div>
     );
 };

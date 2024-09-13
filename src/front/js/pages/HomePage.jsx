@@ -11,12 +11,20 @@ export const HomePage = () => {
     const navigate = useNavigate();
 
     const handlePc = () => {
-        navigate("/PCgames")
+        navigate("/pcgames")
     }
-
+    const handleNintendo = () => {
+        navigate("/nintendo")
+    }
+    const handlePlaystation = () => {
+        navigate("/playstation")
+    }
+    const handleXbox = () => {
+        navigate("xbox")
+    }
     useEffect(() => {
         actions.getGamesPc();
-    }, []); 
+    }, []);
 
     useEffect(() => {
         console.log("gamesPc:", gamesPc);
@@ -29,17 +37,18 @@ export const HomePage = () => {
             </Row>
             <Row className="card-body">
                 <button className="button-pc" onClick={() => handlePc()}>PC</button>
-                <div className="card-row d-flex align-items-center ms-3 mb-4">
+                <div className="card-row d-flex align-items-center mb-3">
+
                     {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
                         Object.keys(gamesPc).map(key => {
                             const game = gamesPc[key].info;
                             const price = gamesPc[key].cheapestPriceEver.price;
                             return (
-                                <GameCard 
-                                    key={game.steamAppID} 
-                                    image={game.thumb} 
-                                    title={game.title} 
-                                    price={price} 
+                                <GameCard
+                                    key={game.steamAppID}
+                                    image={game.thumb}
+                                    title={game.title}
+                                    price={price}
                                 />
                             );
                         })
@@ -47,7 +56,80 @@ export const HomePage = () => {
                         <p>No hay juegos</p>
                     )}
                     <span onClick={() => handlePc()} className="button-arrow ms-3">
-                    <i className="fa-solid fa-circle-arrow-right fs-1"></i>
+                        <span class="tooltip">Ver más</span>
+                        <i className="fa-solid fa-circle-arrow-right fs-1"></i>
+                    </span>
+
+
+                </div>
+
+                <button className="button-pc" onClick={() => handleNintendo()}>Nintendo</button>
+                <div className="card-row d-flex align-items-center mb-3">
+                    {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
+                        Object.keys(gamesPc).map(key => {
+                            const game = gamesPc[key].info;
+                            const price = gamesPc[key].cheapestPriceEver.price;
+                            return (
+                                <GameCard
+                                    key={game.steamAppID}
+                                    image={game.thumb}
+                                    title={game.title}
+                                    price={price}
+                                />
+                            );
+                        })
+                    ) : (
+                        <p>No hay juegos</p>
+                    )}
+                    <span onClick={() => handleNintendo()} className="button-arrow ms-3">
+                        <span class="tooltip">Ver más</span>
+                        <i className="fa-solid fa-circle-arrow-right fs-1"></i>
+                    </span>
+                </div>
+                <button className="button-pc" onClick={() => handleXbox()}>Xbox</button>
+                <div className="card-row d-flex align-items-center mb-3">
+                    {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
+                        Object.keys(gamesPc).map(key => {
+                            const game = gamesPc[key].info;
+                            const price = gamesPc[key].cheapestPriceEver.price;
+                            return (
+                                <GameCard
+                                    key={game.steamAppID}
+                                    image={game.thumb}
+                                    title={game.title}
+                                    price={price}
+                                />
+                            );
+                        })
+                    ) : (
+                        <p>No hay juegos</p>
+                    )}
+                    <span onClick={() => handleXbox()} className="button-arrow ms-3">
+                        <span class="tooltip">Ver más</span>
+                        <i className="fa-solid fa-circle-arrow-right fs-1"></i>
+                    </span>
+                </div>
+                <button className="button-pc" onClick={() => handlePlaystation()}>PlayStation</button>
+                <div className="card-row d-flex align-items-center mb-3">
+                    {gamesPc && typeof gamesPc === 'object' && Object.keys(gamesPc).length > 0 ? (
+                        Object.keys(gamesPc).map(key => {
+                            const game = gamesPc[key].info;
+                            const price = gamesPc[key].cheapestPriceEver.price;
+                            return (
+                                <GameCard
+                                    key={game.steamAppID}
+                                    image={game.thumb}
+                                    title={game.title}
+                                    price={price}
+                                />
+                            );
+                        })
+                    ) : (
+                        <p>No hay juegos</p>
+                    )}
+                    <span onClick={() => handlePlaystation()} className="button-arrow ms-3">
+                        <span class="tooltip">Ver más</span>
+                        <i className="fa-solid fa-circle-arrow-right fs-1"></i>
                     </span>
                 </div>
             </Row>
