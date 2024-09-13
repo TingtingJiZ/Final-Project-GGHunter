@@ -147,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const response = await fetch(uri, options);
 				if(!response.ok) {
-					("Error: ", response.status, response.statusText)
+					console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
@@ -175,7 +175,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const response = await fetch(uri, options);
 				if(!response.ok) {
-					("Error: ", response.status, response.statusText)
+					console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
@@ -203,7 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const response = await fetch(uri, options);
 				if(!response.ok) {
-					("Error: ", response.status, response.statusText)
+					console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
