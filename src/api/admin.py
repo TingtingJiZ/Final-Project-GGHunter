@@ -20,4 +20,3 @@ def setup_admin(app):
     admin.add_view(ModelView(SocialAccounts, db.session))
     admin.add_view(ModelView(Comments, db.session))
     admin.add_view(ModelView(Media, db.session))
-    

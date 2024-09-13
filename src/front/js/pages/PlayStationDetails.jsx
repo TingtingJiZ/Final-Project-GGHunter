@@ -3,11 +3,12 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { CommentsGames } from "../pages/CommentsGames.jsx";
 
-export const PcGameDetails = () => {
+export const PlaystationDetails = () => {
     const { store, actions } = useContext(Context);
-    const [item, setItem] = useState(store.currentPC);
-    const descriptionPC = async () => {
-        await actions.getPcGameDetails()
+    const [item, setItem] = useState(store.currentPlaystation);
+
+    const descriptionPlay = async () => {
+        await actions.getPlaystationDetailsId()
     };
 
     const handleShop = (url) => {
@@ -15,7 +16,7 @@ export const PcGameDetails = () => {
     }
 
     useEffect(() => {
-        descriptionPC();
+        descriptionPlay();
     }, []);
 
     return (
@@ -77,10 +78,6 @@ export const PcGameDetails = () => {
             <div className="container">
                 <CommentsGames />
             </div>
-            <div className="container">
-                <CommentsGames />
-            </div>
         </div>
     );
 };
-

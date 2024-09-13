@@ -12,8 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			nintendo: [],
 			currentNintendo: [],
 			playstation: [],
+			currentPlaystation: [],
 			xbox: [],
-			currentGames: {},
+			currentXbox: [],
 		},
 		actions: {
 			getPC: async () => {
@@ -43,8 +44,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 		        console.log(data.status)
 		        setStore({ gamesPc: data });
             },
-			getPcGameDetails: async () => {
+			/* getPcGameDetails: async () => {
 				const uri = `${process.env.URIBACK}/api/games`;
+				const options = {
+					method: "GET",
+				};
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return;
+				}
+				const data = await response.json();
+				console.log(data.results[0]);
+				setStore({ currentPC: data.results });
+			}, */
+			getPcGameDetailsId: async (id) => {
+				const uri = `${process.env.URIBACK}/api/games/${id}`;
 				const options = {
 					method: "GET",
 				};
@@ -152,6 +167,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data.results)
 				setStore({nintendo: data.results})
 			},
+			getNintendoDetailsId: async (id) => {
+				const uri = `${process.env.URIBACK}/api/games/${id}`;
+				const options = {
+					method: "GET",
+				};
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return;
+				}
+				const data = await response.json();
+				console.log(data.results[0]);
+				setStore({ currentNintendo: data.results });
+			},
 			getPlaystation: async () => {
 				const uri = `${process.env.URIBACK}/api/games`
 				const options = {
@@ -165,6 +194,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json()
 				console.log(data.results)
 				setStore({playstation: data.results})
+			},
+			getPlaystationDetailsId: async (id) => {
+				const uri = `${process.env.URIBACK}/api/games/${id}`;
+				const options = {
+					method: "GET",
+				};
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return;
+				}
+				const data = await response.json();
+				console.log(data.results[0]);
+				setStore({ currentPlaystation: data.results });
 			},
 			getXbox: async () => {
 				const uri = `${process.env.URIBACK}/api/games`
@@ -180,7 +223,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data.results)
 				setStore({xbox: data.results})
 			},
-			setCurrentNintendo: (nintendo) => {setStore({setCurrentNintendo: nintendo})},
+			getXboxDetailsId: async (id) => {
+				const uri = `${process.env.URIBACK}/api/games/${id}`;
+				const options = {
+					method: "GET",
+				};
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return;
+				}
+				const data = await response.json();
+				console.log(data.results[0]);
+				setStore({ currentXbox: data.results });
+			},
+			
 			setCurrentUser: (user) =>{setStore({currentUser:user})},
 			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},
 			setcurrentGamesPc: (gamesPc) => { setStore({ currentGamesPc: gamesPc }) },

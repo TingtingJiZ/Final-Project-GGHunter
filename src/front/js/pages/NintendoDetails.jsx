@@ -3,11 +3,13 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { CommentsGames } from "../pages/CommentsGames.jsx";
 
-export const PcGameDetails = () => {
+export const NintendoDetails = () => {
     const { store, actions } = useContext(Context);
-    const [item, setItem] = useState(store.currentPC);
+    const [item, setItem] = useState(store.currentNintendo);
+    const [activePlatform, setActivePlatform] = useState('');
+
     const descriptionPC = async () => {
-        await actions.getPcGameDetails()
+        await actions.getNintendoDetailsId()
     };
 
     const handleShop = (url) => {
@@ -16,24 +18,35 @@ export const PcGameDetails = () => {
 
     useEffect(() => {
         descriptionPC();
+        const path = window.location.pathname;
+        if (path.includes('/nintendo')) {
+            setActivePlatform('nintendo');
+        } else if (path.includes('/playstation')) {
+            setActivePlatform('playstation');
+        } else if (path.includes('/xbox')) {
+            setActivePlatform('xbox');
+        } else {
+            setActivePlatform('pc');
+        }
     }, []);
 
     return (
         <div className="container my-4 w-75">
-            <ul className="nav nav-underline">
-                <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">PC</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">PlayStation</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Nintendo</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Xbox</a>
-                </li>
-            </ul>
+             <ul className="nav nav-underline">
+            <li className="nav-item">
+                <a className={`nav-link ${activePlatform === 'pc' ? 'active' : ''}`} href="/pc">PC</a>
+            </li>
+            <li className="nav-item">
+                <a className={`nav-link ${activePlatform === 'playstation' ? 'active' : ''}`} href="/playstation">PlayStation</a>
+            </li>
+            <li className="nav-item">
+                <a className={`nav-link ${activePlatform === 'nintendo' ? 'active' : ''}`} href="/nintendo">Nintendo</a>
+            </li>
+            <li className="nav-item">
+                <a className={`nav-link ${activePlatform === 'xbox' ? 'active' : ''}`} href="/xbox">Xbox</a>
+            </li>
+        </ul>
+
             <div className="characteristic w-100">
                 <div className="row rounded card-row p-3">
                     <div className="col-12 col-md-4 text-center">
@@ -55,7 +68,7 @@ export const PcGameDetails = () => {
                     item.game_characteristics[0].store && (
                         <div className="row rounded price-item bg-dark text-white py-2 mb-1" >
                             <div className="col-md-2 store-logo d-flex align-items-center">
-                                <img className="img-fluid" src={item.medias_game[0].url} style={{ maxHeight: '40px' }} alt="Store Logo"/>
+                                <img className="img-fluid" src={item.medias_game[0].url} style={{ maxHeight: '40px' }} alt="Store Logo" />
                             </div>
                             <div className="col-md-6 d-flex flex-column justify-content-center">
                                 <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
@@ -73,9 +86,6 @@ export const PcGameDetails = () => {
                             </div>
                         </div>
                     )}
-            </div>
-            <div className="container">
-                <CommentsGames />
             </div>
             <div className="container">
                 <CommentsGames />
