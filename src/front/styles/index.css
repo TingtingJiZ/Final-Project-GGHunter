@@ -44,12 +44,16 @@ body {
     gap: 70px;
 }
 .button-pc {
-    font-size: 50px;
+    font-size: 40px;
     background-color: #858585;
     border: none;
     cursor: pointer; 
     display: flex;
     justify-content: flex-start;
+}
+.button-pc:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
 }
 .button-arrow {
     font-size: 50px;
