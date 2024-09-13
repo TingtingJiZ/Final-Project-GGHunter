@@ -40,7 +40,7 @@ export const CommentsGames = () => {
     return (
         <div className="container py-3">
             <h2>Reseñas</h2>
-            <Row className="card-body">
+            <Row className="card-row">
                 <h1>Escribe tu Reseña</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
