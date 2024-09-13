@@ -10,8 +10,8 @@ export const PCGames = () => {
         await actions.getPC();
     };
 
-    const handlePcDetails = async (game_id) => {
-        await actions.getPcGameDetails(game_id);
+    const handlePcDetails = async (id) => {
+        await actions.getPcGameDetailsId(id);
         navigate("/pcgamedetails");
     };
 
@@ -53,7 +53,7 @@ export const PCGames = () => {
                             <div>
                                 <h5>{item.title}</h5>
                                 <strong>€{item.game_characteristics[1].store.price}</strong>
-                                <button href="#" onClick={() => handlePcDetails(item.game_id)} className="btn btn-primary">Detalles</button>
+                                <button href="#" onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Detalles</button>
                             </div>
                         </div>
                     </div>

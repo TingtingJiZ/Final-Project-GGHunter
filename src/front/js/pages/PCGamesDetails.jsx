@@ -1,17 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { CommentsGames } from "../pages/CommentsGames.jsx";
 
 export const PcGameDetails = () => {
     const { store, actions } = useContext(Context);
     const [item, setItem] = useState(store.currentPC);
-    
     const descriptionPC = async () => {
         await actions.getPcGameDetails()
     };
 
     const handleShop = async () => {
-        
+
     }
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export const PcGameDetails = () => {
                         <h6>{item.description}</h6>
                     </div>
                 </div>
-                </div>
+            </div>
             <div className="shop mt-3">
                 {store.currentPC.length > 0 ? (
                     store.currentPC.map((item) => (
@@ -71,6 +71,9 @@ export const PcGameDetails = () => {
                 ) : (
                     <p>Loading stores...</p>
                 )}
+            </div>
+            <div className="container">
+                <CommentsGames />
             </div>
         </div>
     );

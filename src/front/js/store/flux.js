@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentNintendo: [],
 			playstation: [],
 			xbox: [],
+			currentGames: {},
 		},
 		actions: {
 			getPC: async () => {
@@ -44,6 +45,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
 			getPcGameDetails: async () => {
 				const uri = `${process.env.URIBACK}/api/games`;
+				const options = {
+					method: "GET",
+				};
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return;
+				}
+				const data = await response.json();
+				console.log(data.results[0]);
+				setStore({ currentPC: data.results });
+			},
+			getPcGameDetailsId: async (id) => {
+				const uri = `${process.env.URIBACK}/api/games/${id}`;
 				const options = {
 					method: "GET",
 				};
