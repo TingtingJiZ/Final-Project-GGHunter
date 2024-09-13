@@ -265,6 +265,7 @@ def handle_comments():
         if not comment_text:
             response_body["message"] = "Missing comment"
             return jsonify(response_body), 400
+        print("insertando")
         new_comment = Comments(user_id=current_user["user_id"], body=comment_text, game_id=game_id)
         db.session.add(new_comment)
         db.session.commit()

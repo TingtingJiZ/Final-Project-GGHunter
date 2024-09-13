@@ -67,7 +67,7 @@ export const CommentsGames = () => {
                                 <Card key={index} style={{ width: '60rem', margin: '1rem' }}>
                                     <Card.Body>
                                         <Card.Text>
-                                           <strong>{item.user_id}</strong> {item.comment}
+                                           <strong>{item.user}</strong> {item.comment}
                                         </Card.Text>
                                        
                                         <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can"></i>
