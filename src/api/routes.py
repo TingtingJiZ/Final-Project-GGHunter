@@ -259,7 +259,7 @@ def handle_comments():
         return jsonify(response_body), 404
     if request.method == "POST":
         data = request.json
-        comment_text = data.get("comment")
+        comment_text = data.get("body")
         game_id = data.get("game_id")
         print(comment_text, game_id)
         if not comment_text:
@@ -333,6 +333,24 @@ def handle_comment(comment_id):
         response_body["message"] = "Comment updated"
         response_body["results"] = comment_to_update.serialize()
         return response_body, 200
+
+
+@api.route("/games/<int:game_id>/comments", methods=["GET"])
+def handele_games_comments(game_id):
+    print(game_id)
+    response_body = {}
+    comments = db.session.execute(
+        db.select(Comments, Users).join(Users, Comments.user_id == Users.id).where(Comments.game_id == game_id)
+    ).all()
+    results = [{
+        "game_id": row.Comments.game_id,
+        "body": row.Comments.body,
+        "user_alias": row.Users.alias,
+        "created_at": row.Comments.created_at
+    } for row in comments]
+    print(results)
+    response_body = {'results': results, 'message': "Los comentarios"}
+    return response_body, 200
 
 
 @api.route("/social_accounts", methods=["GET", "POST"])
