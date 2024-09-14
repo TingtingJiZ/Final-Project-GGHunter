@@ -13,19 +13,13 @@ export const Carousel = () => {
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner mb-3">
                         <div className="carousel-item active" data-bs-interval="10000">
-                            <img className="carousel-item-img"
-                                src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/35320/capsule_616x353.jpg?t=1572519365"
-                                alt="First slide" />
+                            <img src="https://i.ytimg.com/vi/w2yZI9oGHPs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnuPu0T3bxXpNxILvRt7izsrbRXg" className="d-block w-50 mx-auto" alt="..." />
                         </div>
                         <div className="carousel-item" data-bs-interval="2000">
-                            <img className="carousel-item-img"
-                                src="https://upload.wikimedia.org/wikipedia/en/6/6a/Unstoppalbe_Gorg_cover.jpg"
-                                alt="Second slide" />
+                            <img src="https://www.switchaboo.com/content/images/2020/11/D_tf0vQXYAAE_cL.jpg" className="d-block w-50 mx-auto" alt="..." />
                         </div>
                         <div className="carousel-item">
-                            <img className="carousel-item-img"
-                                src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/71000/capsule_616x353.jpg?t=1666983155"
-                                alt="Third slide" />
+                            <img src="https://i.ytimg.com/vi/hGGECWcbtU4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDyRaZxFSDPt-A6PSwf2_vljRvCcw" className="d-block w-50 mx-auto" alt="..." />
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
@@ -39,7 +33,5 @@ export const Carousel = () => {
                 </div>
             </div>
         </div>
-
-
     )
 }

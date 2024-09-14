@@ -15,6 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentPlaystation: [],
 			xbox: [],
 			currentXbox: [],
+			gamesPc: [],
+			currentGamesPc: [],
 		},
 		actions: {
 			getPC: async () => {
@@ -29,7 +31,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data.results);
 				setStore({ pc: data.results });
 			},
-			
 			getGamesPc: async () => {
 		        const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
 		        const options = {
@@ -41,23 +42,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		            return;
 		            }
 		        const data = await response.json()
-		        console.log(data.status)
+		        console.log(data)
 		        setStore({ gamesPc: data });
             },
-			/* getPcGameDetails: async () => {
-				const uri = `${process.env.URIBACK}/api/games`;
-				const options = {
-					method: "GET",
-				};
-				const response = await fetch(uri, options);
-				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
-					return;
-				}
-				const data = await response.json();
-				console.log(data.results[0]);
-				setStore({ currentPC: data.results });
-			}, */
 			getPcGameDetailsId: async (id) => {
 				const uri = `${process.env.URIBACK}/api/games/${id}`;
 				const options = {

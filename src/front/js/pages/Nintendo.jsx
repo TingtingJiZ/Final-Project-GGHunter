@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { GameCard } from '../component/GameCard.jsx';
 
 export const Nintendo = () => {
     const { store, actions } = useContext(Context);
@@ -47,20 +48,19 @@ export const Nintendo = () => {
             </div>
             <div className="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-2 justify-content-center card-body">
                 {store.nintendo && store.nintendo.map((item) => (
-                    <div key={item.id}>
-                        <div className="atropos-card card-row text-white h-100 border-0 justify-content-between" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-                            <img src={item.medias_game[0].url} className="atropos-img h-100" alt={item.title} />
-                            <div className="p-3" style={{ flexGrow: 1 }}>
-                                <h5>{item.title}</h5>
-                            </div>
-                            <footer className="p-3 d-flex justify-content-between align-items-center" style={{ background: "transparent" }}>
-                                <strong>€{item.game_characteristics[1].store.price}</strong>
-                                <button onClick={() => handleNintendoDetails(item.id)} className="btn btn-primary">Info</button>
-                            </footer>
-                        </div>
+                    <div className="col">
+                        <GameCard
+                            key={item.id}
+                            image={item.medias_game[0].url}
+                            title={item.title}
+                            price={item.game_characteristics[1].store.price}
+                            click={() => handleNintendoDetails(item.id)}
+                        />
                     </div>
                 ))}
             </div>
-        </div >
+
+        </div>
     );
 };
+
