@@ -84,7 +84,7 @@ export const NavbarGame = () => {
 			// Eliminar items específicos de localStorage
 			localStorage.removeItem("token");
 			localStorage.removeItem("user");
-			
+
 			// Limpieza del estado global
 			actions.setIsLoged(false);
 			actions.setCurrentUser(null);
@@ -106,25 +106,25 @@ export const NavbarGame = () => {
 						<NavDropdown
 							title="Plataformas"
 							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center"
+							className="mx-5 d-flex justify-content-center down"
 						>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/pcgames">PC</Nav.Link>
+								<Link to="/pcgames" className="dropdown-item">PC</Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/xbox">Xbox</Nav.Link>
+								<Link to="/xbox" className="dropdown-item">Xbox</Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/playstation">PlayStation</Nav.Link>
+								<Link to="/playstation" className="dropdown-item">PlayStation</Link>
 							</NavDropdown.Item>
 							<NavDropdown.Item as="div">
-								<Nav.Link href="/nintendo">Nintendo</Nav.Link>
+								<Link to="/nintendo" className="dropdown-item">Nintendo</Link>
 							</NavDropdown.Item>
 						</NavDropdown>
 						<NavDropdown
 							title="Generos"
 							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center"
+							className="mx-5 d-flex justify-content-center down"
 						>
 							<NavDropdown.Item as="div">
 								<Nav.Link href="/">Home</Nav.Link>
@@ -139,7 +139,7 @@ export const NavbarGame = () => {
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
 								title={<FontAwesomeIcon icon={faUser} style={{ color: "#2d0bce", }} />}
-								className="mx-5 d-flex justify-content-center"
+								className="mx-5 d-flex justify-content-center down"
 							>
 								{store.currentUser === null ? (
 									<>
