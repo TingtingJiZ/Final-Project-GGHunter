@@ -22,7 +22,7 @@
         "publisher": "Square Enix",
         "title": "DRAGON QUEST XI S: Ecos de un pasado perdido",
         "id": 3,
-        "description": "Super Mario Bros. Wonder es el primer juego de Super Mario en 2D en casi 11 años - prepárate para la nostalgia pateando a medida que entras en el mundo mágico de los juegos clásicos de Super Mario mezclados con gráficos y juego de última generación. Ayuda a Mario y sus amigos a devolver la paz al reino de las Flores gobernados por el príncipe Florian y arrebatarle la poderosa Flor Maravilla de Bowser y Kameks.",
+        "description": "La edición definitiva incluye el aclamadísimo DRAGON QUEST XI, además de escenarios adicionales, una banda sonora orquestal, el modo 2D y más cosas. Ya seas fan de toda la vida o un aventurero recién llegado, esta es la experiencia DQXI definitiva. ",
         "developer": "Square Enix",
         "game_genders": []
     },
@@ -88,6 +88,26 @@
         "id": 10,
         "description": "PowerWash Simulator va de lavar a presión, ¡pero presión no tendrás ninguna! Haz que los relajantes sonidos del agua se lleven todas tus preocupaciones. Enciente tu hidrolimpiadora y elimina hasta la última mota de suciedad y mugre que encuentres para dejarlo todo como los chorros",
         "developer": "FuturLab",
+        "game_genders": []
+    },
+    {
+        
+        "is_active": true,
+        "publisher": "Team17",
+        "title": "Overcooked! 2",
+        "id": 11,
+        "description": "¡Overcooked vuelve con un nuevo y caótico juego de cocina en acción! Regresa al Reino de la Cebolla y organiza tu equipo de chefs en un cooperativo clásico o en partidas en línea de hasta cuatro jugadores. Agarraos los delantales... es hora de salvar el mundo (¡otra vez!)",
+        "developer": "Team17",
+        "game_genders": []
+    },
+    {
+        
+        "is_active": true,
+        "publisher": "Square Enix",
+        "title": "Team17",
+        "id": 12,
+        "description": "Moving Out es un divertidísimo simulador cooperativo basado en la física. ¿Estás listo para comenzar tu carrera como transportista? Como técnico certificado en arreglos mobiliarios y mudanzas, tendrás la oportunidad de encargarte de mudanzas por toda la bulliciosa ciudad de Packmore. ",
+        "developer": "Team17",
         "game_genders": []
     }
 ]

@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			pc: [],
 			currentPC: [],
 			comments: [],
+			commentsPerGame: [],
 			nintendo: [],
 			currentNintendo: [],
 			playstation: [],
@@ -85,6 +86,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				body: JSON.stringify(comments)
 			};
 			const response = await fetch(uri, options);
+			console.log(comments);
+			
 			if (!response.ok) {
 				console.log('Error', response.status, response.statusText);
 				return;
@@ -92,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			const newComment = await response.json();
 			const store = getStore();
 			// Agregar el nuevo comentario a la lista
-			setStore({ comments: [...store.comments, newComment] });
+			setStore({ commentsPerGame: [...store.commentsPerGame, newComment] });
 			},
 			getComments: async () => {
 				const token = localStorage.getItem('token');
@@ -139,6 +142,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const updatedComments = store.comments.filter(comment => comment.id !== commentId);
 				setStore({ comments: updatedComments });
+			},
+			getCommentsGames: async (game_id) => {
+				const uri = `${process.env.BACKEND_URL}/api/games/${game_id}/comments`;
+				const options = {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				};
+			
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log('Error', response.status, response.statusText);
+					return;
+				}
+			
+				const data = await response.json();
+				console.log(data.results);
+				setStore({ commentsPerGame: data.results });
 			},
 			getNintendo: async () => {
 				const uri = `${process.env.URIBACK}/api/games`
