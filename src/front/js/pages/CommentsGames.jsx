@@ -45,6 +45,8 @@ export const CommentsGames = () => {
 
     const handleDelete = (commentId) => {
         actions.deleteComment(commentId);
+        // Opcionalmente, desencadena una actualización llamando a la acción para refrescar los comentarios
+        actions.getCommentsGames(store.currentPC.id);
     };
 
     return (

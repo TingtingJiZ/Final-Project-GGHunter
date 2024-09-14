@@ -1,10 +1,22 @@
-
+body {
+    background-color: #5C5C5C;
+    font-family: 'Roboto';
+    font-size: 22px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 footer {
     background: #424242;
     color: #fff;
     padding: 40px 0;
     text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+
 }
 
 .footer-content h3 {
@@ -47,4 +59,24 @@ footer {
 .footer-bottom span {
     color: #e44d26;
     font-weight: bold;
+}
+
+.a-navbar {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.title-navbar {
+    margin-left: 400px;
+    font-size: 80rem;
+    margin-top: 20px;
+}
+
+.custom-dropdown .dropdown-menu {
+    left: auto !important;
+    /* Alinea el desplegable a la izquierda */
+    right: 0 !important;
+    /* Asegúrate de que no esté alineado a la derecha */
 }
