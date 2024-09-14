@@ -189,9 +189,15 @@ footer {
 
 .card-register {
     background-color: rgba(0, 0, 0, 0.5);
+    color:linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
 }
 
 .card-modal {
-    background-color: rgba(18, 54, 90, 1);
-    color: black;
+    flex: 1;
+    margin: 0 10px;
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
+}
+.custom-gradient {
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150)); /* Degradado */
+    color: white; /* Puedes agregar más estilos según sea necesario */
 }
