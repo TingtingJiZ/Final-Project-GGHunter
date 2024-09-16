@@ -50,7 +50,7 @@ export const PcGameDetails = () => {
                 <div className="row rounded card-row p-3">
                     <div className="col-12 col-md-4 text-center">
                         {item.medias_game && item.medias_game.length > 0 ? (
-                            <img src={item.medias_game[0].url} className="img-fluid my-3" alt="Game Image" />
+                            <img src={item.medias_game[2].url} className="h-50 w-50" alt="Game Image" />
                         ) : (
                             <div>No media available</div>
                         )}

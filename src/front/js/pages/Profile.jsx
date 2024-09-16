@@ -6,15 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import logo from '../../img/Recurso 1_png.png';
-
-
 export const Profile = () => {
     const { actions, store } = useContext(Context);
-
     const handleImgError = (event) => {
         event.target.src = Gg_default;
     };
-
     return (
         <>
             {store.currentUser == null ?
@@ -59,7 +55,6 @@ export const Profile = () => {
                                                 </button>
                                             </li>
                                         </ul>
-
                                     </Row>
                                 </Container>
                             </div>
