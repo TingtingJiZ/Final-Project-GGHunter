@@ -4,7 +4,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1942280/header.jpg?t=1725007745",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 1
+            "game_id": 251420
         }
     ],
     [
@@ -12,7 +12,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1942280/ss_61ad3d242282311207828c1a7d87c1c9d7b4d8bf.600x338.jpg?t=1725007745",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 1
+            "game_id": 251420
         }
     ],
     [
@@ -20,7 +20,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/751780/header.jpg?t=1699372258",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 2
+            "game_id": 194160
         }
     ],
     [
@@ -28,7 +28,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/751780/ss_288c1647ffd3639358505e4e0e5a74214a9a9a23.600x338.jpg?t=1699372258",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 2
+            "game_id": 194160
         }
     ],
     [
@@ -36,7 +36,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1295510/header_spanish.jpg?t=1724830623",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 3
+            "game_id": 234902
         }
     ],
     [
@@ -44,7 +44,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1295510/ss_dbc2a77c05f0bf8d17661b6bdf54f88e14fbfaeb.1920x1080.jpg?t=1724830623",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 3
+            "game_id": 234902
         }
     ],
     [
@@ -52,7 +52,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/346110/header.jpg?t=1709879597",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 4
+            "game_id": 144209
         }
     ],
     [
@@ -60,7 +60,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/346110/ss_2fd997a2f7151cb2187043a1f41589cc6a9ebf3a.600x338.jpg?t=1709879597",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 4
+            "game_id": 144209
         }
     ],
     [
@@ -68,7 +68,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/header.jpg?t=1718741655",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 5
+            "game_id": 195104
         }
     ],
     [
@@ -76,7 +76,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_b7374128e5b786a302a716bca038d604b00ffe46.600x338.jpg?t=1718741655",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 5
+            "game_id": 195104
         }
     ],
     [
@@ -84,7 +84,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg?t=1695270428",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 6
+            "game_id": 165363
         }
     ],
     [
@@ -92,7 +92,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/ss_5384f9f8b96a0b9934b2bc35a4058376211636d2.600x338.jpg?t=1695270428",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 6
+            "game_id": 165363
         }
     ],
     [
@@ -100,7 +100,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1135690/header.jpg?t=1718414626",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 7
+            "game_id": 236626
         }
     ],
     [
@@ -108,23 +108,23 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1135690/ss_b32bfdd3f68e1f9e264bd37e10a464629ca034f8.600x338.jpg?t=1718414626",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 7
+            "game_id": 236626
         }
     ],
     [
         {
-            "url":"https://www.minecraft.net/content/dam/games/minecraft/key-art/Vanilla-PMP_Collection-Carousel-0_Update-Aquatic_1280x768.jpg",
+            "url":"https://www.minecraft.net/content/dam/games/badger/screenshots/Minecraft_Legends_PreOrder_Trailer_Thumbnail_1280x720.png",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 8
+            "game_id": 258010
         }
     ],
     [
         {
-            "url":"https://www.minecraft.net/content/dam/games/minecraft/screenshots/PLAYTOGETHERPDPScreenshotRefresh2024_exitingPortal_01.png",
+            "url":"https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.5/c_scale,w_400/ncom/software/switch/70010000033696/e5621b8891a028c76505ac04c6d05c347d380f0799f6c92aaf116b8140fcca0a",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 8
+            "game_id": 258010
         }
     ],
     [
@@ -132,7 +132,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/504230/header.jpg?t=1714089525",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 9
+            "game_id": 177485
         }
     ],
     [
@@ -140,7 +140,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/504230/ss_1ad297c2044cdcf450ee83e56350cafb590da755.600x338.jpg?t=1714089525",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 9
+            "game_id": 177485
         }
     ],
     [
@@ -148,7 +148,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1290000/header.jpg?t=1725458212",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 10
+            "game_id": 229961
         }
     ],
     [
@@ -156,7 +156,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1290000/ss_8782c713c59761ebaacabb214672655a1599ce79.600x338.jpg?t=1725458212",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 10
+            "game_id": 229961
         }
     ],
     [
@@ -164,7 +164,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/728880/header.jpg?t=1723622537",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 11
+            "game_id": 188278
         }
     ],
     [
@@ -172,7 +172,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/728880/ss_2f84a12e1fe82cca37848bf29d4b8b16e83db03b.116x65.jpg?t=1723622537",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 11
+            "game_id": 188278
         }
     ],
     [
@@ -180,7 +180,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/996770/header.jpg?t=1684486398",
             "type_media":"imagen",
             "caption":"Imagen de portada",
-            "game_id": 12
+            "game_id": 212038
         }
     ],
     [
@@ -188,7 +188,7 @@
             "url":"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/996770/ss_17984d719e442ba6863288e3c1ebedea216005b2.600x338.jpg?t=1684486398",
             "type_media":"imagen",
             "caption":"Dentro del videojuego",
-            "game_id": 12
+            "game_id": 212038
         }
     ]
 ]

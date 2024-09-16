@@ -18,6 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentXbox: [],
 			gamesPc: [],
 			currentGamesPc: [],
+			freeGames: []
 		},
 		actions: {
 			getPC: async () => {
@@ -33,7 +34,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ pc: data.results });
 			},
 			getGamesPc: async () => {
-		        const uri = `https://www.cheapshark.com/api/1.0/games?ids=1,2,3,6`
+				//let datos = [];
+				const actions = getActions();
+				let valores = [];
+		        const uri = `https://www.cheapshark.com/api/1.0/games?ids=251420,194160,234902,144209,195104,165363,236626,258010,177485,229961,188278,212038`
 		        const options = {
 		            method: "GET",
 		            }
@@ -44,8 +48,61 @@ const getState = ({ getStore, getActions, setStore }) => {
 		            }
 		        const data = await response.json()
 		        console.log(data)
-		        setStore({ gamesPc: data });
+				let entriesPC = Object.entries(data);
+				for (let i = 0; i < entriesPC.length; i++) {
+					let gameID = entriesPC[i][0];
+					let gameData = entriesPC[i][1];
+					let retailPrice = 0.0;
+					let storeID = 0;
+
+					let preciosPC = gameData.deals;
+					let infoPC = gameData.info;
+					let title = infoPC.title;
+					let steamAppID = infoPC.steamAppID;
+					let thumb = infoPC.thumb;
+			
+					//console.log(`El título es ${title}, el id de steam es ${steamAppID}, la imagen es ${thumb}, y el ID del juego es ${gameID}`);
+					
+					for (let j = 0; j < preciosPC.length; j++) {
+						if (preciosPC[j].storeID == 1) {
+							retailPrice = preciosPC[j].retailPrice;
+							storeID = preciosPC[j].storeID;
+							break;
+						}
+					}
+
+					valores.push({
+						"id": gameID,
+						"steamAppID": steamAppID,
+						"title": title,
+						"thumb": thumb,
+						"precio": retailPrice,
+						"storeID": storeID
+					});
+				}
+			
+				await actions.insertPricePc(valores);
+				console.log(valores);
+				
+				// Guardar los datos en el store
+				setStore({ gamesPc: data });
             },
+			insertPricePc: async (datos) => {
+				const uri = `${process.env.URIBACK}/api/load-api-store`;
+				const options = {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(datos)
+				};
+				console.log(datos);
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return;
+				}
+			},
 			getPcGameDetailsId: async (id) => {
 				const uri = `${process.env.URIBACK}/api/games/${id}`;
 				const options = {
@@ -117,14 +174,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				setStore({ comments: data.results });
 			},
-			deleteComment: async (commentId) => {
+			deleteComment: async (delete_comment) => {
 				const token = localStorage.getItem('token');
 				if (!token) {
 					console.log('No token found');
 					return;
 				}
 			
-				const uri = `${process.env.BACKEND_URL}/api/comments/${commentId}`;
+				const uri = `${process.env.BACKEND_URL}/api/comments/${delete_comment}`;
 				const options = {
 					method: 'DELETE',
 					headers: {
@@ -140,7 +197,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			
 				const store = getStore();
-				const updatedComments = store.comments.filter(comment => comment.id !== commentId);
+				const updatedComments = store.comments.filter(comment => comment.id !== delete_comment);
 				setStore({ comments: updatedComments });
 			},
 			getCommentsGames: async (game_id) => {
@@ -245,6 +302,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				console.log(data.results[0]);
 				setStore({ currentXbox: data.results });
+			},
+			getFreeGames: async () => {
+				const uri = `https://cors-anywhere.herokuapp.com/https://www.mmobomb.com/api1/games`; // Usar un proxy público
+				const options = {
+					method: "GET",
+				};
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText);
+					return;
+				}
+				const data = await response.json();
+				console.log(data);
+				setStore({ freeGames: data });
 			},
 			
 			setCurrentUser: (user) =>{setStore({currentUser:user})},

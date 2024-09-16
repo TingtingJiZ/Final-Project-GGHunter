@@ -1,0 +1,22 @@
+.navbarGame {
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 150, 120));
+}
+.a-navbar {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.title-navbar {
+    margin-left: 400px;
+    font-size: 80rem;
+    margin-top: 20px;
+}
+
+.custom-dropdown .dropdown-menu {
+    left: auto !important;
+    /* Alinea el desplegable a la izquierda */
+    right: 0 !important;
+    /* Asegúrate de que no esté alineado a la derecha */
+}

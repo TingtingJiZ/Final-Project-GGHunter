@@ -1,24 +1,8 @@
+.div-profile {
+    margin-left: 100px;
+    margin-top: 50px;
 
-
-footer {
-    background: #424242;
-    color: #fff;
-    padding: 40px 0;
-    text-align: center;
 }
-
-.footer-content h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-.footer-content p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
 .socials {
     list-style: none;
     padding: 0;
@@ -34,17 +18,4 @@ footer {
     color: #fff;
     font-size: 18px;
     text-decoration: none;
-}
-
-.footer-bottom {
-    margin-top: 20px;
-}
-
-.footer-bottom p {
-    font-size: 14px;
-}
-
-.footer-bottom span {
-    color: #e44d26;
-    font-weight: bold;
 }
