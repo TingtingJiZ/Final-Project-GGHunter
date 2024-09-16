@@ -16,6 +16,7 @@ import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 
 
 export const Signup = ({ show, handleClose }) => {
+    const { actions, store } = useContext(Context);
     const [userLogin, setUserLogin] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [userLastname, setUserLastname] = useState('');
@@ -67,7 +68,12 @@ export const Signup = ({ show, handleClose }) => {
             console.log('Error: ', response.status, response.statusText);
             return
         }
+        
         const data = await response.json()
+        localStorage.setItem("token", data.message);
+		localStorage.setItem("user", JSON.stringify(data.results));
+		actions.setCurrentUser(data.results);
+		actions.setIsLoged(true)
         console.log(data);
         navigate("/")
         handleClose();

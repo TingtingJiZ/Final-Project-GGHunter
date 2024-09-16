@@ -75,7 +75,6 @@ export const NavbarGame = () => {
 		//actions.setAlert({ visible: true, back: 'info', text: data.message })
 		// Me voy al dashboard
 		handleClose();
-		navigate('/profile')
 	};
 
 	const login = () => {
