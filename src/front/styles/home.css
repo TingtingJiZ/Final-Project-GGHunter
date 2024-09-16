@@ -1,36 +1,8 @@
-body {
-    background-color: #5C5C5C;
-    font-family: 'Roboto';
-    font-size: 22px;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-footer {
-    background: #424242;
-    color: #fff;
-    padding: 40px 0;
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: auto;
+.div-profile {
+    margin-left: 100px;
+    margin-top: 50px;
 
 }
-
-.footer-content h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-.footer-content p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
 .socials {
     list-style: none;
     padding: 0;
@@ -46,37 +18,4 @@ footer {
     color: #fff;
     font-size: 18px;
     text-decoration: none;
-}
-
-.footer-bottom {
-    margin-top: 20px;
-}
-
-.footer-bottom p {
-    font-size: 14px;
-}
-
-.footer-bottom span {
-    color: #e44d26;
-    font-weight: bold;
-}
-
-.a-navbar {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.title-navbar {
-    margin-left: 400px;
-    font-size: 80rem;
-    margin-top: 20px;
-}
-
-.custom-dropdown .dropdown-menu {
-    left: auto !important;
-    /* Alinea el desplegable a la izquierda */
-    right: 0 !important;
-    /* Asegúrate de que no esté alineado a la derecha */
 }

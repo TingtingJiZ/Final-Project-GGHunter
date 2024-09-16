@@ -98,14 +98,7 @@
     box-sizing: border-box;
 }
 
-html, button, input, select, textarea {
-    font-family: 'Montserrat', Helvetica, sans-serif;
-    
-}
-h1 {
-  text-align: center;
-  margin: 30px 15px;
-}
+
 .zoom-area { 
   max-width: 490px;
   margin: 30px auto 30px;

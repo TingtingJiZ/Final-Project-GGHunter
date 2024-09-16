@@ -117,14 +117,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				setStore({ comments: data.results });
 			},
-			deleteComment: async (commentId) => {
+			deleteComment: async (delete_comment) => {
 				const token = localStorage.getItem('token');
 				if (!token) {
-					console.log('No se encontró el token');
+					console.log('No token found');
 					return;
 				}
 			
-				const uri = `${process.env.BACKEND_URL}/api/comments/${commentId}`;
+				const uri = `${process.env.BACKEND_URL}/api/comments/${delete_comment}`;
 				const options = {
 					method: 'DELETE',
 					headers: {
@@ -133,22 +133,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				};
 			
-				try {
-					const response = await fetch(uri, options);
-					if (!response.ok) {
-						console.log('Error', response.status, response.statusText);
-						return;
-					}
-			
-					console.log('Comentario eliminado con éxito'); // Depuración: Verificar si se eliminó el comentario
-			
-					// Actualizar el estado de los comentarios después de la eliminación exitosa
-					const store = getStore();
-					const updatedComments = store.commentsPerGame.filter(comment => comment.id !== commentId);
-					setStore({ commentsPerGame: updatedComments });  // Asegúrate de actualizar commentsPerGame
-				} catch (error) {
-					console.error('Error al eliminar el comentario:', error);
+				const response = await fetch(uri, options);
+				if (!response.ok) {
+					console.log('Error', response.status, response.statusText);
+					return;
 				}
+			
+				const store = getStore();
+				const updatedComments = store.comments.filter(comment => comment.id !== delete_comment);
+				setStore({ comments: updatedComments });
 			},
 			getCommentsGames: async (game_id) => {
 				const uri = `${process.env.BACKEND_URL}/api/games/${game_id}/comments`;

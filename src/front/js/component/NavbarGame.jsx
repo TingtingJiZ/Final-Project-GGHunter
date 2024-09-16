@@ -12,6 +12,7 @@ import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../img/Recurso 1_png.png';
+import "../../styles/Navbar.css";
 
 
 export const NavbarGame = () => {
@@ -96,7 +97,9 @@ export const NavbarGame = () => {
 		}
 		navigate('/')
 	}
-
+	const handleProfile = () => {
+		navigate('/profile')
+	}
 	return (
 		<>
 			<Navbar expand="lg" className="navbarGame" data-bs-theme="dark">
@@ -146,7 +149,15 @@ export const NavbarGame = () => {
 						</div>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
-								title={<FontAwesomeIcon icon={faUser} style={{ color: "#2d0bce", fontSize: "34px" }} />}
+								title={
+									<FontAwesomeIcon
+										icon={faUser}
+										style={{
+											color: store.currentUser === null ? "#2d0bce" : "#cb3234",
+											fontSize: "34px"
+										}}
+									/>
+								}
 								className="mx-5 d-flex justify-content-center down custom-dropdown"
 							>
 								{store.currentUser === null ? (
@@ -159,11 +170,17 @@ export const NavbarGame = () => {
 										</NavDropdown.Item>
 									</>
 								) : (
+									<>
+									<NavDropdown.Item as="div">
+										<a className="a-navbar" onClick={handleProfile} variant="outline-success">Tu perfil</a>
+									</NavDropdown.Item>
 									<NavDropdown.Item as="div">
 										<a className="a-navbar" onClick={handleLogout} variant="outline-success">LogOut</a>
 									</NavDropdown.Item>
+									</>
 								)}
 							</NavDropdown>
+
 						</Nav>
 
 					</Navbar.Collapse>

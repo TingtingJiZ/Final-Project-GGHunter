@@ -8,7 +8,7 @@ export const CommentsGames = () => {
 
     useEffect(() => {
         // Obtener los comentarios cuando el componente se monta
-         if (store.currentPC && store.currentPC.id) {
+        if (store.currentPC && store.currentPC.id) {
             actions.getCommentsGames(store.currentPC.id);
         }
 
@@ -32,7 +32,7 @@ export const CommentsGames = () => {
         // Añadir el game_id al formData sin sobrescribir el objeto
         const saved = localStorage.getItem("User");
         const user = JSON.parse(saved);
-        const userId= user?.id
+        const userId = user?.id
         const updatedFormData = {
             body: formData.commentsPerGame,  // El cuerpo del comentario
             game_id: store.currentPC.id,     // ID del juego
@@ -43,10 +43,8 @@ export const CommentsGames = () => {
         setFormData({ commentsPerGame: "" });
     };
 
-    const handleDelete = (commentId) => {
-        actions.deleteComment(commentId);
-        // Opcionalmente, desencadena una actualización llamando a la acción para refrescar los comentarios
-        actions.getCommentsGames(store.currentPC.id);
+    const handleDelete = (delete_comment) => {
+        actions.deleteComment(delete_comment);
     };
 
     return (
@@ -83,7 +81,7 @@ export const CommentsGames = () => {
                                                 <strong>{item.user_alias}</strong> {item.body}
                                             </Row>
                                         </Card.Text>
-                                        <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can"></i>
+                                        <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can"></i> {/* Cambiado aquí */}
                                     </Card.Body>
                                 </Card>
                             ))
@@ -91,6 +89,7 @@ export const CommentsGames = () => {
                             <p>No hay reseñas todavía.</p>
                         )}
                     </Row>
+
                 </div>
             </Row>
         </div>
