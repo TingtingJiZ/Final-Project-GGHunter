@@ -7,15 +7,14 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 
-export const Signup = () => {
-    const { actions, store } = useContext(Context);
-    const navigate = useNavigate();
+export const Signup = ({ show, handleClose }) => {
     const [userLogin, setUserLogin] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [userLastname, setUserLastname] = useState('');
@@ -25,25 +24,21 @@ export const Signup = () => {
         length: false,
         specialCharOrDigit: false,
         lowercase: false,
-        uppercase: false
+        uppercase: false,
     });
-
-
 
     const handlePasswordChange = (event) => {
         const password = event.target.value;
         setUserPassword(password);
-
-        // Validar criterios de la contraseña
         setPasswordCriteria({
             length: password.length >= 8,
-            specialCharOrDigit: /[!@#$%^&*(),.?":{}|<>0-9]/.test(password),
+            specialCharOrDigit: /[\W_0-9]/.test(password),
             lowercase: /[a-z]/.test(password),
-            uppercase: /[A-Z]/.test(password)
+            uppercase: /[A-Z]/.test(password),
         });
     };
 
-    const handleRegister = async (event) => {
+    const handleRegister = (event) => {
         event.preventDefault();
         console.log(userLogin, userPassword);
         const dataToSend = {
@@ -72,15 +67,8 @@ export const Signup = () => {
         }
         const data = await response.json()
         console.log(data);
-
-        localStorage.setItem('token', data.access_token)
-        localStorage.setItem('user', JSON.stringify(data.results))
-        actions.setIsLoged(true);
-        actions.setCurrentUser(data.results);
-        //actions.setAlert({ visible: true, back: 'info', text: data.message })
-        navigate('/')
-    }
-
+        // Lógica de registro
+    };
     return (
         <Container>
             <Row className="justify-content-md-center mt-4 mb-3 signup">
@@ -163,20 +151,114 @@ export const Signup = () => {
                                                 Introduce al menos 1 caracter en mayúsculas
                                             </Col>
                                         </Row>
+        <Modal
+            onHide={handleClose}
+            backdrop="static"
+            size="md"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            keyboard={false}
+            className="card-register"
+            show={show}
+            
+            >
+            <Modal.Header closeButton className="custom-gradient">
+                <Modal.Title>Crear una cuenta</Modal.Title>
+            </Modal.Header>
+                <Modal.Body className="custom-gradient">
+                    <Row className="justify-content-md-center mt-4 mb-3 custom-gradient">
+                        <Col xs={12}>
+                            <Card>
+                                <Card.Body className="custom-gradient">
+                                    <Form onSubmit={handleRegister}>
+                                        <Form.Label className="d-block text-info mb-3 signup-grey {">
+                                            ¡Consulta el precio de tus juegos favoritos, edita tu perfil y muchas cosas más!
+                                        </Form.Label>
+                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                            <Form.Label>Introduce tu correo electrónico</Form.Label>
+                                            <Form.Control
+                                                type="email"
+                                                value={userLogin}
+                                                onChange={(event) => setUserLogin(event.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                                            <Form.Label>Escriba su contraseña</Form.Label>
+                                            <Form.Control
+                                                type="password"
+                                                value={userPassword}
+                                                onChange={handlePasswordChange}
+                                            />
+                                        </Form.Group>
+
+                                        {/* Validación de contraseña */}
+                                        <Form.Group>
+                                            <Container>
+                                                <Row>
+                                                    <Col md={6}>
+                                                        {userPassword === "" ? (
+                                                            <span>
+                                                                <FontAwesomeIcon icon={faCircleInfo} style={{ color: "#000000" }} />
+                                                            </span>
+                                                        ) : !passwordCriteria.length ? (
+                                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
+                                                        ) : (
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
+                                                        )}
+                                                        Introduce al menos 8 caracteres
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        {userPassword === "" ? (
+                                                            <span>
+                                                                <FontAwesomeIcon icon={faCircleInfo} style={{ color: "#000000" }} />
+                                                            </span>
+                                                        ) : !passwordCriteria.specialCharOrDigit ? (
+                                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
+                                                        ) : (
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
+                                                        )}
+                                                        Introduce al menos un carácter especial
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        {userPassword === "" ? (
+                                                            <span>
+                                                                <FontAwesomeIcon icon={faCircleInfo} style={{ color: "#000000" }} />
+                                                            </span>
+                                                        ) : !passwordCriteria.lowercase ? (
+                                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
+                                                        ) : (
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
+                                                        )}
+                                                        Introduce al menos 1 carácter en minúsculas
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        {userPassword === "" ? (
+                                                            <span>
+                                                                <FontAwesomeIcon icon={faCircleInfo} style={{ color: "#000000" }} />
+                                                            </span>
+                                                        ) : !passwordCriteria.uppercase ? (
+                                                            <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
+                                                        ) : (
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
+                                                        )}
+                                                        Introduce al menos 1 carácter en mayúsculas
+                                                    </Col>
+                                                </Row>
+                                            </Container>
+                                        </Form.Group>
                                         <Row className="justify-content-md-center mt-4">
                                             <Col md={6}>
-                                                <Button className="w-100" variant="primary" type="summit" onClick={handleRegister}>Crear una cuenta</Button>
+                                                <Button className="w-100" variant="primary" type="submit">
+                                                    Crear una cuenta
+                                                </Button>
                                             </Col>
                                         </Row>
-                                    </Container>
-                                </Form.Group>
-                            </Form>
-                        </Card.Body>
-
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
-
-    )
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Modal.Body>
+        </Modal>
+    );
 }

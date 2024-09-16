@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { Signup } from "../pages/Signup.jsx";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,12 +20,14 @@ export const NavbarGame = () => {
 	const { actions, store } = useContext(Context);
 	const navigate = useNavigate()
 	const [show, setShow] = useState(false);
+	const [showSignup, setshowSignup] = useState(false);
 	const [userLogin, setUserLogin] = useState('');
 	const [userPassword, setUserPassword] = useState('');
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-
+	const handleShowSignup = () => setshowSignup(true); // Abre el modal
+    const handleCloseSignup = () => setshowSignup(false); // Cierra el modal
 	const handleClick = (Platform) => {
 		console.log("Has pinchao la opción " + Platform);
 
@@ -166,7 +169,12 @@ export const NavbarGame = () => {
 											<a className="a-navbar" onClick={login} variant="outline-success">Login</a>
 										</NavDropdown.Item>
 										<NavDropdown.Item as="div">
+
 											<a className="a-navbar" onClick={() => register()} variant="outline-success">Registrarse</a>
+
+											
+											<Button  onClick={handleShowSignup} variant="outline-success">Regristrarse</Button>
+
 										</NavDropdown.Item>
 									</>
 								) : (
@@ -198,10 +206,10 @@ export const NavbarGame = () => {
 				className="card-register"
 
 			>
-				<Modal.Header closeButton className="card-modal">
+				<Modal.Header closeButton className="custom-gradient">
 					<Modal.Title><strong>Login</strong></Modal.Title>
 				</Modal.Header>
-				<Modal.Body className="card-modal">
+				<Modal.Body className="custom-gradient">
 					<Form onSubmit={handleLogin}>
 						<Form.Group className="mb-3" controlId="formBasicEmail">
 							<Form.Label><strong>Dirección de correo</strong></Form.Label>
@@ -213,13 +221,14 @@ export const NavbarGame = () => {
 						</Form.Group>
 					</Form>
 				</Modal.Body>
-				<Modal.Footer className="card-modal">
+				<Modal.Footer className="custom-gradient">
 					<Button variant="secondary" onClick={handleClose}>
 						Cerrar
 					</Button>
 					<Button variant="primary" onClick={handleLogin}>Inciar sesión</Button>
 				</Modal.Footer>
 			</Modal>
+			<Signup show={showSignup} handleClose={handleCloseSignup} />
 		</>
 	);
 }
