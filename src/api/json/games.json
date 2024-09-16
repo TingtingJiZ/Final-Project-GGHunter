@@ -3,7 +3,7 @@
         "is_active": true,
         "publisher": "Blobfish",
         "title": "Brotato",
-        "id": 1,
+        "id": 251420,
         "description": "Brotato es un roguelite de disparos en el que te moverás de arriba abajo del escenario. Encarna a una patata con 6 armas simultáneas para hacer frente a los alienígenas. Elige entre una variedad de características y objetos para crear combinaciones únicas y sobrevivir hasta que acudan los refuerzos.",
         "developer": "Blobfish",
         "game_genders": []
@@ -12,7 +12,7 @@
         "is_active": true,
         "publisher": "Humble Indie Bundle",
         "title": "Forager",
-        "id": 2,
+        "id": 194160,
         "description": "El popular y estrafalario 'juego idle que no quieres dejar de jugar'. Explora, craftea, junta y administra recursos, encuentra tesoros y secretos y construye tu base desde la nada! ¡Compra tierras para explorar y expandirte!",
         "developer": "HopFrog",
         "game_genders": []
@@ -20,8 +20,8 @@
     {
         "is_active": true,
         "publisher": "Square Enix",
-        "title": "DRAGON QUEST XI S: Ecos de un pasado perdido",
-        "id": 3,
+        "title": "Minecraft Dungeons",
+        "id": 234902,
         "description": "La edición definitiva incluye el aclamadísimo DRAGON QUEST XI, además de escenarios adicionales, una banda sonora orquestal, el modo 2D y más cosas. Ya seas fan de toda la vida o un aventurero recién llegado, esta es la experiencia DQXI definitiva. ",
         "developer": "Square Enix",
         "game_genders": []
@@ -30,7 +30,7 @@
         "is_active": true,
         "publisher": "Studio Wilcard",
         "title": "Ark: Survival Evolved",
-        "id": 4,
+        "id": 144209,
         "description": "Juega como un hombre o una mujer desnudo, congelándote y muriéndote de hambre en una isla misteriosa. Debes cazar, cosechar, crear objetos, cultivar, y construir refugios para sobrevivir. Usa tu habilidad y astucia para matar, domesticar, criar y cabalgar dinosaurios y otras criaturas primitivas.",
         "developer": "Studio Wilcard",
         "game_genders": []
@@ -39,7 +39,7 @@
         "is_active": true,
         "publisher": "Innersloth",
         "title": "Among Us",
-        "id": 5,
+        "id": 195104,
         "description": "Un juego de socialización local o en línea de trabajo en equipo y traición para 4 a 15 jugadores... ¡ambientado en el espacio! ",
         "developer": "Innersloth",
         "game_genders": []
@@ -48,7 +48,7 @@
         "is_active": true,
         "publisher": "Humble Indie Bundle",
         "title": "Hollow knight",
-        "id": 6,
+        "id": 165363,
         "description": "¡Forja tu propio camino en Hollow Knight! Una aventura épica a través de un vasto reino de insectos y héroes que se encuentra en ruinas. Explora cavernas tortuosas, combate contra criaturas corrompidas y entabla amistad con extraños insectos, todo en un estilo clásico en 2D dibujado a mano. ",
         "developer": "HopFrog",
         "game_genders": []
@@ -57,7 +57,7 @@
         "is_active": true,
         "publisher": "Humble Games",
         "title": "Unpacking",
-        "id": 7,
+        "id": 236626,
         "description": "Unpacking es un juego relajante de lógica acerca de la sensación familiar de sacar pertenencias de cajas para colocarlas en un nuevo hogar. Mitad juego de bloques, mitad juego de decoración, podrás crear habitaciones agradables mientras descubres pistas de la vida que estás desempacando.",
         "developer": "Witch Beam",
         "game_genders": []
@@ -66,7 +66,7 @@
         "is_active": true,
         "publisher": "Xbox Game Studios",
         "title": "minecraft legends",
-        "id": 8,
+        "id": 258010,
         "description": "Descubre los misterios de Minecraft Legends. Explora una tierra apacible rica en recursos y exuberantes biomas que se encuentran al borde de la destrucción. ¡Los devastadores piglins han llegado, y depende de ti motivar a tus aliados y guiarlos en batallas estratégicas para salvar el mundo.",
         "developer": "Mojang Studios",
         "game_genders": []
@@ -75,7 +75,7 @@
         "is_active": true,
         "publisher": "Maddy Makes Games Inc.",
         "title": "Celeste",
-        "id": 9,
+        "id": 177485,
         "description": "Ayuda a Madeline a sobrevivir a los demonios de su interior en su viaje hasta la cima de la montaña Celeste, en este ajustadísimo plataforma, obra de los creadores de TowerFall. Enfréntate a cientos de desafíos diseñados a mano, devela retorcidos secretos y, y reconstruye el misterio de la montaña.",
         "developer": "Maddy Makes Games Inc.",
         "game_genders": []
@@ -85,7 +85,7 @@
         "is_active": true,
         "publisher": "Square Enix",
         "title": "PowerWash Simulator",
-        "id": 10,
+        "id": 229961,
         "description": "PowerWash Simulator va de lavar a presión, ¡pero presión no tendrás ninguna! Haz que los relajantes sonidos del agua se lleven todas tus preocupaciones. Enciente tu hidrolimpiadora y elimina hasta la última mota de suciedad y mugre que encuentres para dejarlo todo como los chorros",
         "developer": "FuturLab",
         "game_genders": []
@@ -95,7 +95,7 @@
         "is_active": true,
         "publisher": "Team17",
         "title": "Overcooked! 2",
-        "id": 11,
+        "id": 188278,
         "description": "¡Overcooked vuelve con un nuevo y caótico juego de cocina en acción! Regresa al Reino de la Cebolla y organiza tu equipo de chefs en un cooperativo clásico o en partidas en línea de hasta cuatro jugadores. Agarraos los delantales... es hora de salvar el mundo (¡otra vez!)",
         "developer": "Team17",
         "game_genders": []
@@ -103,9 +103,9 @@
     {
         
         "is_active": true,
-        "publisher": "Square Enix",
+        "publisher": "Team17",
         "title": "Moving Out",
-        "id": 12,
+        "id": 212038,
         "description": "Moving Out es un divertidísimo simulador cooperativo basado en la física. ¿Estás listo para comenzar tu carrera como transportista? Como técnico certificado en arreglos mobiliarios y mudanzas, tendrás la oportunidad de encargarte de mudanzas por toda la bulliciosa ciudad de Packmore. ",
         "developer": "Team17",
         "game_genders": []
