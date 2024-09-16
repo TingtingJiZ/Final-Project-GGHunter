@@ -24,6 +24,7 @@ export const NavbarGame = () => {
 	const [showSignup, setshowSignup] = useState(false);
 	const [userLogin, setUserLogin] = useState('');
 	const [userPassword, setUserPassword] = useState('');
+
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const handleShowSignup = () => setshowSignup(true); // Abre el modal
@@ -131,38 +132,20 @@ export const NavbarGame = () => {
 								<Link to="/nintendo" className="dropdown-item">Nintendo</Link>
 							</NavDropdown.Item>
 						</NavDropdown>
-						<NavDropdown
-							title="Generos"
-							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center down text-white"
-						>
-							<NavDropdown.Item as="div">
-								<Nav.Link href="/">Home</Nav.Link>
-							</NavDropdown.Item>
-							<NavDropdown.Item as="div">
-								<Nav.Link href="/">Home</Nav.Link>
-							</NavDropdown.Item>
-							<NavDropdown.Item as="div">
-								<Nav.Link href="/">Home</Nav.Link>
-							</NavDropdown.Item>
-						</NavDropdown>
-						<div className="title-navbar">
-							<h3 className="fw-bold text-white">G G - H u n t e r</h3>
-						</div>
+						<Navbar.Brand className="title-navbar ml-5 fw-bold text-white">G G - H u n t e r</Navbar.Brand>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
-								title={<FontAwesomeIcon icon={faGamepad} size="xl" style={{color: "#b12727",}} />}
 								className="mx-5 d-flex justify-content-center down"
 								title={
 									<FontAwesomeIcon
-										icon={faUser}
+										icon={faGamepad}
+										size="xl"
 										style={{
 											color: store.currentUser === null ? "#2d0bce" : "#cb3234",
-											fontSize: "34px"
+											
 										}}
 									/>
 								}
-								className="mx-5 d-flex justify-content-center down custom-dropdown"
 							>
 								{store.currentUser === null ? (
 									<>
@@ -170,8 +153,7 @@ export const NavbarGame = () => {
 											<a className="a-navbar" onClick={login} variant="outline-success">Login</a>
 										</NavDropdown.Item>
 										<NavDropdown.Item as="div">
-											<a className="a-navbar" onClick={() => register()} variant="outline-success">Registrarse</a>			
-											<Button  onClick={handleShowSignup} variant="outline-success">Regristrarse</Button>
+											<a className="a-navbar" onClick={handleShowSignup} variant="outline-success">Registrar</a>
 										</NavDropdown.Item>
 									</>
 								) : (
