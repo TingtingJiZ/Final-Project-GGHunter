@@ -151,7 +151,7 @@ footer {
 
 .signup-grey {
     font-size: 15px;
-    color: lavenderblush;
+    color: white;
 }
 
 .button-container {
@@ -198,6 +198,6 @@ footer {
     background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
 }
 .custom-gradient {
-    background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150)); /* Degradado */
-    color: white; /* Puedes agregar más estilos según sea necesario */
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
+    color: white;
 }

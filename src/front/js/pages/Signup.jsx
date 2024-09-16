@@ -62,7 +62,7 @@ export const Signup = ({ show, handleClose }) => {
                             <Card>
                                 <Card.Body className="custom-gradient">
                                     <Form onSubmit={handleRegister}>
-                                        <Form.Label className="d-block text-info mb-3 signup-grey">
+                                        <Form.Label className="d-block text-info mb-3 signup-grey {">
                                             ¡Consulta el precio de tus juegos favoritos, edita tu perfil y muchas cosas más!
                                         </Form.Label>
                                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -94,7 +94,7 @@ export const Signup = ({ show, handleClose }) => {
                                                         ) : !passwordCriteria.length ? (
                                                             <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
                                                         ) : (
-                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#40ff90" }} />
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
                                                         )}
                                                         Introduce al menos 8 caracteres
                                                     </Col>
@@ -106,7 +106,7 @@ export const Signup = ({ show, handleClose }) => {
                                                         ) : !passwordCriteria.specialCharOrDigit ? (
                                                             <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
                                                         ) : (
-                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#40ff90" }} />
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
                                                         )}
                                                         Introduce al menos un carácter especial
                                                     </Col>
@@ -118,7 +118,7 @@ export const Signup = ({ show, handleClose }) => {
                                                         ) : !passwordCriteria.lowercase ? (
                                                             <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
                                                         ) : (
-                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#40ff90" }} />
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
                                                         )}
                                                         Introduce al menos 1 carácter en minúsculas
                                                     </Col>
@@ -130,7 +130,7 @@ export const Signup = ({ show, handleClose }) => {
                                                         ) : !passwordCriteria.uppercase ? (
                                                             <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#ff0000" }} />
                                                         ) : (
-                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#40ff90" }} />
+                                                            <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#008000" }} />
                                                         )}
                                                         Introduce al menos 1 carácter en mayúsculas
                                                     </Col>
