@@ -34,16 +34,16 @@ export const PlaystationDetails = () => {
         <div className="container my-4 w-75">
             <ul className="nav nav-underline">
                 <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'pc' ? 'active' : ''}`} href="/pc">PC</a>
+                    <a className={`nav-link ${activePlatform === 'pc' ? 'active pc' : 'pc'}`} href="/pcgames">PC</a>
                 </li>
                 <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'playstation' ? 'active' : ''}`} href="/playstation">PlayStation</a>
+                    <a className={`nav-link ${activePlatform === 'playstation' ? 'active playstation' : 'playstation'}`} href="/playstation">PlayStation</a>
                 </li>
                 <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'nintendo' ? 'active' : ''}`} href="/nintendo">Nintendo</a>
+                    <a className={`nav-link ${activePlatform === 'nintendo' ? 'active nintendo' : 'nintendo'}`} href="/nintendo">Nintendo</a>
                 </li>
                 <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'xbox' ? 'active' : ''}`} href="/xbox">Xbox</a>
+                    <a className={`nav-link ${activePlatform === 'xbox' ? 'active xbox' : 'xbox'}`} href="/xbox">Xbox</a>
                 </li>
             </ul>
             <div className="characteristic w-100">
@@ -63,9 +63,9 @@ export const PlaystationDetails = () => {
             </div>
             <div className="shop mt-3">
                 {item.game_characteristics && item.game_characteristics[0] && item.game_characteristics[0].store && (
-                    <div className="row rounded price-item bg-dark text-white py-2 mb-1" >
+                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
                         <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.medias_game[0].url} style={{ maxHeight: '40px' }} alt="Store Logo" />
+                            <img className="img-fluid" src={item.game_characteristics[0].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
                         </div>
                         <div className="col-md-6 d-flex flex-column justify-content-center">
                             <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
@@ -84,9 +84,9 @@ export const PlaystationDetails = () => {
                     </div>
                 )}
                 {item.game_characteristics && item.game_characteristics[1] && item.game_characteristics[1].store && (
-                    <div className="row rounded price-item bg-dark text-white py-2 mb-1" >
+                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
                         <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.medias_game[0].url} style={{ maxHeight: '40px' }} alt="Store Logo" />
+                            <img className="img-fluid" src={item.game_characteristics[1].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
                         </div>
                         <div className="col-md-6 d-flex flex-column justify-content-center">
                             <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
@@ -105,9 +105,9 @@ export const PlaystationDetails = () => {
                     </div>
                 )}
                 {item.game_characteristics && item.game_characteristics[2] && item.game_characteristics[2].store && (
-                    <div className="row rounded price-item bg-dark text-white py-2 mb-1" >
+                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
                         <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.medias_game[0].url} style={{ maxHeight: '40px' }} alt="Store Logo" />
+                            <img className="img-fluid" src={item.game_characteristics[2].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
                         </div>
                         <div className="col-md-6 d-flex flex-column justify-content-center">
                             <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
@@ -126,9 +126,9 @@ export const PlaystationDetails = () => {
                     </div>
                 )}
                 {item.game_characteristics && item.game_characteristics[3] && item.game_characteristics[3].store && (
-                    <div className="row rounded price-item bg-dark text-white py-2 mb-1" >
+                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
                         <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.medias_game[0].url} style={{ maxHeight: '40px' }} alt="Store Logo" />
+                            <img className="img-fluid" src={item.game_characteristics[3].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
                         </div>
                         <div className="col-md-6 d-flex flex-column justify-content-center">
                             <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>

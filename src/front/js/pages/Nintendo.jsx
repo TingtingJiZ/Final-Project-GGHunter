@@ -23,7 +23,7 @@ export const Nintendo = () => {
     return (
         <div className="container w-75">
             <h1>Nintendo Games</h1>
-            <div className="row">
+            <div className="row ">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner mb-3">
                         <div className="carousel-item active" data-bs-interval="10000">
@@ -46,20 +46,22 @@ export const Nintendo = () => {
                     </button>
                 </div>
             </div>
-            <div className="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-2 justify-content-center card-body">
+            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-2 justify-content-center card-body">
                 {store.nintendo && store.nintendo.map((item) => (
-                    <div className="col">
-                        <GameCard
-                            key={item.id}
-                            image={item.medias_game[0].url}
-                            title={item.title}
-                            price={item.game_characteristics[1].store.price}
-                            click={() => handleNintendoDetails(item.id)}
-                        />
+                    <div key={item.id}>
+                        <div className="atropos-card card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%"}}>
+                            <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
+                            <div className="p-3" style={{ flexGrow: 1 }}>
+                                <h5 className="fs-4">{item.title}</h5>
+                            </div>
+                            <footer className="p-3 mb-1 d-flex justify-content-between align-items-center" style={{ background: "transparent", flexShrink: 0 }}>
+                                <strong>€{item.game_characteristics[1].store.price}</strong>
+                                <button onClick={() => handleNintendoDetails(item.id)} className="btn btn-primary">Info</button>
+                            </footer>
+                        </div>
                     </div>
                 ))}
             </div>
-
         </div>
     );
 };

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faGamepad } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../img/Recurso 1_png.png';
 import "../../styles/Navbar.css";
 
@@ -23,14 +24,12 @@ export const NavbarGame = () => {
 	const [showSignup, setshowSignup] = useState(false);
 	const [userLogin, setUserLogin] = useState('');
 	const [userPassword, setUserPassword] = useState('');
-
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const handleShowSignup = () => setshowSignup(true); // Abre el modal
     const handleCloseSignup = () => setshowSignup(false); // Cierra el modal
 	const handleClick = (Platform) => {
 		console.log("Has pinchao la opción " + Platform);
-
 	}
 
 	const handleLogin = async (event) => {
@@ -117,7 +116,7 @@ export const NavbarGame = () => {
 						<NavDropdown
 							title="Plataformas"
 							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center down"
+							className="mx-5 d-flex justify-content-center down text-white"
 						>
 							<NavDropdown.Item as="div">
 								<Link to="/pcgames" className="dropdown-item">PC</Link>
@@ -135,7 +134,7 @@ export const NavbarGame = () => {
 						<NavDropdown
 							title="Generos"
 							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center down"
+							className="mx-5 d-flex justify-content-center down text-white"
 						>
 							<NavDropdown.Item as="div">
 								<Nav.Link href="/">Home</Nav.Link>
@@ -152,6 +151,8 @@ export const NavbarGame = () => {
 						</div>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
+								title={<FontAwesomeIcon icon={faGamepad} size="xl" style={{color: "#b12727",}} />}
+								className="mx-5 d-flex justify-content-center down"
 								title={
 									<FontAwesomeIcon
 										icon={faUser}
@@ -169,12 +170,8 @@ export const NavbarGame = () => {
 											<a className="a-navbar" onClick={login} variant="outline-success">Login</a>
 										</NavDropdown.Item>
 										<NavDropdown.Item as="div">
-
-											<a className="a-navbar" onClick={() => register()} variant="outline-success">Registrarse</a>
-
-											
+											<a className="a-navbar" onClick={() => register()} variant="outline-success">Registrarse</a>			
 											<Button  onClick={handleShowSignup} variant="outline-success">Regristrarse</Button>
-
 										</NavDropdown.Item>
 									</>
 								) : (
@@ -188,13 +185,10 @@ export const NavbarGame = () => {
 									</>
 								)}
 							</NavDropdown>
-
 						</Nav>
-
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>
-
 			<Modal
 				show={show}
 				onHide={handleClose}
@@ -204,7 +198,6 @@ export const NavbarGame = () => {
 				centered
 				keyboard={false}
 				className="card-register"
-
 			>
 				<Modal.Header closeButton className="custom-gradient">
 					<Modal.Title><strong>Login</strong></Modal.Title>
