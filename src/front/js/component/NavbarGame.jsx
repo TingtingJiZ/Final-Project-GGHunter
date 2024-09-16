@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faGamepad } from '@fortawesome/free-solid-svg-icons'
 
 
 export const NavbarGame = () => {
@@ -106,7 +107,7 @@ export const NavbarGame = () => {
 						<NavDropdown
 							title="Plataformas"
 							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center down"
+							className="mx-5 d-flex justify-content-center down text-white"
 						>
 							<NavDropdown.Item as="div">
 								<Link to="/pcgames" className="dropdown-item">PC</Link>
@@ -124,7 +125,7 @@ export const NavbarGame = () => {
 						<NavDropdown
 							title="Generos"
 							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center down"
+							className="mx-5 d-flex justify-content-center down text-white"
 						>
 							<NavDropdown.Item as="div">
 								<Nav.Link href="/">Home</Nav.Link>
@@ -138,7 +139,7 @@ export const NavbarGame = () => {
 						</NavDropdown>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
-								title={<FontAwesomeIcon icon={faUser} style={{ color: "#2d0bce", }} />}
+								title={<FontAwesomeIcon icon={faGamepad} size="xl" style={{color: "#b12727",}} />}
 								className="mx-5 d-flex justify-content-center down"
 							>
 								{store.currentUser === null ? (
