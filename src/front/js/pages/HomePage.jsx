@@ -60,10 +60,10 @@ export const HomePage = () => {
             <Row className="card-body">
                 <button className="button-pc" onClick={handlePc}>PC</button>
                 <div className="card-row d-flex align-items-center mb-3">
-                    <Row> {/* Usar Row para envolver las columnas */}
+                    <Row>
                         {(store.pc && store.pc.length > 0) ? (
                             getRandomGames(store.pc, 4).map((item) => (
-                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4"> {/* Usar Col para el tamaño de las columnas */}
+                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
                                         title={item.name}  
                                         image={item.medias_game[0].url}
@@ -82,13 +82,12 @@ export const HomePage = () => {
                     </span>
                 </div>
 
-                {/* Puedes repetir este bloque para otras secciones, como Nintendo, Xbox, PlayStation */}
-                <button className="button-pc" onClick={handlePc}>Nintendo</button>
+                <button className="button-pc" onClick={handleNintendo}>Nintendo</button>
                 <div className="card-row d-flex align-items-center mb-3">
                     <Row> {/* Usar Row para envolver las columnas */}
                         {(store.pc && store.pc.length > 0) ? (
                             getRandomGames(store.pc, 4).map((item) => (
-                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4"> {/* Usar Col para el tamaño de las columnas */}
+                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
                                         title={item.name}  
                                         image={item.medias_game[0].url}
@@ -101,17 +100,17 @@ export const HomePage = () => {
                             <p>No hay juegos</p>
                         )}
                     </Row>
-                    <span onClick={handlePc} className="button-arrow ms-3">
+                    <span onClick={handleNintendo} className="button-arrow ms-3">
                         <span className="tooltip">Ver más</span>
                         <i className="fa-solid fa-circle-arrow-right fs-1"></i>
                     </span>
                 </div>
-                <button className="button-pc" onClick={handlePc}>Xbox</button>
+                <button className="button-pc" onClick={handleXbox}>Xbox</button>
                 <div className="card-row d-flex align-items-center mb-3">
-                    <Row> {/* Usar Row para envolver las columnas */}
+                    <Row>
                         {(store.pc && store.pc.length > 0) ? (
                             getRandomGames(store.pc, 4).map((item) => (
-                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4"> {/* Usar Col para el tamaño de las columnas */}
+                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
                                         title={item.name}  
                                         image={item.medias_game[0].url}
@@ -124,17 +123,17 @@ export const HomePage = () => {
                             <p>No hay juegos</p>
                         )}
                     </Row>
-                    <span onClick={handlePc} className="button-arrow ms-3">
+                    <span onClick={handleXbox} className="button-arrow ms-3">
                         <span className="tooltip">Ver más</span>
                         <i className="fa-solid fa-circle-arrow-right fs-1"></i>
                     </span>
                 </div>
-                <button className="button-pc" onClick={handlePc}>PlayStation</button>
+                <button className="button-pc" onClick={handlePlaystation}>PlayStation</button>
                 <div className="card-row d-flex align-items-center mb-3">
-                    <Row> {/* Usar Row para envolver las columnas */}
+                    <Row>
                         {(store.pc && store.pc.length > 0) ? (
                             getRandomGames(store.pc, 4).map((item) => (
-                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4"> {/* Usar Col para el tamaño de las columnas */}
+                                <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
                                         title={item.name}  
                                         image={item.medias_game[0].url}
@@ -147,7 +146,7 @@ export const HomePage = () => {
                             <p>No hay juegos</p>
                         )}
                     </Row>
-                    <span onClick={handlePc} className="button-arrow ms-3">
+                    <span onClick={handlePlaystation} className="button-arrow ms-3">
                         <span className="tooltip">Ver más</span>
                         <i className="fa-solid fa-circle-arrow-right fs-1"></i>
                     </span>
