@@ -41,15 +41,18 @@ def handle_users():
 def handle_singup():
     response_body = {}
     data = request.json
+    print(data)
     email = data.get("email", None).lower()
     password = data.get("password", None)
     existing_user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
     if existing_user:
         return jsonify({"message": "El usuario con este correo ya existe."}), 409
     new_user = Users(email = email,
-        password = data.get("password"),
-        is_active = True,
-        rol = 'user')
+                     password = data.get("password"),
+                     alias = data.get("alias"),
+                     lastname = data.get("lastname"),
+                     is_active = True,
+                     rol = 'user')
     db.session.add(new_user)
     db.session.commit()
     user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
@@ -277,17 +280,6 @@ def handle_comments():
         response_body["results"] = results
         response_body["message"] = f'Comments for user {current_user} retrieved successfully'
         return jsonify(response_body), 200
-    if request.method == "DELETE":
-        data = request.json
-        comment_user = data.get("comment_text")
-        delete_comment = db.session.execute(db.select(Comments).where(Comments.user_id == user_id, Comments.comment_text == comment_user)).scalar()
-        if not delete_comment:
-            response_body["message"] = f"Delete comment not found"
-            return jsonify(response_body), 404
-        db.session.delete(delete_comment)
-        db.session.commit()
-        response_body["message"] = f"Comment deletede"
-        return jsonify(response_body), 201
 
 
 @api.route("/comments/<int:comment_id>", methods=["GET", "PUT", "DELETE"])
@@ -351,6 +343,26 @@ def handele_games_comments(game_id):
     print(results)
     response_body = {'results': results, 'message': "Los comentarios"}
     return response_body, 200
+
+""" @api.route('/comments/<int:comment_id>', methods=['DELETE'])
+def delete_comment(comment_id):
+    # Buscar el comentario por ID
+    comment = Comments.query.get(comment_id)
+
+    # Si el comentario no existe, devolver un error
+    if not comment:
+        return jsonify({'error': 'Comment not found'}), 404
+
+    try:
+        # Eliminar el comentario
+        db.session.delete(comment)
+        db.session.commit()
+
+        return jsonify({'message': 'Comment deleted successfully'}), 200
+    except Exception as e:
+        # Manejar errores al intentar eliminar el comentario
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500 """
 
 
 @api.route("/social_accounts", methods=["GET", "POST"])

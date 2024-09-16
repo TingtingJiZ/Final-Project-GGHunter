@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import logo from '../../img/Recurso 1_png.png';
+import "../../styles/Navbar.css";
 
 
 export const NavbarGame = () => {
@@ -98,12 +100,18 @@ export const NavbarGame = () => {
 		}
 		navigate('/')
 	}
-
+	const handleProfile = () => {
+		navigate('/profile')
+	}
 	return (
 		<>
 			<Navbar expand="lg" className="navbarGame" data-bs-theme="dark">
 				<Container fluid>
-					<Navbar.Brand as={Link} to="/">Tienda </Navbar.Brand>
+					<Navbar.Brand as={Link} to="/"><img
+						src={logo}
+						alt="Logo"
+						style={{ height: '55px' }} // Ajusta el tamaño según sea necesario
+					/></Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<NavDropdown
@@ -139,28 +147,50 @@ export const NavbarGame = () => {
 								<Nav.Link href="/">Home</Nav.Link>
 							</NavDropdown.Item>
 						</NavDropdown>
+						<div className="title-navbar">
+							<h3 className="fw-bold text-white">G G - H u n t e r</h3>
+						</div>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
-								title={<FontAwesomeIcon icon={faUser} style={{ color: "#2d0bce", }} />}
-								className="mx-5 d-flex justify-content-center down"
+								title={
+									<FontAwesomeIcon
+										icon={faUser}
+										style={{
+											color: store.currentUser === null ? "#2d0bce" : "#cb3234",
+											fontSize: "34px"
+										}}
+									/>
+								}
+								className="mx-5 d-flex justify-content-center down custom-dropdown"
 							>
 								{store.currentUser === null ? (
 									<>
 										<NavDropdown.Item as="div">
-											<Button onClick={login} variant="outline-success">Login</Button>
+											<a className="a-navbar" onClick={login} variant="outline-success">Login</a>
 										</NavDropdown.Item>
 										<NavDropdown.Item as="div">
+
+											<a className="a-navbar" onClick={() => register()} variant="outline-success">Registrarse</a>
+
 											
 											<Button  onClick={handleShowSignup} variant="outline-success">Regristrarse</Button>
+
 										</NavDropdown.Item>
 									</>
 								) : (
+									<>
 									<NavDropdown.Item as="div">
-										<Button onClick={handleLogout} variant="outline-success">LogOut</Button>
+										<a className="a-navbar" onClick={handleProfile} variant="outline-success">Tu perfil</a>
 									</NavDropdown.Item>
+									<NavDropdown.Item as="div">
+										<a className="a-navbar" onClick={handleLogout} variant="outline-success">LogOut</a>
+									</NavDropdown.Item>
+									</>
 								)}
 							</NavDropdown>
+
 						</Nav>
+
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

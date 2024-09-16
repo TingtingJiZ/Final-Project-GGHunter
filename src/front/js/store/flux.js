@@ -174,14 +174,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				setStore({ comments: data.results });
 			},
-			deleteComment: async (commentId) => {
+			deleteComment: async (delete_comment) => {
 				const token = localStorage.getItem('token');
 				if (!token) {
 					console.log('No token found');
 					return;
 				}
 			
-				const uri = `${process.env.BACKEND_URL}/api/comments/${commentId}`;
+				const uri = `${process.env.BACKEND_URL}/api/comments/${delete_comment}`;
 				const options = {
 					method: 'DELETE',
 					headers: {
@@ -197,7 +197,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			
 				const store = getStore();
-				const updatedComments = store.comments.filter(comment => comment.id !== commentId);
+				const updatedComments = store.comments.filter(comment => comment.id !== delete_comment);
 				setStore({ comments: updatedComments });
 			},
 			getCommentsGames: async (game_id) => {
