@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentPC: [],
 			comments: [],
 			commentsPerGame: [],
+			commentsPerGame2: [],
 			nintendo: [],
 			currentNintendo: [],
 			playstation: [],
@@ -221,7 +222,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 				const data = await response.json();
 				console.log(data.results);
-				setStore({ commentsPerGame: data.results });
+				setStore({ commentsPerGame2: data.results });
 			},
 			getNintendo: async () => {
 				const uri = `${process.env.URIBACK}/api/games`
