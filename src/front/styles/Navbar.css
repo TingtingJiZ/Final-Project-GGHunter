@@ -1,15 +1,12 @@
 .navbarGame {
     background: linear-gradient(rgb(102, 186, 102), rgb(29, 150, 120));
 }
+
 .a-navbar {
     color: white;
     text-decoration: none;
     cursor: pointer;
     font-size: 20px;
-}
-
-.title-navbar {
-    margin-left: 25%;
 }
 
 .custom-dropdown .dropdown-menu {
@@ -18,3 +15,22 @@
     right: 0 !important;
     /* Asegúrate de que no esté alineado a la derecha */
 }
+
+.gg-hunter {
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%);
+    flex-wrap: wrap;
+  }
+  
+@media (max-width: 768px) {
+    .gg-hunter {
+      position: relative;
+      left: auto;
+      transform: none;
+      text-align: center;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+  }
+  
