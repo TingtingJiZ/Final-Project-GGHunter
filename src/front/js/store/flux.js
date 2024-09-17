@@ -128,7 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results[0]);
+				//console.log(data.results);
 				setStore({ currentPC: data.results });
 			},
       		createComments: async (comments) => {
@@ -174,14 +174,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				setStore({ comments: data.results });
 			},
-			deleteComment: async (delete_comment) => {
+			deleteComment: async (commentId) => {
 				const token = localStorage.getItem('token');
-				if (!token) {
-					console.log('No token found');
-					return;
-				}
-			
-				const uri = `${process.env.BACKEND_URL}/api/comments/${delete_comment}`;
+				const uri = `${process.env.BACKEND_URL}/api/comments/${commentId}`;
 				const options = {
 					method: 'DELETE',
 					headers: {
@@ -190,15 +185,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				};
 			
-				const response = await fetch(uri, options);
-				if (!response.ok) {
-					console.log('Error', response.status, response.statusText);
-					return;
-				}
+				try {
+					const response = await fetch(uri, options);
 			
-				const store = getStore();
-				const updatedComments = store.comments.filter(comment => comment.id !== delete_comment);
-				setStore({ comments: updatedComments });
+					if (response.status === 401) {  // Manejar el caso de error 401
+						return { ok: false, message: "No autorizado. Por favor, inicia sesión nuevamente." };
+					}
+			
+					if (!response.ok) {
+						return { ok: false, message: 'No autorizado. Por favor, inicia sesión nuevamente.' };
+					}
+			
+					return { ok: true, message: "Comentario eliminado correctamente" };
+				} catch (error) {
+					console.error('Error en la solicitud de eliminación de comentario:', error);
+					return { ok: false, message: 'Error en la solicitud al servidor' };
+				}
 			},
 			getCommentsGames: async (game_id) => {
 				const uri = `${process.env.BACKEND_URL}/api/games/${game_id}/comments`;
@@ -244,7 +246,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results[0]);
+				console.log(data.results);
 				setStore({ currentNintendo: data.results });
 			},
 			getPlaystation: async () => {
@@ -272,7 +274,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results[0]);
+				console.log(data.results);
 				setStore({ currentPlaystation: data.results });
 			},
 			getXbox: async () => {
@@ -300,7 +302,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results[0]);
+				console.log(data.results);
 				setStore({ currentXbox: data.results });
 			},
 			getFreeGames: async () => {
