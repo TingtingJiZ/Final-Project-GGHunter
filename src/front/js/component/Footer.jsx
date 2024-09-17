@@ -5,8 +5,7 @@ export const Footer = () => {
     return (
         <footer>
             <div className="footer-body text-dark">
-                <div className="
-                ">
+                <div>
                     <h3 className="title-footer">ÚNETE A NUESTRO DISCORD</h3>
                     <p className="p-footer">Ven al servidor oficial de GG-Hunter y chatea con otros usuarios.</p>
                     <a href="https://discord.gg/G3vKZ7DJXk" className="icon-discord" target="_blank">
