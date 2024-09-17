@@ -104,38 +104,27 @@ export const NavbarGame = () => {
 	}
 	return (
 		<>
-			<Navbar expand="lg" className="navbarGame" data-bs-theme="dark" style={{ position: 'relative' }}>
-				<Container fluid className="d-flex justify-content-between align-items-center">
-					<Navbar.Brand as={Link} to="/"><img
-						src={logo}
-						alt="Logo"
-						style={{ height: '55px' }}
-					/></Navbar.Brand>
-					<Navbar.Toggle aria-controls="basic-navbar-nav" className="ms-auto" />
-					<Navbar.Brand className="fw-bold text-white text-center mx-auto gg-hunter">
-						G G - H u n t e r
-					</Navbar.Brand>
-					<Navbar.Collapse id="basic-navbar-nav" className="order-lg-0">
+			<Navbar expand="lg" className="navbarGame">
+				<Container> {/* add fluid if want full page */}
+					<Navbar.Brand as={Link} to="/"><img src={logo} alt="Logo" style={{ height: '55px' }} /></Navbar.Brand>
+					<Navbar.Brand className="text-white" href="#home">GG-Hunter</Navbar.Brand>
+					<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="me-auto">
-							<NavDropdown
-								title="Plataformas"
-								id={`offcanvasNavbarDropdown-expand`}
-								className="mx-5 d-flex justify-content-center down text-white">
-								<NavDropdown.Item as="div"><Link to="/pcgames" className="dropdown-item">PC</Link></NavDropdown.Item>
-								<NavDropdown.Item as="div"><Link to="/xbox" className="dropdown-item">Xbox</Link></NavDropdown.Item>
-								<NavDropdown.Item as="div"><Link to="/playstation" className="dropdown-item">PlayStation</Link></NavDropdown.Item>
-								<NavDropdown.Item as="div"><Link to="/nintendo" className="dropdown-item">Nintendo</Link></NavDropdown.Item>
-							</NavDropdown>
+							<Nav.Link as="div"><Link to="/pcgames" className="dropdown-item text-white">PC</Link></Nav.Link>
+							<Nav.Link as="div"><Link to="/xbox" className="dropdown-item text-white">Xbox</Link></Nav.Link >
+							<Nav.Link as="div"><Link to="/playstation" className="dropdown-item text-white">PlayStation</Link></Nav.Link >
+							<Nav.Link as="div"><Link to="/nintendo" className="dropdown-item text-white">Nintendo</Link></Nav.Link >
 						</Nav>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
-								className="mx-5 d-flex justify-content-center down"
+								className=" d-flex justify-content-center down dark-dropdown"
 								title={
 									<FontAwesomeIcon
 										icon={faGamepad}
 										size="xl"
 										style={{
-											color: store.currentUser === null ? "#2d0bce" : "#cb3234",
+											color: store.currentUser === null ? "#715fcf" : "#e18e8d",
 
 										}}
 									/>
@@ -162,9 +151,9 @@ export const NavbarGame = () => {
 								)}
 							</NavDropdown>
 						</Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
+					</Navbar.Collapse >
+				</Container >
+			</Navbar >
 			<Modal
 				show={show}
 				onHide={handleClose}

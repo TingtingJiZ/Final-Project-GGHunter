@@ -17,7 +17,6 @@ export const PlaystationDetails = () => {
     }
 
     useEffect(() => {
-        //descriptionPlay();
         const path = window.location.pathname;
         if (path.includes('/playstation')) {
             setActivePlatform('playstation');
@@ -32,20 +31,6 @@ export const PlaystationDetails = () => {
 
     return (
         <div className="container my-4 w-75">
-            <ul className="nav nav-underline">
-                <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'pc' ? 'active pc' : 'pc'}`} href="/pcgames">PC</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'playstation' ? 'active playstation' : 'playstation'}`} href="/playstation">PlayStation</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'nintendo' ? 'active nintendo' : 'nintendo'}`} href="/nintendo">Nintendo</a>
-                </li>
-                <li className="nav-item">
-                    <a className={`nav-link ${activePlatform === 'xbox' ? 'active xbox' : 'xbox'}`} href="/xbox">Xbox</a>
-                </li>
-            </ul>
             <div className="characteristic w-100">
                 <div className="row rounded card-row p-3">
                     <div className="col-12 col-md-4 text-center">
@@ -60,92 +45,94 @@ export const PlaystationDetails = () => {
                         <h6>{item.description}</h6>
                     </div>
                 </div>
+                <ul className="nav nav-underline">
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'pc' ? 'active pc fs-3' : 'pc fs-4'}`} href="/pcgames">PC</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'playstation' ? 'active playstation fs-3' : 'playstation fs-4'}`} href="/playstation">PlayStation</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'nintendo' ? 'active nintendo fs-3' : 'nintendo fs-4'}`} href="/nintendo">Nintendo</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'xbox' ? 'active xbox fs-3' : 'xbox fs-4'}`} href="/xbox">Xbox</a>
+                    </li>
+                </ul>
             </div>
-            <div className="shop mt-3">
-                {item.game_characteristics && item.game_characteristics[0] && item.game_characteristics[0].store && (
-                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
-                        <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.game_characteristics[0].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
-                        </div>
-                        <div className="col-md-6 d-flex flex-column justify-content-center">
-                            <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
-                        </div>
-                        <div className="col-md-4 d-flex flex-column align-items-md-end">
-                            <h4 className="mb-1" style={{ fontSize: '19px' }}>
-                                <span className="discount">
-                                    €{item.game_characteristics[0].store.price}
-                                </span>
-                            </h4>
-                            <h6 className="end-time mb-1" style={{ fontSize: '0.75rem' }}>
-                                End: in 4 days
-                            </h6>
-                            <button className="btn btn-shop py-1 px-2 btn-success" onClick={() => handleShop(item.game_characteristics[0].store.url)}> Comprar </button>
-                        </div>
-                    </div>
-                )}
-                {item.game_characteristics && item.game_characteristics[1] && item.game_characteristics[1].store && (
-                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
-                        <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.game_characteristics[1].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
-                        </div>
-                        <div className="col-md-6 d-flex flex-column justify-content-center">
-                            <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
-                        </div>
-                        <div className="col-md-4 d-flex flex-column align-items-md-end">
-                            <h4 className="mb-1" style={{ fontSize: '19px' }}>
-                                <span className="discount">
-                                    €{item.game_characteristics[1].store.price}
-                                </span>
-                            </h4>
-                            <h6 className="end-time mb-1" style={{ fontSize: '0.75rem' }}>
-                                End: in 4 days
-                            </h6>
-                            <button className="btn btn-shop py-1 px-2 btn-success" onClick={() => handleShop(item.game_characteristics[1].store.url)}> Comprar </button>
+            <div className="container mt-3">
+                <div className="row">
+                    <div className="col-12 col-sm-6 col-md-3 mb-4">
+                        <div className="card text-center p-3 gradient-card">
+                            {item.game_characteristics && item.game_characteristics[0] && item.game_characteristics[0].store && (
+                                <>
+                                    <div className="mb-3">
+                                        <img className="img-fluid" src={item.game_characteristics[0].store.home_page} style={{ maxHeight: '100px' }} alt="Store Logo" />
+                                    </div>
+                                    <div className="d-flex flex-column align-items-center">
+                                        <span className="discount h5 mb-3">
+                                            €{item.game_characteristics[0].store.price}
+                                        </span>
+                                        <button
+                                            className="btn btn-shop py-2 px-4 btn-success" onClick={() => handleShop(item.game_characteristics[0].store.url)}>Comprar
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
-                )}
-                {item.game_characteristics && item.game_characteristics[2] && item.game_characteristics[2].store && (
-                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
-                        <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.game_characteristics[2].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
-                        </div>
-                        <div className="col-md-6 d-flex flex-column justify-content-center">
-                            <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
-                        </div>
-                        <div className="col-md-4 d-flex flex-column align-items-md-end">
-                            <h4 className="mb-1" style={{ fontSize: '19px' }}>
-                                <span className="discount">
-                                    €{item.game_characteristics[2].store.price}
-                                </span>
-                            </h4>
-                            <h6 className="end-time mb-1" style={{ fontSize: '0.75rem' }}>
-                                End: in 4 days
-                            </h6>
-                            <button className="btn btn-shop py-1 px-2 btn-success" onClick={() => handleShop(item.game_characteristics[2].store.url)}> Comprar </button>
+                    <div className="col-12 col-sm-6 col-md-3 mb-4">
+                        <div className="card text-center p-3 gradient-card">
+                            {item.game_characteristics && item.game_characteristics[1] && item.game_characteristics[1].store && (
+                                <>
+                                    <div className="mb-3">
+                                        <img className="img-fluid" src={item.game_characteristics[1].store.home_page} style={{ maxHeight: '100px' }} alt="Store Logo" />
+                                    </div>
+                                    <div className="d-flex flex-column align-items-center">
+                                        <span className="discount h5 mb-3">
+                                            €{item.game_characteristics[1].store.price}
+                                        </span>
+                                        <button className="btn btn-shop py-2 px-4 btn-success" onClick={() => handleShop(item.game_characteristics[1].store.url)}>Comprar</button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
-                )}
-                {item.game_characteristics && item.game_characteristics[3] && item.game_characteristics[3].store && (
-                    <div className="row card-row rounded price-item bg-dark text-white py-2 mb-1" >
-                        <div className="col-md-2 store-logo d-flex align-items-center">
-                            <img className="img-fluid" src={item.game_characteristics[3].store.home_page} style={{ maxHeight: '40px' }} alt="Store Logo" />
-                        </div>
-                        <div className="col-md-6 d-flex flex-column justify-content-center">
-                            <h5 className="mb-2" style={{ fontSize: '19px' }}>{item.url}</h5>
-                        </div>
-                        <div className="col-md-4 d-flex flex-column align-items-md-end">
-                            <h4 className="mb-1" style={{ fontSize: '19px' }}>
-                                <span className="discount">
-                                    €{item.game_characteristics[3].store.price}
-                                </span>
-                            </h4>
-                            <h6 className="end-time mb-1" style={{ fontSize: '0.75rem' }}>
-                                End: in 4 days
-                            </h6>
-                            <button className="btn btn-shop py-1 px-2 btn-success" onClick={() => handleShop(item.game_characteristics[3].store.url)}> Comprar </button>
+                    <div className="col-12 col-sm-6 col-md-3 mb-4">
+                        <div className="card text-center p-3 gradient-card">
+                            {item.game_characteristics && item.game_characteristics[2] && item.game_characteristics[2].store && (
+                                <>
+                                    <div className="mb-3">
+                                        <img className="img-fluid" src={item.game_characteristics[2].store.home_page} style={{ maxHeight: '100px' }} alt="Store Logo" />
+                                    </div>
+                                    <div className="d-flex flex-column align-items-center">
+                                        <span className="discount h5 mb-3">
+                                            €{item.game_characteristics[2].store.price}
+                                        </span>
+                                        <button className="btn btn-shop py-2 px-4 btn-success" onClick={() => handleShop(item.game_characteristics[2].store.url)}>Comprar</button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
-                )}
+                    <div className="col-12 col-sm-6 col-md-3 mb-4">
+                        <div className="card text-center p-3 gradient-card">
+                            {item.game_characteristics && item.game_characteristics[3] && item.game_characteristics[3].store && (
+                                <>
+                                    <div className="mb-3">
+                                        <img className="img-fluid" src={item.game_characteristics[3].store.home_page} style={{ maxHeight: '100px' }} alt="Store Logo" />
+                                    </div>
+                                    <div className="d-flex flex-column align-items-center">
+                                        <span className="discount h5 mb-3">
+                                            €{item.game_characteristics[3].store.price}
+                                        </span>
+                                        <button className="btn btn-shop py-2 px-4 btn-success" onClick={() => handleShop(item.game_characteristics[3].store.url)}>Comprar</button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="container">
                 <CommentsGames />
