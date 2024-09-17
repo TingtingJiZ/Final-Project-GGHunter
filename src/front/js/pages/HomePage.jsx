@@ -41,7 +41,7 @@ export const HomePage = () => {
         navigate("xbox")
     }
     useEffect(() => {
-        actions.getGamesPc();
+        //actions.getGamesPc();
         //actions.getGamesPc();
         actions.getPC();
 
