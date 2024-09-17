@@ -1,23 +1,30 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext.js";
-import { Row, Card, Button } from 'react-bootstrap';
+import { Row, Card, Button, Alert} from 'react-bootstrap';
 
 export const CommentsGames = () => {
     const { store, actions } = useContext(Context);
     const [formData, setFormData] = useState({ commentsPerGame: "" });
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        // Obtener los comentarios cuando el componente se monta
         if (store.currentPC && store.currentPC.id) {
             actions.getCommentsGames(store.currentPC.id);
+            console.log("Holaaa");
+            
         }
 
-    }, [store.currentPC]);  // Asegúrate de que se ejecute cuando `currentPC` cambie
+    }, [store.currentPC]);
 
     useEffect(() => {
-        // Verificar el contenido del store
-        console.log("Comentarios en el store:", store.commentsPerGame);
-    }, [store.commentsPerGame]);
+        if (errorMessage) {  
+            const timer = setTimeout(() => {
+                setErrorMessage("");
+            }, 5000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [errorMessage]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -32,7 +39,6 @@ export const CommentsGames = () => {
         // Añadir el game_id al formData sin sobrescribir el objeto
         const saved = localStorage.getItem("User");
         const user = JSON.parse(saved);
-        const userId = user?.id
         const updatedFormData = {
             body: formData.commentsPerGame,  // El cuerpo del comentario
             game_id: store.currentPC.id,     // ID del juego
@@ -43,11 +49,22 @@ export const CommentsGames = () => {
         setFormData({ commentsPerGame: "" });
     };
 
-    const handleDelete = (delete_comment) => {
-        console.log(delete_comment);
+const handleDelete = async (delete_comment) => {
+    try {
+        const response = await actions.deleteComment(delete_comment);  // Llamar a la función de actions
         
-        actions.deleteComment(delete_comment);
-    };
+        if (response.ok) {
+            console.log("Comentario eliminado");
+            setErrorMessage("");  // Limpiar mensaje de error
+            actions.getCommentsGames(store.currentPC.id);  // Actualizar comentarios después de la eliminación
+        } else {
+            setErrorMessage(response.message);  // Mostrar el mensaje de error devuelto por la acción
+        }
+    } catch (error) {
+        console.error("Error en el frontend al eliminar el comentario", error);
+        setErrorMessage("Error al eliminar el comentario. Inténtalo de nuevo.");
+    }
+};
 
     return (
         <div className="container py-3">
@@ -70,7 +87,11 @@ export const CommentsGames = () => {
                         </span>
                     </button>
                 </form>
-
+                {errorMessage && (  // Mostrar el mensaje de error si existe
+                    <Alert variant="danger" onClose={() => setErrorMessage("")} dismissible>
+                        {errorMessage}
+                    </Alert>
+                )}
                 <div id="reviews">
                     <h2>Reseñas:</h2>
                     <Row>
