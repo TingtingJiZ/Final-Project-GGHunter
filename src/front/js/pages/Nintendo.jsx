@@ -56,7 +56,10 @@ export const Nintendo = () => {
                             </div>
                             <footer className="p-3 mb-1 d-flex justify-content-between align-items-center" style={{ background: "transparent", flexShrink: 0 }}>
                                 <strong>€{item.game_characteristics[1].store.price}</strong>
-                                <button onClick={() => handleNintendoDetails(item.id)} className="btn btn-primary">Info</button>
+                                <span><button onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Info</button>
+                                <button onClick={() => handleAddToFavourites(item.game_id)} className="btn btn-secondary">
+                                <i className="fa-regular fa-heart"></i>
+                                </button></span>
                             </footer>
                         </div>
                     </div>

@@ -531,6 +531,7 @@ def handle_favourites():
     if request.method == 'POST':
         data = request.get_json()
         game_id = data.get('game_id')
+        """ user_id = data.get('user_id') """
         existing_favorite = db.session.execute(db.select(Users).where(user_id=user.id, game_id=game_id)).scalar()
 
         if existing_favorite:
