@@ -44,6 +44,8 @@ export const CommentsGames = () => {
     };
 
     const handleDelete = (delete_comment) => {
+        console.log(delete_comment);
+        
         actions.deleteComment(delete_comment);
     };
 
@@ -81,7 +83,7 @@ export const CommentsGames = () => {
                                                 <strong>{item.user_alias}</strong> {item.body}
                                             </Row>
                                         </Card.Text>
-                                        <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can"></i> {/* Cambiado aquí */}
+                                        <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can"></i>
                                     </Card.Body>
                                 </Card>
                             ))
