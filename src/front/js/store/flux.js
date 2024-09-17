@@ -20,6 +20,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentGamesPc: [],
 			freeGames: [],
 			favourites: [],
+			favouritesUser:[]
 		},
 		actions: {
 			getPC: async () => {
@@ -367,7 +368,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     const response = await fetch(uri, options);
                     const data = await response.json();
 					console.log(data.results)
-                    setStore({ favourites: data.results });
+                    setStore({ favouritesUser: data.results });
                 } catch (error) {
                     console.error("Error fetching favourites:", error);
                 }
