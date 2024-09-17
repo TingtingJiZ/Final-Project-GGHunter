@@ -8,12 +8,13 @@ export const CommentsGames = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
-        if (store.currentPC && store.currentPC.id) {
+        const timer = setTimeout(() => {
             actions.getCommentsGames(store.currentPC.id);
-            console.log("Holaaa");
-            
-        }
+        }, 1000);
 
+        return () => clearTimeout(timer);
+        
+    
     }, [store.currentPC]);
 
     useEffect(() => {
@@ -47,6 +48,7 @@ export const CommentsGames = () => {
         actions.createComments(updatedFormData);
         // Limpiar el formulario después del envío
         setFormData({ commentsPerGame: "" });
+        actions.getCommentsGames(store.currentPC.id);
     };
 
 const handleDelete = async (delete_comment) => {
@@ -95,15 +97,15 @@ const handleDelete = async (delete_comment) => {
                 <div id="reviews">
                     <h2>Reseñas:</h2>
                     <Row>
-                        {store.commentsPerGame.length > 0 ? (
-                            store.commentsPerGame.map((item, index) => (
+                        {store.commentsPerGame2.length > 0 ? (
+                            store.commentsPerGame2.map((item, index) => (
                                 <Card key={index} style={{ width: '60rem', margin: '1rem' }}>
                                     <Card.Body>
-                                        <Card.Text>
+                                    <div>  {/* Cambiado de Card.Text a div */}
                                             <Row>
                                                 <strong>{item.user_alias}</strong> {item.body}
                                             </Row>
-                                        </Card.Text>
+                                        </div>
                                         <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can"></i>
                                     </Card.Body>
                                 </Card>

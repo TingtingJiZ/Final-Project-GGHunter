@@ -42,7 +42,9 @@ export const HomePage = () => {
     }
     useEffect(() => {
         //actions.getGamesPc();
+        //actions.getGamesPc();
         actions.getPC();
+
     }, []);
 
     useEffect(() => {

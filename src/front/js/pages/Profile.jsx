@@ -6,11 +6,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import logo from '../../img/Recurso 1_png.png';
-
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 export const Profile = () => {
     const { actions, store } = useContext(Context);
+    const navigate = useNavigate();
     const handleImgError = (event) => {
         event.target.src = Gg_default;
+    };
+
+    const handleFavourites = () => {
+        navigate("/favourites");
     };
     const isAdmin = store.currentUser?.rol === "admin";
     return (
@@ -76,6 +82,7 @@ export const Profile = () => {
                                                     role="tab"
                                                     aria-controls="pills-profile"
                                                     aria-selected="false"
+                                                    onClick={handleFavourites}
                                                 >
                                                     <FontAwesomeIcon icon={faStar} />
                                                 </button>

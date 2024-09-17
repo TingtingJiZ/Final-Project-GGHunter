@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentPC: [],
 			comments: [],
 			commentsPerGame: [],
+			commentsPerGame2: [],
 			nintendo: [],
 			currentNintendo: [],
 			playstation: [],
@@ -18,7 +19,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentXbox: [],
 			gamesPc: [],
 			currentGamesPc: [],
-			freeGames: []
+			freeGames: [],
+			favourites: [],
+			favouritesUser:[]
 		},
 		actions: {
 			getPC: async () => {
@@ -219,7 +222,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 				const data = await response.json();
 				console.log(data.results);
-				setStore({ commentsPerGame: data.results });
+				setStore({ commentsPerGame2: data.results });
 			},
 			getNintendo: async () => {
 				const uri = `${process.env.URIBACK}/api/games`
@@ -319,6 +322,60 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(data);
 				setStore({ freeGames: data });
 			},
+			addToFavourites: async (gameId) => {
+                const token = localStorage.getItem('token');
+                console.log(token);
+                const dataToSend = {
+                    "game_id": gameId,
+                };
+                const uri = `${process.env.URIBACK}/api/favourites`;
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify(dataToSend),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                };
+                console.log(dataToSend, localStorage.getItem('token'));
+                try {
+                    const response = await fetch(uri, options);
+                    if (!response.ok) {
+                        console.log('Error: ', response.status, response.statusText);
+                        if (response.status === 401) {
+                            const data = await response.json();
+                            console.log("Error: " + response.status + " " + response.statusText);
+                        } else if (response.status === 409) {
+                            console.log("El favorito ya existe");
+                        }
+                        return;
+                    }
+                    const data = await response.json();
+					console.log(data)
+                    setStore({ favourites: [...getStore().favourites, data.results] });
+                } catch (error) {
+                    console.error("Error adding to favourites:", error);
+                }
+            },
+            getFavourites: async () => {
+                const token = localStorage.getItem('token');
+                const uri = process.env.BACKEND_URL + '/api/favourites';
+                const options = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                };
+                try {
+                    const response = await fetch(uri, options);
+                    const data = await response.json();
+					console.log(data.results)
+                    setStore({ favouritesUser: data.results });
+                } catch (error) {
+                    console.error("Error fetching favourites:", error);
+                }
+            },
 			
 			setCurrentUser: (user) =>{setStore({currentUser:user})},
 			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},

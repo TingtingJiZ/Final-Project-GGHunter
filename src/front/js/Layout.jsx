@@ -25,6 +25,7 @@ import { Xbox } from "./pages/Xbox.jsx";
 import { PlaystationDetails } from "./pages/PlayStationDetails.jsx";
 import { XboxDetails } from "./pages/XboxDetails.jsx";
 import { NintendoDetails } from "./pages/NintendoDetails.jsx"
+import { Favourites } from "./pages/Favourites.jsx"
 
 
 // Create your first component
@@ -58,6 +59,7 @@ const Layout = () => {
                         <Route element={<Premium />} path="/premium"/>
                         <Route element={<PayPremium />} path="/pay-premium"/>
                         <Route element={<PayReady />} path="/pay-ready"/>
+                        <Route element={<Favourites />} path="/favourites"/>
                     </Routes>
                     <Footer />
                 </ScrollToTop>
