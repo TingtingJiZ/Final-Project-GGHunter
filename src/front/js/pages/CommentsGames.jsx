@@ -49,7 +49,6 @@ export const CommentsGames = () => {
 
     return (
         <div className="container py-3">
-            <h2>Reseñas</h2>
             <Row className="card-row">
                 <h1>Escribe tu Reseña</h1>
                 <form onSubmit={handleSubmit}>
@@ -60,6 +59,7 @@ export const CommentsGames = () => {
                             value={formData.commentsPerGame}
                             onChange={handleChange}
                             rows="4"
+                            style={{ width: '100%', height: '20%' }}
                         />
                     </div>
                     <button type="submit" className="button-container">
