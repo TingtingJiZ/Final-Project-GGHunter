@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			currentGamesPc: [],
 			freeGames: [],
 			favourites: [],
-			favouritesUser:[]
+			favouritesUser: [],
 		},
 		actions: {
 			getPC: async () => {
@@ -40,17 +40,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//let datos = [];
 				const actions = getActions();
 				let valores = [];
-		        const uri = `https://www.cheapshark.com/api/1.0/games?ids=251420,194160,234902,144209,195104,165363,236626,258010,177485,229961,188278,212038`
-		        const options = {
-		            method: "GET",
-		            }
-		        const response = await fetch(uri, options)
-		        if(!response.ok) {
-		            console.log("Error: ", response.status, response.statusText)
-		            return;
-		            }
-		        const data = await response.json()
-		        console.log(data)
+				const uri = `https://www.cheapshark.com/api/1.0/games?ids=251420,194160,234902,144209,195104,165363,236626,258010,177485,229961,188278,212038`
+				const options = {
+					method: "GET",
+				}
+				const response = await fetch(uri, options)
+				if (!response.ok) {
+					console.log("Error: ", response.status, response.statusText)
+					return;
+				}
+				const data = await response.json()
+				console.log(data)
 				let entriesPC = Object.entries(data);
 				for (let i = 0; i < entriesPC.length; i++) {
 					let gameID = entriesPC[i][0];
@@ -63,9 +63,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let title = infoPC.title;
 					let steamAppID = infoPC.steamAppID;
 					let thumb = infoPC.thumb;
-			
+
 					//console.log(`El título es ${title}, el id de steam es ${steamAppID}, la imagen es ${thumb}, y el ID del juego es ${gameID}`);
-					
+
 					for (let j = 0; j < preciosPC.length; j++) {
 						if (preciosPC[j].storeID == 1) {
 							retailPrice = preciosPC[j].retailPrice;
@@ -83,13 +83,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"storeID": storeID
 					});
 				}
-			
+
 				await actions.insertPricePc(valores);
 				console.log(valores);
-				
+
 				// Guardar los datos en el store
-				setStore({ gamesPc: data });
-            },
+				setStore({ gamesPc: valores });
+			},
 			insertPricePc: async (datos) => {
 				const uri = `${process.env.URIBACK}/api/load-api-store`;
 				const options = {
@@ -134,28 +134,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//console.log(data.results);
 				setStore({ currentPC: data.results });
 			},
-      		createComments: async (comments) => {
-			const token = localStorage.getItem('token');
-			const uri = `${process.env.BACKEND_URL}/api/comments`;
-			const options = {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${token}`
-				},
-				body: JSON.stringify(comments)
-			};
-			const response = await fetch(uri, options);
-			console.log(comments);
-			
-			if (!response.ok) {
-				console.log('Error', response.status, response.statusText);
-				return;
-			}
-			const newComment = await response.json();
-			const store = getStore();
-			// Agregar el nuevo comentario a la lista
-			setStore({ commentsPerGame: [...store.commentsPerGame, newComment] });
+			createComments: async (comments) => {
+				const token = localStorage.getItem('token');
+				const uri = `${process.env.BACKEND_URL}/api/comments`;
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`
+					},
+					body: JSON.stringify(comments)
+				};
+				const response = await fetch(uri, options);
+				console.log(comments);
+
+				if (!response.ok) {
+					console.log('Error', response.status, response.statusText);
+					return;
+				}
+				const newComment = await response.json();
+				const store = getStore();
+				// Agregar el nuevo comentario a la lista
+				setStore({ commentsPerGame: [...store.commentsPerGame, newComment] });
 			},
 			getComments: async () => {
 				const token = localStorage.getItem('token');
@@ -167,13 +167,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						'Authorization': `Bearer ${token}`
 					}
 				};
-			
+
 				const response = await fetch(uri, options);
 				if (!response.ok) {
 					console.log('Error', response.status, response.statusText);
 					return;
 				}
-			
+
 				const data = await response.json();
 				setStore({ comments: data.results });
 			},
@@ -187,18 +187,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						'Authorization': `Bearer ${token}`
 					}
 				};
-			
+
 				try {
 					const response = await fetch(uri, options);
-			
+
 					if (response.status === 401) {  // Manejar el caso de error 401
 						return { ok: false, message: "No autorizado. Por favor, inicia sesión nuevamente." };
 					}
-			
+
 					if (!response.ok) {
 						return { ok: false, message: 'No autorizado. Por favor, inicia sesión nuevamente.' };
 					}
-			
+
 					return { ok: true, message: "Comentario eliminado correctamente" };
 				} catch (error) {
 					console.error('Error en la solicitud de eliminación de comentario:', error);
@@ -213,13 +213,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						'Content-Type': 'application/json'
 					}
 				};
-			
+
 				const response = await fetch(uri, options);
 				if (!response.ok) {
 					console.log('Error', response.status, response.statusText);
 					return;
 				}
-			
+
 				const data = await response.json();
 				console.log(data.results);
 				setStore({ commentsPerGame2: data.results });
@@ -230,13 +230,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 				}
 				const response = await fetch(uri, options);
-				if(!response.ok) {
+				if (!response.ok) {
 					console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
 				console.log(data.results)
-				setStore({nintendo: data.results})
+				setStore({ nintendo: data.results })
 			},
 			getNintendoDetailsId: async (id) => {
 				const uri = `${process.env.URIBACK}/api/games/${id}`;
@@ -258,13 +258,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 				}
 				const response = await fetch(uri, options);
-				if(!response.ok) {
+				if (!response.ok) {
 					console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
 				console.log(data.results)
-				setStore({playstation: data.results})
+				setStore({ playstation: data.results })
 			},
 			getPlaystationDetailsId: async (id) => {
 				const uri = `${process.env.URIBACK}/api/games/${id}`;
@@ -286,13 +286,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 				}
 				const response = await fetch(uri, options);
-				if(!response.ok) {
+				if (!response.ok) {
 					console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
 				console.log(data.results)
-				setStore({xbox: data.results})
+				setStore({ xbox: data.results })
 			},
 			getXboxDetailsId: async (id) => {
 				const uri = `${process.env.URIBACK}/api/games/${id}`;
@@ -323,62 +323,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ freeGames: data });
 			},
 			addToFavourites: async (gameId) => {
-                const token = localStorage.getItem('token');
-                console.log(token);
-                const dataToSend = {
-                    "game_id": gameId,
-                };
-                const uri = `${process.env.URIBACK}/api/favourites`;
-                const options = {
-                    method: 'POST',
-                    body: JSON.stringify(dataToSend),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                };
-                console.log(dataToSend, localStorage.getItem('token'));
-                try {
-                    const response = await fetch(uri, options);
-                    if (!response.ok) {
-                        console.log('Error: ', response.status, response.statusText);
-                        if (response.status === 401) {
-                            const data = await response.json();
-                            console.log("Error: " + response.status + " " + response.statusText);
-                        } else if (response.status === 409) {
-                            console.log("El favorito ya existe");
-                        }
-                        return;
-                    }
-                    const data = await response.json();
+				const token = localStorage.getItem('token');
+				console.log(token);
+				const dataToSend = {
+					"game_id": gameId,
+				};
+				const uri = `${process.env.URIBACK}/api/favourites`;
+				const options = {
+					method: 'POST',
+					body: JSON.stringify(dataToSend),
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`
+					}
+				};
+				console.log(dataToSend, localStorage.getItem('token'));
+				try {
+					const response = await fetch(uri, options);
+					if (!response.ok) {
+						console.log('Error: ', response.status, response.statusText);
+						if (response.status === 401) {
+							const data = await response.json();
+							console.log("Error: " + response.status + " " + response.statusText);
+						} else if (response.status === 409) {
+							console.log("El favorito ya existe");
+						}
+						return;
+					}
+					const data = await response.json();
 					console.log(data)
-                    setStore({ favourites: [...getStore().favourites, data.results] });
-                } catch (error) {
-                    console.error("Error adding to favourites:", error);
-                }
-            },
-            getFavourites: async () => {
-                const token = localStorage.getItem('token');
-                const uri = process.env.BACKEND_URL + '/api/favourites';
-                const options = {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                };
-                try {
-                    const response = await fetch(uri, options);
-                    const data = await response.json();
+					setStore({ favourites: [...getStore().favourites, data.results] });
+				} catch (error) {
+					console.error("Error adding to favourites:", error);
+				}
+			},
+			getFavourites: async () => {
+				const token = localStorage.getItem('token');
+				const uri = process.env.BACKEND_URL + '/api/favourites';
+				const options = {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`
+					}
+				};
+				try {
+					const response = await fetch(uri, options);
+					const data = await response.json();
 					console.log(data.results)
-                    setStore({ favouritesUser: data.results });
-                } catch (error) {
-                    console.error("Error fetching favourites:", error);
-                }
-            },
-			
-			setCurrentUser: (user) =>{setStore({currentUser:user})},
-			setIsLoged: (isLogin) => {setStore({ isLoged: isLogin })},
+					setStore({ favouritesUser: data.results });
+				} catch (error) {
+					console.error("Error fetching favourites:", error);
+				}
+			},
+
+			setCurrentUser: (user) => { setStore({ currentUser: user }) },
+			setIsLoged: (isLogin) => { setStore({ isLoged: isLogin }) },
 			setcurrentGamesPc: (gamesPc) => { setStore({ currentGamesPc: gamesPc }) },
 		}
 	};

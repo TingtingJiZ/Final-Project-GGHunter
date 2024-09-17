@@ -885,7 +885,7 @@ def load_data_from_apiReal_store():
     data = request.get_json()
     response_body = {
         'results': [],
-        'message': "Usuarios añadidos exitosamente"
+        'message': "Precios API"
     }
 
     print(data)
