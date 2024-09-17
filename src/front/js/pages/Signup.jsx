@@ -71,7 +71,7 @@ export const Signup = ({ show, handleClose }) => {
         console.log(data);
         navigate("/")
         handleClose();
-        
+
         // Lógica de registro
     };
     return (
@@ -90,14 +90,14 @@ export const Signup = ({ show, handleClose }) => {
                 <Modal.Title>Crear una cuenta</Modal.Title>
             </Modal.Header>
             <Modal.Body className="custom-gradient">
+                <Form.Label className="d-block text-white mb-3 signup-grey fs-6">
+                    ¡Consulta el precio de tu juegos favoritos en varias tiendas!
+                </Form.Label>
                 <Row className="justify-content-md-center mt-4 mb-3 custom-gradient">
                     <Col xs={12}>
                         <Card>
                             <Card.Body className="custom-gradient">
                                 <Form onSubmit={handleRegister}>
-                                    <Form.Label className="d-block text-white mb-3 signup-grey fs-6">
-                                        ¡Consulta el precio de tu juegos favoritos en varias tiendas!
-                                    </Form.Label>
                                     <Form.Group className="mb-3" controlId="formBasicName">
                                         <Form.Label>Nombre:</Form.Label>
                                         <Form.Control type="text" placeholder="" value={userAlias} onChange={(event) => setUserAlias(event.target.value)} />

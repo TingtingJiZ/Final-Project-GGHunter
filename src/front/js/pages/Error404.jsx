@@ -15,7 +15,7 @@ export const Error404 = () => {
             </section>
             <div className="link-container p-5">
             <p className="d-flex justify-content-center align-items-center fs-4"><b>Ooh no...</b> No pudimos encontrar lo que buscas.</p>
-                <a className="more-link" onClick={() => navigate('/')}>Go to home!</a>
+                <a className="more-link" onClick={() => navigate('/')}>Vuelve al inicio</a>
             </div>
         </div>
     )

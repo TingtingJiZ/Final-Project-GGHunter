@@ -6,11 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import logo from '../../img/Recurso 1_png.png';
+
 export const Profile = () => {
     const { actions, store } = useContext(Context);
     const handleImgError = (event) => {
         event.target.src = Gg_default;
     };
+    const isAdmin = store.currentUser?.rol === "admin";
     return (
         <>
             {store.currentUser == null ?
@@ -31,29 +33,69 @@ export const Profile = () => {
                             <h1 className="fw-bold fs-1">¡Hola {store.currentUser.alias}!</h1>
                             <div className="card-row">
                                 <Container>
-                                        <Card.Img className="mt-1" src={logo} alt="Logo" style={{ height: '90px', width: '85px' }} />
+                                    <Card.Img className="mt-1" src={logo} alt="Logo" style={{ height: '90px', width: '85px' }} />
                                     <Row className="align-items-center">
-            
-                                        <div className="div-profile" style={{ width: "100%", maxWidth: "18rem" }}>
-                                            <Card.Body className="fs-3">
-                                                <span><Card.Text><strong>Nombre:</strong> <br/>{store.currentUser.alias}</Card.Text></span>
-                                                <span><Card.Text><strong>Apellidos:</strong><br/> {store.currentUser.lastname}</Card.Text></span>
-                                                <Card.Text><strong>Email:</strong><br/> {store.currentUser.email}</Card.Text>
+                                        <div className="container div-profile my-4">
+                                            <Card.Body className="fs-3 card-row">
+                                                <div className="row gy-3">
+                                                    <div className="cols-12 cols-md-4 cols-xl-1">
+                                                        <Card.Text><strong>Nombre:</strong> <br />{store.currentUser.alias}</Card.Text>
+                                                    </div>
+                                                    <div className="cols-12 cols-md-4 cols-xl-1">
+                                                        <Card.Text><strong>Apellidos:</strong><br />{store.currentUser.lastname}</Card.Text>
+                                                    </div>
+                                                    <div className="cols-12 cols-md-4 cols-xl-1">
+                                                        <Card.Text><strong>Email:</strong><br />{store.currentUser.email}</Card.Text>
+                                                    </div>
+                                                </div>
                                             </Card.Body>
                                         </div>
                                         <ul className="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                                            {/* Botón visible para todos */}
                                             <li className="nav-item" role="presentation">
-                                                <button className="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                                                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                                <button
+                                                    className="nav-link active"
+                                                    id="pills-home-tab"
+                                                    data-bs-toggle="pill"
+                                                    data-bs-target="#pills-home"
+                                                    type="button"
+                                                    role="tab"
+                                                    aria-controls="pills-home"
+                                                    aria-selected="true"
+                                                >
                                                     <FontAwesomeIcon icon={faUser} style={{ color: "#2d0bce" }} />
                                                 </button>
                                             </li>
                                             <li className="nav-item" role="presentation">
-                                                <button className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                                                    type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                <button
+                                                    className="nav-link"
+                                                    id="pills-profile-tab"
+                                                    data-bs-toggle="pill"
+                                                    data-bs-target="#pills-profile"
+                                                    type="button"
+                                                    role="tab"
+                                                    aria-controls="pills-profile"
+                                                    aria-selected="false"
+                                                >
                                                     <FontAwesomeIcon icon={faStar} />
                                                 </button>
                                             </li>
+                                            {isAdmin ? (
+                                                <li className="nav-item" role="presentation">
+                                                    <button
+                                                        className="nav-link"
+                                                        id="pills-admin-tab"
+                                                        data-bs-toggle="pill"
+                                                        data-bs-target="#pills-admin"
+                                                        type="button"
+                                                        role="tab"
+                                                        aria-controls="pills-admin"
+                                                        aria-selected="false"
+                                                    >
+                                                        <i className="fa-solid fa-user-lock"></i>
+                                                    </button>
+                                                </li>
+                                            ) : null}
                                         </ul>
                                     </Row>
                                 </Container>
