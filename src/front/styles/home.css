@@ -1,7 +1,11 @@
 .div-profile {
-    margin-left: 100px;
-    margin-top: 50px;
-
+    margin-top: 30px;
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
+    height: 30%;
+    width: 55%;
+    margin-right: 10px;
+    margin-left: 10%;
+    margin-bottom: 5%;
 }
 .socials {
     list-style: none;
