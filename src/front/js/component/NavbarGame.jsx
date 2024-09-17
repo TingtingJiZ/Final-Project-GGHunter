@@ -144,10 +144,10 @@ export const NavbarGame = () => {
 								{store.currentUser === null ? (
 									<>
 										<NavDropdown.Item as="div">
-											<a className="a-navbar" onClick={login} variant="outline-success">Login</a>
+											<a className="a-navbar" onClick={login} variant="outline-success">Entrar</a>
 										</NavDropdown.Item>
 										<NavDropdown.Item as="div">
-											<a className="a-navbar" onClick={handleShowSignup} variant="outline-success">Registrar</a>
+											<a className="a-navbar" onClick={handleShowSignup} variant="outline-success">Regístrate</a>
 										</NavDropdown.Item>
 									</>
 								) : (
