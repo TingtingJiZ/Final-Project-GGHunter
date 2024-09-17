@@ -28,7 +28,7 @@ export const NavbarGame = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const handleShowSignup = () => setshowSignup(true); // Abre el modal
-    const handleCloseSignup = () => setshowSignup(false); // Cierra el modal
+	const handleCloseSignup = () => setshowSignup(false); // Cierra el modal
 	const handleClick = (Platform) => {
 		console.log("Has pinchao la opción " + Platform);
 	}
@@ -75,7 +75,6 @@ export const NavbarGame = () => {
 		//actions.setAlert({ visible: true, back: 'info', text: data.message })
 		// Me voy al dashboard
 		handleClose();
-		navigate('/profile')
 	};
 
 	const login = () => {
@@ -105,34 +104,29 @@ export const NavbarGame = () => {
 	}
 	return (
 		<>
-			<Navbar expand="lg" className="navbarGame" data-bs-theme="dark">
-				<Container fluid>
+			<Navbar expand="lg" className="navbarGame" data-bs-theme="dark" style={{ position: 'relative' }}>
+				<Container fluid className="d-flex justify-content-between align-items-center">
 					<Navbar.Brand as={Link} to="/"><img
 						src={logo}
 						alt="Logo"
-						style={{ height: '55px' }} // Ajusta el tamaño según sea necesario
+						style={{ height: '55px' }}
 					/></Navbar.Brand>
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
-						<NavDropdown
-							title="Plataformas"
-							id={`offcanvasNavbarDropdown-expand`}
-							className="mx-5 d-flex justify-content-center down text-white"
-						>
-							<NavDropdown.Item as="div">
-								<Link to="/pcgames" className="dropdown-item">PC</Link>
-							</NavDropdown.Item>
-							<NavDropdown.Item as="div">
-								<Link to="/xbox" className="dropdown-item">Xbox</Link>
-							</NavDropdown.Item>
-							<NavDropdown.Item as="div">
-								<Link to="/playstation" className="dropdown-item">PlayStation</Link>
-							</NavDropdown.Item>
-							<NavDropdown.Item as="div">
-								<Link to="/nintendo" className="dropdown-item">Nintendo</Link>
-							</NavDropdown.Item>
-						</NavDropdown>
-						<Navbar.Brand className="title-navbar ml-5 fw-bold text-white">G G - H u n t e r</Navbar.Brand>
+					<Navbar.Toggle aria-controls="basic-navbar-nav" className="ms-auto" />
+					<Navbar.Brand className="fw-bold text-white text-center mx-auto gg-hunter">
+						G G - H u n t e r
+					</Navbar.Brand>
+					<Navbar.Collapse id="basic-navbar-nav" className="order-lg-0">
+						<Nav className="me-auto">
+							<NavDropdown
+								title="Plataformas"
+								id={`offcanvasNavbarDropdown-expand`}
+								className="mx-5 d-flex justify-content-center down text-white">
+								<NavDropdown.Item as="div"><Link to="/pcgames" className="dropdown-item">PC</Link></NavDropdown.Item>
+								<NavDropdown.Item as="div"><Link to="/xbox" className="dropdown-item">Xbox</Link></NavDropdown.Item>
+								<NavDropdown.Item as="div"><Link to="/playstation" className="dropdown-item">PlayStation</Link></NavDropdown.Item>
+								<NavDropdown.Item as="div"><Link to="/nintendo" className="dropdown-item">Nintendo</Link></NavDropdown.Item>
+							</NavDropdown>
+						</Nav>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
 								className="mx-5 d-flex justify-content-center down"
@@ -142,7 +136,7 @@ export const NavbarGame = () => {
 										size="xl"
 										style={{
 											color: store.currentUser === null ? "#2d0bce" : "#cb3234",
-											
+
 										}}
 									/>
 								}
@@ -158,12 +152,12 @@ export const NavbarGame = () => {
 									</>
 								) : (
 									<>
-									<NavDropdown.Item as="div">
-										<a className="a-navbar" onClick={handleProfile} variant="outline-success">Tu perfil</a>
-									</NavDropdown.Item>
-									<NavDropdown.Item as="div">
-										<a className="a-navbar" onClick={handleLogout} variant="outline-success">LogOut</a>
-									</NavDropdown.Item>
+										<NavDropdown.Item as="div">
+											<a className="a-navbar" onClick={handleProfile} variant="outline-success">Tu perfil</a>
+										</NavDropdown.Item>
+										<NavDropdown.Item as="div">
+											<a className="a-navbar" onClick={handleLogout} variant="outline-success">Cerrar Sessión</a>
+										</NavDropdown.Item>
 									</>
 								)}
 							</NavDropdown>
@@ -179,8 +173,7 @@ export const NavbarGame = () => {
 				aria-labelledby="contained-modal-title-vcenter"
 				centered
 				keyboard={false}
-				className="card-register"
-			>
+				className="card-register">
 				<Modal.Header closeButton className="custom-gradient">
 					<Modal.Title><strong>Login</strong></Modal.Title>
 				</Modal.Header>

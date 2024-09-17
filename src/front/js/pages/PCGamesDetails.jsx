@@ -17,7 +17,7 @@ export const PcGameDetails = () => {
     }
 
     useEffect(() => {
-        descriptionPC();
+        //descriptionPC();
         const path = window.location.pathname;
         if (path.includes('/playstation')) {
             setActivePlatform('playstation');

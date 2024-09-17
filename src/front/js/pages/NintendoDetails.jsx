@@ -17,7 +17,7 @@ export const NintendoDetails = () => {
     }
 
     useEffect(() => {
-        descriptionPC();
+        //descriptionPC();
         const path = window.location.pathname;
         if (path.includes('/nintendo')) {
             setActivePlatform('nintendo');

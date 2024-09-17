@@ -17,7 +17,7 @@ export const XboxDetails = () => {
     }
 
     useEffect(() => {
-        descriptionXbox();
+        //descriptionXbox();
         const path = window.location.pathname;
         if (path.includes('/playstation')) {
             setActivePlatform('playstation');

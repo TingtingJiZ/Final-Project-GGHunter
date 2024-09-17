@@ -297,15 +297,20 @@ def handle_comment(comment_id):
         response_body["results"] = comment.serialize()
         return response_body, 200
     if request.method == "DELETE":
-        delete_comment = db.session.execute(db.select(Comments).where(Comments.id == comment_id)).scalar()
+        # Obtener el comentario que pertenece al usuario autenticado
+        delete_comment = db.session.execute(
+            db.select(Comments).where(Comments.id == comment_id, Comments.user_id == current_user["user_id"])  # Asegurar que el usuario sea el propietario
+        ).scalar()
+
         if not delete_comment:
-            response_body["message"] = "Comment to delete not found"
+            response_body["message"] = "Comment to delete not found or you do not have permission"
             response_body["results"] = {}
             return response_body, 404
+
         db.session.delete(delete_comment)
         db.session.commit()
-        response_body["message"] = f"Comment deleted"
-        return jsonify(response_body), 201
+        response_body["message"] = "Comment deleted"
+        return jsonify(response_body), 200
     if request.method == "PUT":
         data = request.get_json()
         game_id = data.get("game_id", None)
@@ -335,6 +340,7 @@ def handele_games_comments(game_id):
         db.select(Comments, Users).join(Users, Comments.user_id == Users.id).where(Comments.game_id == game_id)
     ).all()
     results = [{
+        "id": row.Comments.id,
         "game_id": row.Comments.game_id,
         "body": row.Comments.body,
         "user_alias": row.Users.alias,

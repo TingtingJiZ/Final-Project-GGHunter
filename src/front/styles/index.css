@@ -175,17 +175,17 @@ h1 {
 }
 
 .nav-link.active.pc {
-    color: #4CAF50; 
+    color: #373a37; 
     font-weight: bold; 
 }
 
 .nav-link.active.playstation {
-    color: #3F51B5; 
+    color: #6671b3; 
     font-weight: bold;
 }
 
 .nav-link.active.nintendo {
-    color: #E53935;
+    color: #a54c4b;
     font-weight: bold;
 }
 
@@ -195,7 +195,7 @@ h1 {
 }
 
 .nav-link.pc {
-    color: #4CAF50; 
+    color: #3b3e3b; 
 }
 
 .nav-link.playstation {

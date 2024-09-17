@@ -1,60 +1,63 @@
 footer {
-    color: #fff;
+    background-color: #5C5C5C;
     padding: 40px 0;
     text-align: center;
     position: relative;
     bottom: 0;
     width: 100%;
     margin-top: auto;
-    background-color: #333;
-    margin-block: 30px;
 }
 
 .div-footer {
     width: 180px;
-    height: 250px;
+    height: auto; 
+    margin-bottom: 20px;
 }
+
 .footer-body {
     display: flex;
     justify-content: space-around;
-    background-color: #424242;
+    background-color: #313131;
     font-family: 'Roboto';
-    font-size: 50px;
     padding: 30px;
+    flex-wrap: wrap;
 }
 
 .footer-body div {
     flex: 1;
-    margin: 0 10px;
+    margin: 10px; 
     background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
+    padding: 20px;
+    min-width: 250px;
+    box-sizing: border-box;
 }
 
 .title-footer {
-    padding: 20px;
     font-size: 20px;
-    margin-top: 30px;
+    margin-top: 20px;
     font-weight: bold;
 }
 
 .p-footer {
-    font-size: 20px;
+    font-size: 16px;
     padding: 5px;
 }
 
 .icon-discord {
-    font-size: 50px;
-    background-color: transparent;
+    font-size: 40px; 
     border: none;
     cursor: pointer;
+    color: #3540ba;
 }
 
 .icon-social {
-    color: rgb(0, 0, 0);
+    color: rgba(47, 46, 46, 0.668);
     border: none;
     cursor: pointer;
-    font-size: 40px;
-    margin-right: 35px;
+    font-size: 35px; 
+    margin-right: 20px;
 }
+
 .footer-content h3 {
     font-size: 24px;
     margin-bottom: 20px;
@@ -75,7 +78,3 @@ footer {
     font-size: 14px;
 }
 
-.footer-bottom span {
-    color: #e44d26;
-    font-weight: bold;
-}
