@@ -513,33 +513,47 @@ def handle_profile():
 @jwt_required()
 def handle_favourites():
     current_user = get_jwt_identity()
+    # Recuperar el usuario actual basado en el JWT
     user = db.session.execute(db.select(Users).where(Users.id == current_user['user_id'])).scalar()
-
+    
     if not user:
         response_body = {'results': {}, 'message': "User not found"}
         return jsonify(response_body), 404
 
+    # GET: Obtener los juegos favoritos del usuario
     if request.method == 'GET':
-        # Obtener los juegos favoritos del usuario
+        # Obtener los favoritos del usuario
         favourites = Favorites.query.filter_by(user_id=user.id).all()
+        
+        # Obtener la información detallada de cada juego
+        detailed_favourites = []
+        for favorite in favourites:
+            game = db.session.execute(db.select(Games).where(Games.id == favorite.game_id)).scalar()
+            if game:
+                detailed_favourites.append(game.serialize())  # Asumiendo que la clase Games tiene un método serialize()
+
         response_body = {
-            'results': [favorite.serialize() for favorite in favourites],
+            'results': detailed_favourites,
             'message': "User favourites retrieved successfully"
         }
         return jsonify(response_body), 200
-
+    # POST: Añadir un juego a los favoritos del usuario
     if request.method == 'POST':
         data = request.get_json()
         game_id = data.get('game_id')
-        """ user_id = data.get('user_id') """
-        existing_favorite = db.session.execute(db.select(Users).where(user_id=user.id, game_id=game_id)).scalar()
+        
+        if not game_id:
+            response_body = {'results': {}, 'message': "game_id is required"}
+            return jsonify(response_body), 400
 
+        # Verificar si el juego ya está en favoritos
+        existing_favorite = Favorites.query.filter_by(user_id=user.id, game_id=game_id).first()
         if existing_favorite:
             response_body = {'results': {}, 'message': "Game already in favourites"}
             return jsonify(response_body), 400
 
-        new_favorite = Favorites(user_id=user.id,
-                                game_id=game_id)
+        # Añadir el nuevo favorito
+        new_favorite = Favorites(user_id=user.id, game_id=game_id)
         db.session.add(new_favorite)
         db.session.commit()
 
@@ -549,17 +563,25 @@ def handle_favourites():
         }
         return jsonify(response_body), 201
 
+    # DELETE: Eliminar un juego de los favoritos del usuario
     if request.method == 'DELETE':
         data = request.get_json()
         game_id = data.get('game_id')
-        favorite = Favorites.query.filter_by(user_id=user.id, game_id=game_id).first()
 
+        if not game_id:
+            response_body = {'results': {}, 'message': "game_id is required"}
+            return jsonify(response_body), 400
+
+        # Buscar el favorito para eliminar
+        favorite = Favorites.query.filter_by(user_id=user.id, game_id=game_id).first()
         if not favorite:
             response_body = {'results': {}, 'message': "Game not found in favourites"}
             return jsonify(response_body), 404
 
+        # Eliminar el favorito
         db.session.delete(favorite)
         db.session.commit()
+
         response_body = {'results': {}, 'message': "Game removed from favourites successfully"}
         return jsonify(response_body), 200
 

@@ -324,7 +324,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const dataToSend = {
                     "game_id": gameId,
                 };
-                const uri = `${process.env.URIBACK}/api/favorites`;
+                const uri = `${process.env.URIBACK}/api/favourites`;
                 const options = {
                     method: 'POST',
                     body: JSON.stringify(dataToSend),
@@ -333,7 +333,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         'Authorization': `Bearer ${token}`
                     }
                 };
-                console.log(dataToSend, localStorage.getItem('access_token'));
+                console.log(dataToSend, localStorage.getItem('token'));
                 try {
                     const response = await fetch(uri, options);
                     if (!response.ok) {
@@ -366,6 +366,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 try {
                     const response = await fetch(uri, options);
                     const data = await response.json();
+					console.log(data.results)
                     setStore({ favourites: data.results });
                 } catch (error) {
                     console.error("Error fetching favourites:", error);

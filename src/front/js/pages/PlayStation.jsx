@@ -14,6 +14,10 @@ export const PlayStation = () => {
         await actions.getPlaystationDetailsId(id)
         navigate("/playstationdetails")
     }
+
+    const handleAddToFavourites = async (gameId) => {
+        await actions.addToFavourites(gameId);
+    };
     useEffect(() => {
         playstationData()
     },[])
@@ -56,7 +60,7 @@ export const PlayStation = () => {
                             <footer className="p-3 mb-1 d-flex justify-content-between align-items-center" style={{ background: "transparent", flexShrink: 0 }}>
                                 <strong>€{item.game_characteristics[1].store.price}</strong>
                                 <span><button onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Info</button>
-                                <button onClick={() => handleAddToFavourites(item.game_id)} className="btn btn-secondary">
+                                <button onClick={() => handleAddToFavourites(item.id)} className="btn btn-secondary">
                                 <i className="fa-regular fa-heart"></i>
                                 </button></span>
                             </footer>

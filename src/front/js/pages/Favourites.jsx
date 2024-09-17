@@ -6,6 +6,7 @@ export const Favourites = () => {
 
     useEffect(() => {
         actions.getFavourites();
+        console.log(store.favourites)
     }, []);
 
     return (
