@@ -11,6 +11,8 @@ export const HomePage = () => {
     const navigate = useNavigate();
 
     const handlePcDetails = async (id) => {
+        console.log(id);
+        
         await actions.getPcGameDetailsId(id);
         navigate("/pcgamedetails");
     };

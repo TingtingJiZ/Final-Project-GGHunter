@@ -128,7 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results[0]);
+				//console.log(data.results);
 				setStore({ currentPC: data.results });
 			},
       		createComments: async (comments) => {
