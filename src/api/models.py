@@ -189,6 +189,7 @@ class GameCharacteristics(db.Model):
                 "recomended": self.recomended,
                 "store": self.store.serialize() if self.store else None}
 
+
 class Platforms(db.Model):
     __tablename__ = "platforms"
     id = db.Column(db.Integer, primary_key=True)

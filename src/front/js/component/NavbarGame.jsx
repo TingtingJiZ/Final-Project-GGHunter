@@ -27,20 +27,17 @@ export const NavbarGame = () => {
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-	const handleShowSignup = () => setshowSignup(true); // Abre el modal
-	const handleCloseSignup = () => setshowSignup(false); // Cierra el modal
-	const handleClick = (Platform) => {
-		console.log("Has pinchao la opción " + Platform);
-	}
+	const handleShowSignup = () => setshowSignup(true);
+	const handleCloseSignup = () => setshowSignup(false);
 
 	const handleLogin = async (event) => {
 		event.preventDefault();
-		console.log(userLogin, userPassword);
+		//console.log(userLogin, userPassword);
 		const dataToSend = {
 			"email": userLogin,
 			"password": userPassword
 		};
-		// 1. fetch al /api/login enviando en el body el dataToSend
+
 		const uri = process.env.BACKEND_URL + '/api/login'
 		const options = {
 			method: 'POST',
@@ -55,25 +52,15 @@ export const NavbarGame = () => {
 			console.log('Error: ', response.status, response.statusText);
 			if (response.status == 401) {
 				const data = await response.json()
-				// let alert = {
-				//     visible: true,
-				//     back: 'danger',
-				//     text: data.message
-				// }
-				// actions.setAlert(alert)
 				console.log("Error: " + response.status + response.statusText)
 			}
 			return
 		}
 		const data = await response.json()
-		// Almaceno los datos en localStorage y en flux (store)
 		localStorage.setItem("token", data.message);
 		localStorage.setItem("user", JSON.stringify(data.results));
 		actions.setCurrentUser(data.results);
 		actions.setIsLoged(true)
-		//actions.token(data.access_token)
-		//actions.setAlert({ visible: true, back: 'info', text: data.message })
-		// Me voy al dashboard
 		handleClose();
 	};
 
@@ -85,15 +72,10 @@ export const NavbarGame = () => {
 	}
 	const handleLogout = () => {
 		try {
-			// Eliminar items específicos de localStorage
 			localStorage.removeItem("token");
 			localStorage.removeItem("user");
-
-			// Limpieza del estado global
 			actions.setIsLoged(false);
 			actions.setCurrentUser(null);
-			//console.log("Usuario deslogado de la web");
-			// Redirigir al usuario a la página de inicio
 		} catch (error) {
 			console.error('Error al intentar desloguear:', error);
 		}
@@ -125,7 +107,6 @@ export const NavbarGame = () => {
 										size="xl"
 										style={{
 											color: store.currentUser === null ? "#353ab8" : "#b52639",
-
 										}}
 									/>
 								}

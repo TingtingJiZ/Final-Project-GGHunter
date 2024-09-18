@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext.js";
-import { Row,Alert } from 'react-bootstrap';
+import { Row, Alert } from 'react-bootstrap';
 import "../../styles/Comments.css";
 
 export const CommentsGames = () => {
@@ -38,13 +38,13 @@ export const CommentsGames = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Añadir el game_id al formData sin sobrescribir el objeto
+
         const saved = localStorage.getItem("User");
         const user = JSON.parse(saved);
         const updatedFormData = {
-            body: formData.commentsPerGame,  // El cuerpo del comentario
-            game_id: store.currentPC.id,     // ID del juego
-            user_id: store.currentUser.id   // ID del usuario que comenta
+            body: formData.commentsPerGame,
+            game_id: store.currentPC.id,
+            user_id: store.currentUser.id
         };
         actions.createComments(updatedFormData);
         setFormData({ commentsPerGame: "" });
@@ -55,9 +55,9 @@ export const CommentsGames = () => {
         try {
             const response = await actions.deleteComment(delete_comment);
             if (response.ok) {
-                console.log("Comentario eliminado");
-                setErrorMessage(""); 
-                actions.getCommentsGames(store.currentPC.id);  
+                //Console.log("Comentario eliminado");
+                setErrorMessage("");
+                actions.getCommentsGames(store.currentPC.id);
             } else {
                 setErrorMessage(response.message);
             }
@@ -75,7 +75,7 @@ export const CommentsGames = () => {
                     <div>
                         <h4>Tu reseña:</h4>
                         <textarea
-                            name="commentsPerGame"  // Este nombre debe coincidir con el campo del estado
+                            name="commentsPerGame"
                             value={formData.commentsPerGame}
                             onChange={handleChange}
                             rows="4"

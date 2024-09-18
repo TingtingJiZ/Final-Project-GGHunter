@@ -12,13 +12,13 @@ export const PCGames = () => {
     };
 
     const isFavourite = (gameId) => {
-        if(store.favouritesUser){
+        if (store.favouritesUser) {
             const yes = store.favouritesUser.some(fav => fav.id === gameId);
-            console.log(yes)
-            return yes ? true : false 
+            //Console.log(yes)
+            return yes ? true : false
         }
     };
-    
+
     const handlePcDetails = async (id) => {
         await actions.getPcGameDetailsId(id);
         navigate("/pcgamedetails");
@@ -26,17 +26,17 @@ export const PCGames = () => {
 
     const handleAddToFavourites = async (gameId) => {
         if (isFavourite(gameId)) {
-            await actions.removeFromFavourites(gameId); // Asume que existe una acción para eliminar favoritos
+            await actions.removeFromFavourites(gameId);
         } else {
             await actions.addToFavourites(gameId);
         }
-        await actions.getFavourites(); // Actualizar la lista de favoritos después de cada acción
+        await actions.getFavourites();
     };
 
     useEffect(() => {
         pcData();
         if (isLoged) {
-            actions.getFavourites(); // Obtener favoritos si el usuario está logueado
+            actions.getFavourites();
         }
     }, [isLoged]);
 
@@ -57,8 +57,8 @@ export const PCGames = () => {
                                     <button onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Info</button>
 
                                     {isLoged ? (
-                                        <button 
-                                            onClick={() => handleAddToFavourites(item.id)} 
+                                        <button
+                                            onClick={() => handleAddToFavourites(item.id)}
                                             className={`btn btn-secondary favourite-btn ${isFavourite(item.id) ? 'favourited' : ''}`}>
                                             <i className={`fa fa-heart ${isFavourite(item.id) ? 'text-danger' : ''}`}></i>
                                         </button>

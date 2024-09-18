@@ -41,7 +41,7 @@ def handle_users():
 def handle_singup():
     response_body = {}
     data = request.json
-    print(data)
+    #print(data)
     email = data.get("email", None).lower()
     password = data.get("password", None)
     existing_user = db.session.execute(db.select(Users).where(Users.email == email)).scalar()
@@ -250,12 +250,12 @@ def handle_game(game_id):
 @api.route("/comments", methods=["GET", "POST"])
 @jwt_required()
 def handle_comments():
-    print("*************")
+    #print("*************")
     response_body = {}
     current_user = get_jwt_identity()
-    print(current_user)
+    #print(current_user)
     user = db.session.execute(db.select(Users).where(Users.id == current_user["user_id"])).scalar()
-    print(user)
+    #print(user)
     if not user:
         response_body["results"] = {}
         response_body["message"] = "User not found"
@@ -264,11 +264,11 @@ def handle_comments():
         data = request.json
         comment_text = data.get("body")
         game_id = data.get("game_id")
-        print(comment_text, game_id)
+        #print(comment_text, game_id)
         if not comment_text:
             response_body["message"] = "Missing comment"
             return jsonify(response_body), 400
-        print("insertando")
+        #print("insertando")
         new_comment = Comments(user_id=current_user["user_id"], body=comment_text, game_id=game_id)
         db.session.add(new_comment)
         db.session.commit()
@@ -334,7 +334,7 @@ def handle_comment(comment_id):
 
 @api.route("/games/<int:game_id>/comments", methods=["GET"])
 def handele_games_comments(game_id):
-    print(game_id)
+    #print(game_id)
     response_body = {}
     comments = db.session.execute(
         db.select(Comments, Users).join(Users, Comments.user_id == Users.id).where(Comments.game_id == game_id)
@@ -346,7 +346,7 @@ def handele_games_comments(game_id):
         "user_alias": row.Users.alias,
         "created_at": row.Comments.created_at
     } for row in comments]
-    print(results)
+    #print(results)
     response_body = {'results': results, 'message': "Los comentarios"}
     return response_body, 200
 
@@ -598,7 +598,7 @@ def handle_media(game_id):
     if request.method == "GET":
         list_media = db.session.execute(db.select(Media)).scalars()
         rows = [row.serialize() for row in list_media]
-        print(rows)
+        #print(rows)
         response_body['message'] = f"List of the game {game_id}"
         response_body['result'] = rows
         return jsonify(response_body), 200
@@ -632,7 +632,7 @@ def load_data_from_api_user():
 
     with open(json_path, 'r', encoding='utf-8') as json_file:
         data = json.load(json_file)
-        print(data)
+        #print(data)
         
         for row in data:
             email = row['email']
@@ -811,7 +811,7 @@ def load_data_from_api_platforms():
         for row in data:
             id = row['id']
             name = row['name']
-            print(f"El id {id} el nombre {name}")
+            #print(f"El id {id} el nombre {name}")
             existing_store = Platforms.query.get(id)
             if not existing_store:
                 platform = Platforms(
@@ -888,7 +888,7 @@ def load_data_from_apiReal_store():
         'message': "Precios API"
     }
 
-    print(data)
+    #print(data)
     if data is None:
         return jsonify({"message": "No data provided"}), 400
     
@@ -934,16 +934,16 @@ def load_data_from_apiReal_store():
                     db.session.add(media)
                     db.session.commit()
             else:
-                print(f"No existe el juego con id {game_id}")
+                #print(f"No existe el juego con id {game_id}")
                 data = {
                     "message": f"El juego con id {game_id} no existe"
                 }
         except Exception as e:
-            print(f"Hay un problema de conexión")
+            pass
+            #print(f"Hay un problema de conexión")
     response_body['results'].append({
         "datos": data,
         'message': "Resultados de la operación"
     })
 
     return response_body, 200
-

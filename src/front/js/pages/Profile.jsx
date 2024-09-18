@@ -135,7 +135,7 @@ export const Profile = () => {
                                 aria-selected={activeTab === "favourites"}
                                 onClick={() => setActiveTab("favourites")}
                             >
-                                <FontAwesomeIcon icon={faStar} />
+                                <FontAwesomeIcon icon={faStar} style={{ color: "#2d0bce" }} />
                             </button>
                         </li>
                         {isAdmin ? (
@@ -149,7 +149,7 @@ export const Profile = () => {
                                     aria-selected={activeTab === "admin"}
                                     onClick={() => setActiveTab("admin")}
                                 >
-                                    <i className="fa-solid fa-user-lock"></i>
+                                    <i className="fa-solid fa-user-lock" style={{ color: "#2d0bce" }}></i>
                                 </button>
                             </li>
                         ) : null}
