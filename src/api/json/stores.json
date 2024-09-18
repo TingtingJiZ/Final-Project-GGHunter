@@ -4,147 +4,31 @@
             "size_mb": 333,
             "minimun": {},
             "recomended": {},
-            "game_id": 1,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/1942280/Brotato/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 3.49
-        },
-        {
-            "size_mb": 263,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 2,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/751780/Forager/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 19.99
-        },
-        {
-            "size_mb": 14310,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 3,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/1295510/DRAGON_QUEST_XI_S_Ecos_de_un_pasado_perdido__Edicion_definitiva/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 39.99
-        }
-    ],
-    [
-        {
-            "size_mb": 7636,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 4,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/346110/ARK_Survival_Evolved/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 14.79
-        }
-    ],
-    [
-        {
-            "size_mb": 1264,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 5,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/945360/Among_Us/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 3.14
-        }
-    ],
-    [
-        {
-            "size_mb": 5423,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 6,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/367520/Hollow_Knight/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 14.79
-        }
-    ],
-    [
-        {
-            "size_mb": 106,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 7,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/1135690/Unpacking/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 19.99
-        }
-    ],
-    [
-        {
-            "size_mb": 15264,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 8,
-            "platform_id": 1,
-            "url": "https://www.minecraft.net/es-es/store/minecraft-deluxe-collection-pc",
-            "home_page": "https://www.minecraft.net/es-es",
-            "price": 29.99
-        }
-    ],
-    [
-        {
-            "size_mb": 15264,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 9,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/504230/Celeste/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 19.50
-        }
-    ],
-    [
-        {
-            "size_mb": 4431,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 10,
-            "platform_id": 1,
-            "url": "https://store.steampowered.com/app/1290000/PowerWash_Simulator/",
-            "home_page": "https://store.steampowered.com/",
-            "price": 24.99
-        }
-    ],
-    [
-        {
-            "size_mb": 333,
-            "minimun": {},
-            "recomended": {},
-            "game_id": 1,
+            "game_id": 251420,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Programas-descargables-Nintendo-Switch/Brotato-2373736.html",
-            "home_page": "https://store.steampowered.com/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 4.99
         },
         {
             "size_mb": 263,
             "minimun": {},
             "recomended": {},
-            "game_id": 2,
+            "game_id": 194160,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Programas-descargables-Nintendo-Switch/Forager-1501105.html",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 19.99
         },
         {
             "size_mb": 14310,
             "minimun": {},
             "recomended": {},
-            "game_id": 3,
+            "game_id": 234902,
             "platform_id": 2,
-            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/DRAGON-QUEST-XI-S-Ecos-de-un-pasado-perdido-Edicion-definitiva-1514406.html",
-            "home_page": "https://www.nintendo.com/es-es/",
-            "price": 59.99
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Minecraft-Dungeons-1749059.html",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
+            "price": 19.99
         }
     ],
     [
@@ -152,10 +36,10 @@
             "size_mb": 7636,
             "minimun": {},
             "recomended": {},
-            "game_id": 4,
+            "game_id": 144209,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/ARK-Survival-Evolved-1480530.html",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 19.99
         }
     ],
@@ -164,10 +48,10 @@
             "size_mb": 1264,
             "minimun": {},
             "recomended": {},
-            "game_id": 5,
+            "game_id": 195104,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Programas-descargables-Nintendo-Switch/Among-Us-1882965.html",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 4.29
         }
     ],
@@ -176,10 +60,10 @@
             "size_mb": 5423,
             "minimun": {},
             "recomended": {},
-            "game_id": 6,
+            "game_id": 165363,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Programas-descargables-Nintendo-Switch/Hollow-Knight-1125772.html?srsltid=AfmBOoqCSxBCGmW7M1Zo8M0ZKi9sYvAEDjhgsjx_Dtk-1V16q3Gb5l5h",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 14.99
         }
     ],
@@ -188,10 +72,10 @@
             "size_mb": 106,
             "minimun": {},
             "recomended": {},
-            "game_id": 7,
+            "game_id": 236626,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Programas-descargables-Nintendo-Switch/Unpacking-2053335.html",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 39.9
         }
     ],
@@ -200,10 +84,10 @@
             "size_mb": 15264,
             "minimun": {},
             "recomended": {},
-            "game_id": 8,
+            "game_id": 258010,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Minecraft-1386505.html",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 29.99
         }
     ],
@@ -212,10 +96,10 @@
             "size_mb": 15264,
             "minimun": {},
             "recomended": {},
-            "game_id": 9,
+            "game_id": 177485,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Programas-descargables-Nintendo-Switch/Celeste-1207064.html",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 19.99
         }
     ],
@@ -224,11 +108,33 @@
             "size_mb": 4431,
             "minimun": {},
             "recomended": {},
-            "game_id": 10,
+            "game_id": 229961,
             "platform_id": 2,
             "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Super-Mario-Bros-2404150.html",
-            "home_page": "https://www.nintendo.com/es-es/",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
             "price": 24.99
+        }
+    ],[
+        {
+            "size_mb": 4431,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 188278,
+            "platform_id": 2,
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Overcooked-2-1388792.html",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
+            "price": 24.99
+        }
+    ],[
+        {
+            "size_mb": 4431,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 212038,
+            "platform_id": 2,
+            "url": "https://www.nintendo.com/es-es/Juegos/Juegos-de-Nintendo-Switch/Moving-Out-1742758.html?srsltid=AfmBOooJDujPnbrI-uqZC45Jf9_s3SQmq0q_XId_nbL5yhUuQATGzpXV",
+            "home_page": "https://brandemia.org/contenido/subidas/2022/11/nintendo-logo-2022-actual-1024x572.png",
+            "price": 6.24
         }
     ],
     [
@@ -236,31 +142,31 @@
             "size_mb": 333,
             "minimun": {},
             "recomended": {},
-            "game_id": 1,
+            "game_id": 251420,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/brotato/9p9vnsqk1w3k",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 4.99
         },
         {
             "size_mb": 263,
             "minimun": {},
             "recomended": {},
-            "game_id": 2,
+            "game_id": 194160,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/forager/9mv2s7q5phsw",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 19.99
         },
         {
             "size_mb": 14310,
             "minimun": {},
             "recomended": {},
-            "game_id": 3,
+            "game_id": 234902,
             "platform_id": 3,
-            "url": "https://www.xbox.com/es-ES/games/store/dragon-quest-xi-s-ecos-de-un-pasado-perdido-edicion-definitiva/9PBDC0XZ8TXK/0010",
-            "home_page": "https://www.xbox.com/es-ES",
-            "price": 39.98
+            "url": "https://www.xbox.com/es-ES/games/store/minecraft-dungeons/9n8nj74fztg9",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
+            "price": 19.99
         }
     ],
     [
@@ -268,10 +174,10 @@
             "size_mb": 7636,
             "minimun": {},
             "recomended": {},
-            "game_id": 4,
+            "game_id": 144209,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/ark-survival-evolved/bnblc4zgfnkb",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 14.99
         }
     ],
@@ -280,10 +186,10 @@
             "size_mb": 1264,
             "minimun": {},
             "recomended": {},
-            "game_id": 5,
+            "game_id": 195104,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/among-us/9ng07qjnk38j",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 4.99
         }
     ],
@@ -292,10 +198,10 @@
             "size_mb": 5423,
             "minimun": {},
             "recomended": {},
-            "game_id": 6,
+            "game_id": 165363,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-ES/games/store/hollow-knight-edicion-corazon-vacio/9MW9469V91LM/0010",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 14.99
         }
     ],
@@ -304,10 +210,10 @@
             "size_mb": 106,
             "minimun": {},
             "recomended": {},
-            "game_id": 7,
+            "game_id": 236626,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/unpacking/9nh5hn11fg4m",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 19.99
         }
     ],
@@ -316,10 +222,10 @@
             "size_mb": 15264,
             "minimun": {},
             "recomended": {},
-            "game_id": 8,
+            "game_id": 258010,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/minecraft-coleccion-deluxe/9p4vml1wr91n",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 29.99
         }
     ],
@@ -328,10 +234,10 @@
             "size_mb": 15264,
             "minimun": {},
             "recomended": {},
-            "game_id": 9,
+            "game_id": 177485,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/celeste/bwmql2rpwbhb",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 19.98
         }
     ],
@@ -340,43 +246,64 @@
             "size_mb": 4431,
             "minimun": {},
             "recomended": {},
-            "game_id": 10,
+            "game_id": 229961,
             "platform_id": 3,
             "url": "https://www.xbox.com/es-es/games/store/powerwash-simulator/9nhdjc0nw20m",
-            "home_page": "https://www.xbox.com/es-ES",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
             "price": 24.99
         }
-    ],
-    [
+    ],[
+        {
+            "size_mb": 4431,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 188278,
+            "platform_id": 3,
+            "url": "https://www.xbox.com/es-ES/games/store/overcooked-2/BVJLKDG2TX8H",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
+            "price": 24.99
+        }
+    ],[
+        {
+            "size_mb": 4431,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 212038,
+            "platform_id": 3,
+            "url": "https://www.xbox.com/es-ES/games/store/moving-out/9NXPBSMHPLTV",
+            "home_page": "https://i.pinimg.com/originals/bf/21/de/bf21deeef128ed67160f9fddd520036b.png",
+            "price": 24.99
+        }
+    ],[
         {
             "size_mb": 333,
             "minimun": {},
             "recomended": {},
-            "game_id": 1,
+            "game_id": 251420,
             "platform_id": 4,
             "url": "https://store.playstation.com/es-es/concept/10007282",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 4.99
         },
         {
             "size_mb": 263,
             "minimun": {},
             "recomended": {},
-            "game_id": 2,
+            "game_id": 194160,
             "platform_id": 4,
             "url": "https://store.playstation.com/es-es/product/EP3717-CUSA13959_00-APP0990000000022",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 19.99
         },
         {
             "size_mb": 14310,
             "minimun": {},
             "recomended": {},
-            "game_id": 3,
+            "game_id": 234902,
             "platform_id": 4,
-            "url": "https://www.playstation.com/es-es/games/dragon-quest-xi-echoes-of-an-elusive-age/",
-            "home_page": "https://www.playstation.com/es-es/",
-            "price": 39.99
+            "url": "https://store.playstation.com/es-es/product/EP4433-CUSA18797_00-DUNGEONSPS400000",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
+            "price": 19.99
         }
     ],
     [
@@ -384,10 +311,10 @@
             "size_mb": 7636,
             "minimun": {},
             "recomended": {},
-            "game_id": 4,
+            "game_id": 144209,
             "platform_id": 4,
             "url": "https://store.playstation.com/es-es/product/EP0688-CUSA06782_00-ARKSEGAME0000000",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 14.99
         }
     ],
@@ -396,10 +323,10 @@
             "size_mb": 1264,
             "minimun": {},
             "recomended": {},
-            "game_id": 5,
+            "game_id": 195104,
             "platform_id": 4,
             "url": "https://www.playstation.com/es-es/games/among-us/",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 3.99
         }
     ],
@@ -408,10 +335,10 @@
             "size_mb": 5423,
             "minimun": {},
             "recomended": {},
-            "game_id": 6,
+            "game_id": 165363,
             "platform_id": 4,
             "url": "https://www.playstation.com/es-es/games/hollow-knight-voidheart-edition/",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 14.99
         }
     ],
@@ -420,10 +347,10 @@
             "size_mb": 106,
             "minimun": {},
             "recomended": {},
-            "game_id": 7,
+            "game_id": 236626,
             "platform_id": 4,
             "url": "https://store.playstation.com/es-es/product/EP3717-PPSA07118_00-UNPACKINGPS5000E",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 19.99
         }
     ],
@@ -432,10 +359,10 @@
             "size_mb": 15264,
             "minimun": {},
             "recomended": {},
-            "game_id": 8,
+            "game_id": 258010,
             "platform_id": 4,
             "url": "https://www.playstation.com/es-es/games/minecraft/",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 19.99
         }
     ],
@@ -444,10 +371,10 @@
             "size_mb": 15264,
             "minimun": {},
             "recomended": {},
-            "game_id": 9,
+            "game_id": 177485,
             "platform_id": 4,
             "url": "https://www.playstation.com/es-es/games/celeste/",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 19.99
         }
     ],
@@ -456,11 +383,33 @@
             "size_mb": 4431,
             "minimun": {},
             "recomended": {},
-            "game_id": 10,
+            "game_id": 229961,
             "platform_id": 4,
             "url": "https://store.playstation.com/es-es/concept/10003654",
-            "home_page": "https://www.playstation.com/es-es/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
             "price": 17.49
+        }
+    ],[
+        {
+            "size_mb": 4431,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 188278,
+            "platform_id": 4,
+            "url": "https://www.playstation.com/es-es/games/overcooked-2/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
+            "price": 24.99
+        }
+    ],[
+        {
+            "size_mb": 4431,
+            "minimun": {},
+            "recomended": {},
+            "game_id": 212038,
+            "platform_id": 4,
+            "url": "https://www.playstation.com/es-es/games/moving-out/",
+            "home_page": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/PlayStation_logo.svg/619px-PlayStation_logo.svg.png",
+            "price": 24.99
         }
     ]
 ]

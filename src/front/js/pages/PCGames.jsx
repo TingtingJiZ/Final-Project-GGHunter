@@ -5,60 +5,70 @@ import { Context } from "../store/appContext";
 export const PCGames = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
+    const isLoged = store.isLoged;
 
     const pcData = async () => {
         await actions.getPC();
     };
 
-    const handlePcDetails = async (game_id) => {
-        await actions.getPcGameDetails(game_id);
+    const isFavourite = (gameId) => {
+        if (store.favouritesUser) {
+            const yes = store.favouritesUser.some(fav => fav.id === gameId);
+            //Console.log(yes)
+            return yes ? true : false
+        }
+    };
+
+    const handlePcDetails = async (id) => {
+        await actions.getPcGameDetailsId(id);
         navigate("/pcgamedetails");
+    };
+
+    const handleAddToFavourites = async (gameId) => {
+        if (isFavourite(gameId)) {
+            await actions.removeFromFavourites(gameId);
+        } else {
+            await actions.addToFavourites(gameId);
+        }
+        await actions.getFavourites();
     };
 
     useEffect(() => {
         pcData();
-    }, []);
+        if (isLoged) {
+            actions.getFavourites();
+        }
+    }, [isLoged]);
 
     return (
-        <div className="container w-75">
-            <h1>PC Games</h1>
-            <div className="row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-inner mb-3">
-                        <div className="carousel-item active" data-bs-interval="10000">
-                            <img src="https://i.ytimg.com/vi/w2yZI9oGHPs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBnuPu0T3bxXpNxILvRt7izsrbRXg" className="d-block w-75 mx-auto" alt="..." />
-                        </div>
-                        <div className="carousel-item" data-bs-interval="2000">
-                            <img src="https://www.switchaboo.com/content/images/2020/11/D_tf0vQXYAAE_cL.jpg" className="d-block w-75 mx-auto" alt="..." />
-                        </div>
-                        <div className="carousel-item">
-                            <img src="https://i.ytimg.com/vi/hGGECWcbtU4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDyRaZxFSDPt-A6PSwf2_vljRvCcw" className="d-block w-75 mx-auto" alt="..." />
-                        </div>
-                    </div>
-                    <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                    </button>
-                    <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            <div className="row row-cols-1 row-cols-md-3 row-cols-xl-5 g-2 justify-content-center card-body">
+        <div className="container w-75 mb-5">
+            <h1>PC</h1>
+            <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-2 justify-content-center">
                 {store.pc && store.pc.map((item) => (
                     <div key={item.id}>
-                        <div className="atropos-card card-row text-white h-100 border-0" style={{ height: "18rem" }}>
-                            <img src={item.medias_game[0].url} className="atropos-img" alt="..." />
-                            <div>
-                                <h5>{item.title}</h5>
-                                <strong>€{item.game_characteristics[1].store.price}</strong>
-                                <button href="#" onClick={() => handlePcDetails(item.game_id)} className="btn btn-primary">Detalles</button>
+                        <div className="card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                            <img src={item.medias_game[0].url} alt={item.title} style={{ objectFit: 'contain', flexShrink: 0 }} />
+                            <div className="p-3" style={{ flexGrow: 1 }}>
+                                <h5 className="fs-4">{item.title}</h5>
                             </div>
+                            <footer className="p-3 mb-1 d-flex justify-content-between align-items-center" style={{ background: "transparent", flexShrink: 0 }}>
+                                <strong>€{item.game_characteristics[1].store.price}</strong>
+                                <span>
+                                    <button onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Info</button>
+
+                                    {isLoged ? (
+                                        <button
+                                            onClick={() => handleAddToFavourites(item.id)}
+                                            className={`btn btn-secondary favourite-btn ${isFavourite(item.id) ? 'favourited' : ''}`}>
+                                            <i className={`fa fa-heart ${isFavourite(item.id) ? 'text-danger' : ''}`}></i>
+                                        </button>
+                                    ) : null}
+                                </span>
+                            </footer>
                         </div>
                     </div>
                 ))}
             </div>
-        </div >
+        </div>
     );
 };

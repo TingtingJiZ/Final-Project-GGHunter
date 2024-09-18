@@ -1,0 +1,79 @@
+footer {
+    background-color: #323232;
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+}
+
+.div-footer {
+    width: 180px;
+    height: auto; 
+    margin-bottom: 20px;
+}
+
+.footer-body {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'Roboto';
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-body div {
+    flex: 1;
+    margin: 10px; 
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
+    padding: 20px;
+    min-width: 250px;
+    box-sizing: border-box;
+}
+
+.title-footer {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.p-footer {
+    font-size: 16px;
+    padding: 5px;
+}
+
+.icon-discord {
+    font-size: 40px; 
+    border: none;
+    cursor: pointer;
+    color: #3540ba;
+}
+
+.icon-social {
+    color: rgba(10, 10, 10, 0.668);
+    border: none;
+    cursor: pointer;
+    font-size: 35px; 
+    margin-right: 20px;
+}
+
+.footer-content h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.footer-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+}
+

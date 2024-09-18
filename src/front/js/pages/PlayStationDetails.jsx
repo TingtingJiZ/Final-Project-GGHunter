@@ -3,13 +3,13 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { CommentsGames } from "../pages/CommentsGames.jsx";
 
-export const PcGameDetails = () => {
+export const PlaystationDetails = () => {
     const { store, actions } = useContext(Context);
-    const [item, setItem] = useState(store.currentPC);
+    const [item, setItem] = useState(store.currentPlaystation);
     const [activePlatform, setActivePlatform] = useState('');
 
-    const descriptionPC = async () => {
-        await actions.getPcGameDetailsId()
+    const descriptionPlay = async () => {
+        await actions.getPlaystationDetailsId()
     };
 
     const handleShop = (url) => {
@@ -31,36 +31,34 @@ export const PcGameDetails = () => {
 
     return (
         <div className="container my-4 w-75">
-            <div className="container">
-                <div className="characteristic w-100">
-                    <div className="row rounded card-row p-3">
-                        <div className="col-12 col-md-4 text-center">
-                            {item.medias_game && item.medias_game.length > 0 ? (
-                                <img src={item.medias_game[0].url} className="img-fluid my-3" alt="Game Image" />
-                            ) : (
-                                <div>No media available</div>
-                            )}
-                        </div>
-                        <div className="col-12 col-md-8">
-                            <h3 className="mt-1">{item.title}</h3>
-                            <h6>{item.description}</h6>
-                        </div>
+            <div className="characteristic w-100">
+                <div className="row rounded card-row p-3">
+                    <div className="col-12 col-md-4 text-center">
+                        {item.medias_game && item.medias_game.length > 0 ? (
+                            <img src={item.medias_game[0].url} className="img-fluid my-3" alt="Game Image" />
+                        ) : (
+                            <div>No media available</div>
+                        )}
                     </div>
-                    <ul className="nav nav-underline">
-                        <li className="nav-item">
-                            <a className={`nav-link ${activePlatform === 'pc' ? 'active pc fs-3' : 'pc fs-4'}`} href="/pcgames">PC</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className={`nav-link ${activePlatform === 'playstation' ? 'active playstation fs-3' : 'playstation fs-4'}`} href="/playstation">PlayStation</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className={`nav-link ${activePlatform === 'nintendo' ? 'active nintendo fs-3' : 'nintendo fs-4'}`} href="/nintendo">Nintendo</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className={`nav-link ${activePlatform === 'xbox' ? 'active xbox fs-3' : 'xbox fs-4'}`} href="/xbox">Xbox</a>
-                        </li>
-                    </ul>
+                    <div className="col-12 col-md-8">
+                        <h3 className="mt-1">{item.title}</h3>
+                        <h6>{item.description}</h6>
+                    </div>
                 </div>
+                <ul className="nav nav-underline">
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'pc' ? 'active pc fs-3' : 'pc fs-4'}`} href="/pcgames">PC</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'playstation' ? 'active playstation fs-3' : 'playstation fs-4'}`} href="/playstation">PlayStation</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'nintendo' ? 'active nintendo fs-3' : 'nintendo fs-4'}`} href="/nintendo">Nintendo</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className={`nav-link ${activePlatform === 'xbox' ? 'active xbox fs-3' : 'xbox fs-4'}`} href="/xbox">Xbox</a>
+                    </li>
+                </ul>
             </div>
             <div className="container mt-3">
                 <div className="row">

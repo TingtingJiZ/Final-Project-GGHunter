@@ -1,24 +1,12 @@
-
-
-footer {
-    background: #424242;
-    color: #fff;
-    padding: 40px 0;
-    text-align: center;
+.div-profile {
+    margin-top: 30px;
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 120, 150));
+    height: 30%;
+    width: 55%;
+    margin-right: 10px;
+    margin-left: 10%;
+    margin-bottom: 5%;
 }
-
-.footer-content h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: 500;
-}
-
-.footer-content p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
 .socials {
     list-style: none;
     padding: 0;
@@ -34,17 +22,4 @@ footer {
     color: #fff;
     font-size: 18px;
     text-decoration: none;
-}
-
-.footer-bottom {
-    margin-top: 20px;
-}
-
-.footer-bottom p {
-    font-size: 14px;
-}
-
-.footer-bottom span {
-    color: #e44d26;
-    font-weight: bold;
 }

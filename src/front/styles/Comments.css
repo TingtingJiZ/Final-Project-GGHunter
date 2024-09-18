@@ -1,0 +1,11 @@
+.comments {
+    color: #41143a;
+    font-weight: bold;
+    font-size: x-large; 
+}
+
+#reviews {
+    max-height: 80vh;
+    overflow-y: auto; 
+}
+
