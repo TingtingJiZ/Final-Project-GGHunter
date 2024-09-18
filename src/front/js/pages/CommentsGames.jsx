@@ -47,21 +47,19 @@ export const CommentsGames = () => {
             user_id: store.currentUser.id   // ID del usuario que comenta
         };
         actions.createComments(updatedFormData);
-        // Limpiar el formulario después del envío
         setFormData({ commentsPerGame: "" });
         actions.getCommentsGames(store.currentPC.id);
     };
 
     const handleDelete = async (delete_comment) => {
         try {
-            const response = await actions.deleteComment(delete_comment);  // Llamar a la función de actions
-
+            const response = await actions.deleteComment(delete_comment);
             if (response.ok) {
                 console.log("Comentario eliminado");
-                setErrorMessage("");  // Limpiar mensaje de error
-                actions.getCommentsGames(store.currentPC.id);  // Actualizar comentarios después de la eliminación
+                setErrorMessage(""); 
+                actions.getCommentsGames(store.currentPC.id);  
             } else {
-                setErrorMessage(response.message);  // Mostrar el mensaje de error devuelto por la acción
+                setErrorMessage(response.message);
             }
         } catch (error) {
             console.error("Error en el frontend al eliminar el comentario", error);
@@ -118,7 +116,6 @@ export const CommentsGames = () => {
                         )}
                     </div>
                 </div>
-
             </Row>
         </div>
     );
