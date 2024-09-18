@@ -1,14 +1,13 @@
 .navbarGame {
-    background: linear-gradient(rgb(102, 186, 102), rgb(29, 150, 120));
+    background: linear-gradient(rgb(102, 186, 102), rgb(29, 150, 120)); 
 }
 
 .a-navbar {
-    color: #358c1c;
+    color: #ffffff;
     text-decoration: none;
     cursor: pointer;
     font-size: 20px;
 }
-
 
 .dark-dropdown .dropdown-menu {
   background-color: #343a40; 
@@ -23,4 +22,8 @@
 
 .dark-dropdown .dropdown-divider {
   border-top-color: #6c757d;
+}
+
+.link-hover:hover {
+  text-decoration: underline;
 }
