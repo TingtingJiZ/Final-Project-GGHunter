@@ -13,7 +13,7 @@ import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faGamepad } from '@fortawesome/free-solid-svg-icons'
-import logo from '../../img/Recurso 1_png.png';
+import logo from '../../img/logo-sin-nombre.png';
 import "../../styles/Navbar.css";
 
 
@@ -105,16 +105,16 @@ export const NavbarGame = () => {
 	return (
 		<>
 			<Navbar expand="lg" className="navbarGame">
-				<Container> {/* add fluid if want full page */}
+				<Container>
 					<Navbar.Brand as={Link} to="/"><img src={logo} alt="Logo" style={{ height: '55px' }} /></Navbar.Brand>
-					<Navbar.Brand className="text-white" href="#home">GG-Hunter</Navbar.Brand>
+					<Navbar.Brand style={{color:'#213c80'}} className="fs-3 mr-3 fw-bold" to="/">GG-Hunter</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="me-auto">
-							<Nav.Link as="div"><Link to="/pcgames" className="dropdown-item text-white">PC</Link></Nav.Link>
-							<Nav.Link as="div"><Link to="/xbox" className="dropdown-item text-white">Xbox</Link></Nav.Link >
-							<Nav.Link as="div"><Link to="/playstation" className="dropdown-item text-white">PlayStation</Link></Nav.Link >
-							<Nav.Link as="div"><Link to="/nintendo" className="dropdown-item text-white">Nintendo</Link></Nav.Link >
+					<Navbar.Collapse id="basic-navbar-nav" className="mr-5">
+						<Nav className="fs-4 d-flex justify-content-end">
+							<Nav.Link as="div"><Link to="/pcgames" className="dropdown-item text-white ml-2 link-hover">PC</Link></Nav.Link>
+							<Nav.Link as="div"><Link to="/xbox" className="dropdown-item text-white ml-2 link-hover">Xbox</Link></Nav.Link>
+							<Nav.Link as="div"><Link to="/playstation" className="dropdown-item text-white ml-2 link-hover">PlayStation</Link></Nav.Link>
+							<Nav.Link as="div"><Link to="/nintendo" className="dropdown-item text-white ml-2 link-hover">Nintendo</Link></Nav.Link>
 						</Nav>
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<NavDropdown
@@ -124,7 +124,7 @@ export const NavbarGame = () => {
 										icon={faGamepad}
 										size="xl"
 										style={{
-											color: store.currentUser === null ? "#715fcf" : "#e18e8d",
+											color: store.currentUser === null ? "#353ab8" : "#b52639",
 
 										}}
 									/>
@@ -159,7 +159,7 @@ export const NavbarGame = () => {
 				onHide={handleClose}
 				backdrop="static"
 				size="md"
-				aria-labelledby="contained-modal-title-vcenter"
+				aria-labelledby="contained-modal-title-center"
 				centered
 				keyboard={false}
 				className="card-register">
