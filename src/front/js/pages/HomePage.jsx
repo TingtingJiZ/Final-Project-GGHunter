@@ -11,8 +11,8 @@ export const HomePage = () => {
     const navigate = useNavigate();
 
     const handlePcDetails = async (id) => {
-        console.log(id);
-        
+        //Console.log(id);
+
         await actions.getPcGameDetailsId(id);
         navigate("/pcgamedetails");
     };
@@ -41,14 +41,12 @@ export const HomePage = () => {
         navigate("xbox")
     }
     useEffect(() => {
-        //actions.getGamesPc();
-        //actions.getGamesPc();
         actions.getPC();
 
     }, []);
 
     useEffect(() => {
-        console.log("gamesPc:", gamesPc);
+        //Console.log("gamesPc:", gamesPc);
     }, [gamesPc]);
 
     const getRandomGames = (gamesArray, count) => {
@@ -69,10 +67,10 @@ export const HomePage = () => {
                             getRandomGames(store.pc, 4).map((item) => (
                                 <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
-                                        title={item.name}  
+                                        title={item.name}
                                         image={item.medias_game[0].url}
                                         price={item.game_characteristics[0].store.price}
-                                        onClick={() => handlePcDetails(item.id)} 
+                                        onClick={() => handlePcDetails(item.id)}
                                     />
                                 </Col>
                             ))
@@ -88,15 +86,15 @@ export const HomePage = () => {
 
                 <button className="button-pc" onClick={handleNintendo}>Nintendo</button>
                 <div className="card-row d-flex align-items-center mb-3">
-                    <Row> {/* Usar Row para envolver las columnas */}
+                    <Row>
                         {(store.pc && store.pc.length > 0) ? (
                             getRandomGames(store.pc, 4).map((item) => (
                                 <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
-                                        title={item.name}  
+                                        title={item.name}
                                         image={item.medias_game[0].url}
                                         price={item.game_characteristics[1].store.price}
-                                        onClick={() => handleNintendoDetails(item.id)} 
+                                        onClick={() => handleNintendoDetails(item.id)}
                                     />
                                 </Col>
                             ))
@@ -116,10 +114,10 @@ export const HomePage = () => {
                             getRandomGames(store.pc, 4).map((item) => (
                                 <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
-                                        title={item.name}  
+                                        title={item.name}
                                         image={item.medias_game[0].url}
                                         price={item.game_characteristics[2].store.price}
-                                        onClick={() => handleXboxDetails(item.id)} 
+                                        onClick={() => handleXboxDetails(item.id)}
                                     />
                                 </Col>
                             ))
@@ -139,10 +137,10 @@ export const HomePage = () => {
                             getRandomGames(store.pc, 4).map((item) => (
                                 <Col key={item.id} xs={12} sm={6} md={6} lg={3} className="mb-4">
                                     <GameCard
-                                        title={item.name}  
+                                        title={item.name}
                                         image={item.medias_game[0].url}
                                         price={item.game_characteristics[3].store.price}
-                                        onClick={() => handlePLayStationDetails(item.id)} 
+                                        onClick={() => handlePLayStationDetails(item.id)}
                                     />
                                 </Col>
                             ))

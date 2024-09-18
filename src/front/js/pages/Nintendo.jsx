@@ -6,18 +6,15 @@ export const Nintendo = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
     const isLoged = store.isLoged;
-
-    // Obtener los datos de Nintendo
     const nintendoData = async () => {
         await actions.getNintendo();
     };
 
-    // Verificar si el juego está en favoritos
     const isFavourite = (gameId) => {
-        if(store.favouritesUser){
+        if (store.favouritesUser) {
             const yes = store.favouritesUser.some(fav => fav.id === gameId);
-            console.log(yes)
-            return yes ? true : false 
+            //Console.log(yes)
+            return yes ? true : false
         }
     };
 
@@ -48,8 +45,8 @@ export const Nintendo = () => {
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-2 justify-content-center">
                 {store.nintendo && store.nintendo.map((item) => (
                     <div key={item.id}>
-                        <div className="card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%"}}>
-                            <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
+                        <div className="card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                            <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0 }} />
                             <div className="p-3" style={{ flexGrow: 1 }}>
                                 <h5 className="fs-4">{item.title}</h5>
                             </div>
@@ -59,8 +56,8 @@ export const Nintendo = () => {
                                     <button onClick={() => handleNintendoDetails(item.id)} className="btn btn-primary">Info</button>
 
                                     {isLoged ? (
-                                        <button 
-                                            onClick={() => handleAddToFavourites(item.id)} 
+                                        <button
+                                            onClick={() => handleAddToFavourites(item.id)}
                                             className={`btn btn-secondary favourite-btn ${isFavourite(item.id) ? 'favourited' : ''}`}>
                                             <i className={`fa fa-heart ${isFavourite(item.id) ? 'text-danger' : ''}`}></i>
                                         </button>

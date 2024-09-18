@@ -43,7 +43,7 @@ export const Signup = ({ show, handleClose }) => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        console.log(userLogin, userPassword);
+        //Console.log(userLogin, userPassword);
         const dataToSend = {
             "alias": userAlias,
             "lastname": userLastname,
@@ -51,7 +51,7 @@ export const Signup = ({ show, handleClose }) => {
             "password": userPassword
         };
         if (!passwordCriteria.length || !passwordCriteria.lowercase || !passwordCriteria.uppercase || !passwordCriteria.specialCharOrDigit) {
-            console.log('Error: La contraseña no cumple con todos los criterios');
+            //Console.log('Error: La contraseña no cumple con todos los criterios');
             return;
         }
         const uri = process.env.BACKEND_URL + '/api/signup';
@@ -65,16 +65,16 @@ export const Signup = ({ show, handleClose }) => {
         const response = await fetch(uri, options);
         if (!response.ok) {
             // tratar el error
-            console.log('Error: ', response.status, response.statusText);
+            //Console.log('Error: ', response.status, response.statusText);
             return
         }
-        
+
         const data = await response.json()
         localStorage.setItem("token", data.message);
-		localStorage.setItem("user", JSON.stringify(data.results));
-		actions.setCurrentUser(data.results);
-		actions.setIsLoged(true)
-        console.log(data);
+        localStorage.setItem("user", JSON.stringify(data.results));
+        actions.setCurrentUser(data.results);
+        actions.setIsLoged(true)
+        //Console.log(data);
         navigate("/")
         handleClose();
 

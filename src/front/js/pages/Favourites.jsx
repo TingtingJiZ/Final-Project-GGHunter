@@ -6,7 +6,7 @@ export const Favourites = () => {
 
     useEffect(() => {
         actions.getFavourites();
-        console.log(store.favouritesUser)
+        //Console.log(store.favouritesUser)
     }, []);
 
     return (
@@ -14,9 +14,9 @@ export const Favourites = () => {
             <h1>Favoritos</h1>
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-2 justify-content-center card-body">
                 {store.favouritesUser && store.favouritesUser.map((item) => (
-                    <div key={item.game_id}>
-                        <div className="atropos-card card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%"}}>
-                            <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
+                    <div key={item.id}>
+                        <div className="atropos-card card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                            <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0 }} />
                             <div className="p-3" style={{ flexGrow: 1 }}>
                                 <h5 className="fs-4">{item.title}</h5>
                             </div>

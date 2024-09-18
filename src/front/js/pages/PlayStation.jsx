@@ -3,19 +3,19 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
 export const PlayStation = () => {
-    const {store, actions} = useContext(Context)
+    const { store, actions } = useContext(Context)
     const navigate = useNavigate()
     const isLoged = store.isLoged;
 
     const playstationData = async () => {
         await actions.getPlaystation()
     }
-    
+
     const isFavourite = (gameId) => {
-        if(store.favouritesUser){
+        if (store.favouritesUser) {
             const yes = store.favouritesUser.some(fav => fav.id === gameId);
-            console.log(yes)
-            return yes ? true : false 
+            //Console.log(yes)
+            return yes ? true : false
         }
     };
 
@@ -26,28 +26,28 @@ export const PlayStation = () => {
 
     const handleAddToFavourites = async (gameId) => {
         if (isFavourite(gameId)) {
-            await actions.removeFromFavourites(gameId); // Asume que existe una acción para eliminar favoritos
+            await actions.removeFromFavourites(gameId);
         } else {
             await actions.addToFavourites(gameId);
         }
-        await actions.getFavourites(); // Actualizar la lista de favoritos después de cada acción
+        await actions.getFavourites();
     };
 
     useEffect(() => {
         playstationData();
         if (isLoged) {
-            actions.getFavourites(); // Obtener favoritos si el usuario está logueado
+            actions.getFavourites();
         }
     }, [isLoged]);
 
-    return(
+    return (
         <div className="container w-75 mb-5">
             <h1>PlayStation Games</h1>
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-2 justify-content-center">
                 {store.playstation && store.playstation.map((item) => (
                     <div key={item.id}>
-                        <div className="atropos-card card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%"}}>
-                            <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
+                        <div className="atropos-card card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                            <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0 }} />
                             <div className="p-3" style={{ flexGrow: 1 }}>
                                 <h5 className="fs-4">{item.title}</h5>
                             </div>
@@ -55,10 +55,9 @@ export const PlayStation = () => {
                                 <strong>€{item.game_characteristics[1].store.price}</strong>
                                 <span>
                                     <button onClick={() => handlePlaystationDetails(item.id)} className="btn btn-primary">Info</button>
-
                                     {isLoged ? (
-                                        <button 
-                                            onClick={() => handleAddToFavourites(item.id)} 
+                                        <button
+                                            onClick={() => handleAddToFavourites(item.id)}
                                             className={`btn btn-secondary favourite-btn ${isFavourite(item.id) ? 'favourited' : ''}`}>
                                             <i className={`fa fa-heart ${isFavourite(item.id) ? 'text-danger' : ''}`}></i>
                                         </button>

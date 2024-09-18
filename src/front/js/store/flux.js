@@ -29,11 +29,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const options = { method: "GET" };
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results);
+				//console.log(data.results);
 				setStore({ pc: data.results });
 			},
 			getGamesPc: async () => {
@@ -46,11 +46,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const response = await fetch(uri, options)
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText)
+					//console.log("Error: ", response.status, response.statusText)
 					return;
 				}
 				const data = await response.json()
-				console.log(data)
+				//console.log(data)
 				let entriesPC = Object.entries(data);
 				for (let i = 0; i < entriesPC.length; i++) {
 					let gameID = entriesPC[i][0];
@@ -85,7 +85,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				await actions.insertPricePc(valores);
-				console.log(valores);
+				//console.log(valores);
 
 				// Guardar los datos en el store
 				setStore({ gamesPc: valores });
@@ -99,10 +99,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					body: JSON.stringify(datos)
 				};
-				console.log(datos);
+				//console.log(datos);
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 			},
@@ -113,11 +113,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results[0]);
+				//console.log(data.results[0]);
 				setStore({ currentPC: data.results });
 			},
 			getPcGameDetailsId: async (id) => {
@@ -127,7 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 				const data = await response.json();
@@ -146,10 +146,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(comments)
 				};
 				const response = await fetch(uri, options);
-				console.log(comments);
+				//console.log(comments);
 
 				if (!response.ok) {
-					console.log('Error', response.status, response.statusText);
+					//console.log('Error', response.status, response.statusText);
 					return;
 				}
 				const newComment = await response.json();
@@ -170,7 +170,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log('Error', response.status, response.statusText);
+					//console.log('Error', response.status, response.statusText);
 					return;
 				}
 
@@ -201,7 +201,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					return { ok: true, message: "Comentario eliminado correctamente" };
 				} catch (error) {
-					console.error('Error en la solicitud de eliminación de comentario:', error);
+					//console.error('Error en la solicitud de eliminación de comentario:', error);
 					return { ok: false, message: 'Error en la solicitud al servidor' };
 				}
 			},
@@ -216,12 +216,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log('Error', response.status, response.statusText);
+					//console.log('Error', response.status, response.statusText);
 					return;
 				}
 
 				const data = await response.json();
-				console.log(data.results);
+				//console.log(data.results);
 				setStore({ commentsPerGame2: data.results });
 			},
 			getNintendo: async () => {
@@ -231,11 +231,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText)
+					//console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
-				console.log(data.results)
+				//console.log(data.results)
 				setStore({ nintendo: data.results })
 			},
 			getNintendoDetailsId: async (id) => {
@@ -245,11 +245,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results);
+				//console.log(data.results);
 				setStore({ currentNintendo: data.results });
 			},
 			getPlaystation: async () => {
@@ -259,11 +259,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText)
+					//console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
-				console.log(data.results)
+				//console.log(data.results)
 				setStore({ playstation: data.results })
 			},
 			getPlaystationDetailsId: async (id) => {
@@ -273,11 +273,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results);
+				//console.log(data.results);
 				setStore({ currentPlaystation: data.results });
 			},
 			getXbox: async () => {
@@ -287,11 +287,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText)
+					//console.log("Error: ", response.status, response.statusText)
 					return
 				}
 				const data = await response.json()
-				console.log(data.results)
+				//console.log(data.results)
 				setStore({ xbox: data.results })
 			},
 			getXboxDetailsId: async (id) => {
@@ -301,11 +301,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 				const data = await response.json();
-				console.log(data.results);
+				//console.log(data.results);
 				setStore({ currentXbox: data.results });
 			},
 			getFreeGames: async () => {
@@ -315,16 +315,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(uri, options);
 				if (!response.ok) {
-					console.log("Error: ", response.status, response.statusText);
+					//console.log("Error: ", response.status, response.statusText);
 					return;
 				}
 				const data = await response.json();
-				console.log(data);
+				//console.log(data);
 				setStore({ freeGames: data });
 			},
 			addToFavourites: async (gameId) => {
 				const token = localStorage.getItem('token');
-				console.log(token);
+				//console.log(token);
 				const dataToSend = {
 					"game_id": gameId,
 				};
@@ -337,24 +337,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 						'Authorization': `Bearer ${token}`
 					}
 				};
-				console.log(dataToSend, localStorage.getItem('token'));
+				//console.log(dataToSend, localStorage.getItem('token'));
 				try {
 					const response = await fetch(uri, options);
 					if (!response.ok) {
-						console.log('Error: ', response.status, response.statusText);
+						//console.log('Error: ', response.status, response.statusText);
 						if (response.status === 401) {
 							const data = await response.json();
-							console.log("Error: " + response.status + " " + response.statusText);
+							//console.log("Error: " + response.status + " " + response.statusText);
 						} else if (response.status === 409) {
-							console.log("El favorito ya existe");
+							//console.log("El favorito ya existe");
 						}
 						return;
 					}
 					const data = await response.json();
-					console.log(data)
+					//console.log(data)
 					setStore({ favourites: [...getStore().favourites, data.results] });
 				} catch (error) {
-					console.error("Error adding to favourites:", error);
+					//console.error("Error adding to favourites:", error);
 				}
 			},
 			getFavourites: async () => {
@@ -370,10 +370,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(uri, options);
 					const data = await response.json();
-					console.log(data.results)
+					//console.log(data.results)
 					setStore({ favouritesUser: data.results });
 				} catch (error) {
-					console.error("Error fetching favourites:", error);
+					//console.error("Error fetching favourites:", error);
 				}
 			},
 			removeFromFavourites: async (gameId) => {
@@ -392,21 +392,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(uri, options);
 					if (!response.ok) {
-						console.log('Error: ', response.status, response.statusText);
+						//console.log('Error: ', response.status, response.statusText);
 						if (response.status === 401) {
-							console.log("Error: " + response.status + " " + response.statusText);
+							//console.log("Error: " + response.status + " " + response.statusText);
 						} else if (response.status === 404) {
-							console.log("Favorito no encontrado");
+							//console.log("Favorito no encontrado");
 						}
 						return;
 					}
-					console.log(`Favorito con game_id ${gameId} eliminado`);
+					//console.log(`Favorito con game_id ${gameId} eliminado`);
 			
 					// Actualizar la lista de favoritos en el estado global (store)
 					const updatedFavourites = getStore().favouritesUser.filter(fav => fav.game_id !== gameId);
 					setStore({ favouritesUser: updatedFavourites });
 				} catch (error) {
-					console.error("Error removing from favourites:", error);
+					//console.error("Error removing from favourites:", error);
 				}
 			},
 
