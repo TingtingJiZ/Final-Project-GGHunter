@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { GameCard } from '../component/GameCard.jsx';
 
 export const Nintendo = () => {
     const { store, actions } = useContext(Context);
@@ -27,7 +26,7 @@ export const Nintendo = () => {
             {store.nintendo && store.nintendo.map((item) => (
                 <div key={item.id}>
                     <div className="card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%"}}>
-                        <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
+                        <img src={item.medias_game[0].url} alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
                         <div className="p-3" style={{ flexGrow: 1 }}>
                             <h5 className="fs-4">{item.title}</h5>
                         </div>

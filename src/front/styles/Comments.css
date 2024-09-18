@@ -1,10 +1,5 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Esto asegura que el contenedor ocupe toda la altura de la ventana */
-    max-height: 100%; /* Asegura que no exceda la altura */
-}
-
-#reviews {
-    flex-grow: 1;
+.comments {
+    color: #41143a;
+    font-weight: bold;
+    font-size: x-large; 
 }
