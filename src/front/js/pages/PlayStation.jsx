@@ -24,7 +24,7 @@ export const PlayStation = () => {
 
     return(
         <div className="container w-75 mb-5">
-            <h1>PlayStation Games</h1>
+            <h1>PlayStation</h1>
             <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-2 justify-content-center">
                 {store.playstation && store.playstation.map((item) => (
                     <div key={item.id}>
@@ -35,7 +35,7 @@ export const PlayStation = () => {
                             </div>
                             <footer className="p-3 mb-1 d-flex justify-content-between align-items-center" style={{ background: "transparent", flexShrink: 0 }}>
                                 <strong>€{item.game_characteristics[1].store.price}</strong>
-                                <span><button onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Info</button>
+                                <span><button onClick={() => handlePlaystationDetails(item.id)} className="btn btn-primary">Info</button>
                                 <button onClick={() => handleAddToFavourites(item.id)} className="btn btn-secondary">
                                 <i className="fa-regular fa-heart"></i>
                                 </button></span>
