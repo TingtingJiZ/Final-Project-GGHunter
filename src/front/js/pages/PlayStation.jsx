@@ -11,17 +11,34 @@ export const PlayStation = () => {
         await actions.getPlaystation()
     }
     
+    const isFavourite = (gameId) => {
+        if(store.favouritesUser){
+            const yes = store.favouritesUser.some(fav => fav.id === gameId);
+            console.log(yes)
+            return yes ? true : false 
+        }
+    };
+
     const handlePlaystationDetails = async (id) => {
         await actions.getPlaystationDetailsId(id)
         navigate("/playstationdetails")
     }
 
     const handleAddToFavourites = async (gameId) => {
-        await actions.addToFavourites(gameId);
+        if (isFavourite(gameId)) {
+            await actions.removeFromFavourites(gameId); // Asume que existe una acción para eliminar favoritos
+        } else {
+            await actions.addToFavourites(gameId);
+        }
+        await actions.getFavourites(); // Actualizar la lista de favoritos después de cada acción
     };
+
     useEffect(() => {
-        playstationData()
-    },[])
+        playstationData();
+        if (isLoged) {
+            actions.getFavourites(); // Obtener favoritos si el usuario está logueado
+        }
+    }, [isLoged]);
 
     return(
         <div className="container w-75 mb-5">
@@ -37,11 +54,13 @@ export const PlayStation = () => {
                             <footer className="p-3 mb-1 d-flex justify-content-between align-items-center" style={{ background: "transparent", flexShrink: 0 }}>
                                 <strong>€{item.game_characteristics[1].store.price}</strong>
                                 <span>
-                                    <button onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Info</button>
+                                    <button onClick={() => handlePlaystationDetails(item.id)} className="btn btn-primary">Info</button>
 
                                     {isLoged ? (
-                                        <button onClick={() => handleAddToFavourites(item.id)} className="btn btn-secondary">
-                                            <i className="fa-regular fa-heart"></i>
+                                        <button 
+                                            onClick={() => handleAddToFavourites(item.id)} 
+                                            className={`btn btn-secondary favourite-btn ${isFavourite(item.id) ? 'favourited' : ''}`}>
+                                            <i className={`fa fa-heart ${isFavourite(item.id) ? 'text-danger' : ''}`}></i>
                                         </button>
                                     ) : null}
                                 </span>

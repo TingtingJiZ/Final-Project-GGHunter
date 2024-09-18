@@ -11,18 +11,34 @@ export const PCGames = () => {
         await actions.getPC();
     };
 
+    const isFavourite = (gameId) => {
+        if(store.favouritesUser){
+            const yes = store.favouritesUser.some(fav => fav.id === gameId);
+            console.log(yes)
+            return yes ? true : false 
+        }
+    };
+    
     const handlePcDetails = async (id) => {
         await actions.getPcGameDetailsId(id);
         navigate("/pcgamedetails");
     };
 
     const handleAddToFavourites = async (gameId) => {
-        await actions.addToFavourites(gameId);
+        if (isFavourite(gameId)) {
+            await actions.removeFromFavourites(gameId); // Asume que existe una acción para eliminar favoritos
+        } else {
+            await actions.addToFavourites(gameId);
+        }
+        await actions.getFavourites(); // Actualizar la lista de favoritos después de cada acción
     };
 
     useEffect(() => {
         pcData();
-    }, []);
+        if (isLoged) {
+            actions.getFavourites(); // Obtener favoritos si el usuario está logueado
+        }
+    }, [isLoged]);
 
     return (
         <div className="container w-75 mb-5">
@@ -43,8 +59,8 @@ export const PCGames = () => {
                                     {isLoged ? (
                                         <button 
                                             onClick={() => handleAddToFavourites(item.id)} 
-                                            className="btn btn-secondary favourite-btn">
-                                            <i className="fa fa-heart" style={{ color: isFavourite(item.id) ? 'red' : '#ccc' }}></i>
+                                            className={`btn btn-secondary favourite-btn ${isFavourite(item.id) ? 'favourited' : ''}`}>
+                                            <i className={`fa fa-heart ${isFavourite(item.id) ? 'text-danger' : ''}`}></i>
                                         </button>
                                     ) : null}
                                 </span>

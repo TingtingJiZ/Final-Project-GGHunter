@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -7,9 +7,6 @@ export const Nintendo = () => {
     const navigate = useNavigate();
     const isLoged = store.isLoged;
 
-    // Estado local para manejar los favoritos
-    const [favourites, setFavourites] = useState([]);
-
     // Obtener los datos de Nintendo
     const nintendoData = async () => {
         await actions.getNintendo();
@@ -17,28 +14,33 @@ export const Nintendo = () => {
 
     // Verificar si el juego está en favoritos
     const isFavourite = (gameId) => {
-        return favourites.some(fav => fav.id === gameId);
+        if(store.favouritesUser){
+            const yes = store.favouritesUser.some(fav => fav.id === gameId);
+            console.log(yes)
+            return yes ? true : false 
+        }
     };
 
-    // Manejar detalles del juego de Nintendo
     const handleNintendoDetails = async (id) => {
         await actions.getNintendoDetailsId(id);
         navigate("/nintendodetails");
     };
 
-    // Añadir o quitar de favoritos
     const handleAddToFavourites = async (gameId) => {
-        await actions.addToFavourites(gameId);
-        setFavourites([...store.favourites]);
+        if (isFavourite(gameId)) {
+            await actions.removeFromFavourites(gameId);
+        } else {
+            await actions.addToFavourites(gameId);
+        }
+        await actions.getFavourites();
     };
 
     useEffect(() => {
         nintendoData();
-    }, []);
-
-    useEffect(() => {
-        setFavourites([...store.favourites]);
-    }, [store.favourites]);
+        if (isLoged) {
+            actions.getFavourites();
+        }
+    }, [isLoged]);
 
     return (
         <div className="container w-75 mb-5">
@@ -60,7 +62,7 @@ export const Nintendo = () => {
                                         <button 
                                             onClick={() => handleAddToFavourites(item.id)} 
                                             className={`btn btn-secondary favourite-btn ${isFavourite(item.id) ? 'favourited' : ''}`}>
-                                            <i className="fa fa-heart"></i>
+                                            <i className={`fa fa-heart ${isFavourite(item.id) ? 'text-danger' : ''}`}></i>
                                         </button>
                                     ) : null}
                                 </span>
