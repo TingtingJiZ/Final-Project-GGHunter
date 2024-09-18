@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext.js";
-import { Row, Card, Button, Alert} from 'react-bootstrap';
+import { Row,Alert } from 'react-bootstrap';
+import "../../styles/Comments.css";
 
 export const CommentsGames = () => {
     const { store, actions } = useContext(Context);
@@ -13,12 +14,12 @@ export const CommentsGames = () => {
         }, 1000);
 
         return () => clearTimeout(timer);
-        
-    
+
+
     }, [store.currentPC]);
 
     useEffect(() => {
-        if (errorMessage) {  
+        if (errorMessage) {
             const timer = setTimeout(() => {
                 setErrorMessage("");
             }, 5000);
@@ -51,22 +52,22 @@ export const CommentsGames = () => {
         actions.getCommentsGames(store.currentPC.id);
     };
 
-const handleDelete = async (delete_comment) => {
-    try {
-        const response = await actions.deleteComment(delete_comment);  // Llamar a la función de actions
-        
-        if (response.ok) {
-            console.log("Comentario eliminado");
-            setErrorMessage("");  // Limpiar mensaje de error
-            actions.getCommentsGames(store.currentPC.id);  // Actualizar comentarios después de la eliminación
-        } else {
-            setErrorMessage(response.message);  // Mostrar el mensaje de error devuelto por la acción
+    const handleDelete = async (delete_comment) => {
+        try {
+            const response = await actions.deleteComment(delete_comment);  // Llamar a la función de actions
+
+            if (response.ok) {
+                console.log("Comentario eliminado");
+                setErrorMessage("");  // Limpiar mensaje de error
+                actions.getCommentsGames(store.currentPC.id);  // Actualizar comentarios después de la eliminación
+            } else {
+                setErrorMessage(response.message);  // Mostrar el mensaje de error devuelto por la acción
+            }
+        } catch (error) {
+            console.error("Error en el frontend al eliminar el comentario", error);
+            setErrorMessage("Error al eliminar el comentario. Inténtalo de nuevo.");
         }
-    } catch (error) {
-        console.error("Error en el frontend al eliminar el comentario", error);
-        setErrorMessage("Error al eliminar el comentario. Inténtalo de nuevo.");
-    }
-};
+    };
 
     return (
         <div className="container py-3">
@@ -89,33 +90,35 @@ const handleDelete = async (delete_comment) => {
                         </span>
                     </button>
                 </form>
-                {errorMessage && (  // Mostrar el mensaje de error si existe
+                {errorMessage && (
                     <Alert variant="danger" onClose={() => setErrorMessage("")} dismissible>
                         {errorMessage}
                     </Alert>
                 )}
-                <div id="reviews">
+                <div id="reviews" className="container mt-3">
                     <h2>Reseñas:</h2>
-                    <Row>
+                    <div>
                         {store.commentsPerGame2.length > 0 ? (
                             store.commentsPerGame2.map((item, index) => (
-                                <Card key={index} style={{ width: '60rem', margin: '1rem' }}>
-                                    <Card.Body>
-                                    <div>  {/* Cambiado de Card.Text a div */}
-                                            <Row>
-                                                <strong>{item.user_alias}</strong> {item.body}
-                                            </Row>
-                                        </div>
-                                        <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can"></i>
-                                    </Card.Body>
-                                </Card>
+                                <div key={index} className="d-flex flex-column my-3 p-3 border rounded" style={{ wordWrap: 'break-word', whiteSpace: 'normal' }}>
+                                    <div className="mb-3">
+                                        <strong className="comments">{item.user_alias}</strong>
+                                        <p className="mb-0">{item.body}</p>
+                                    </div>
+                                    <div className="mt-auto text-end">
+                                        <i onClick={() => handleDelete(item.id)} className="fa-solid fa-trash-can trash-icon" style={{ cursor: 'pointer', color: 'black' }}
+                                            onMouseOver={(e) => e.target.style.color = 'red'}
+                                            onMouseOut={(e) => e.target.style.color = 'black'}>
+                                        </i>
+                                    </div>
+                                </div>
                             ))
                         ) : (
                             <p>No hay reseñas todavía.</p>
                         )}
-                    </Row>
-
+                    </div>
                 </div>
+
             </Row>
         </div>
     );
