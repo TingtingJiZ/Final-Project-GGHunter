@@ -41,12 +41,12 @@ export const Xbox = () => {
 
     return(
         <div className="container w-75 mb-5">
-        <h1>PC Games</h1>
+        <h1>Xbox</h1>
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-2 justify-content-center">
             {store.xbox && store.xbox.map((item) => (
                 <div key={item.id}>
                     <div className="card-row text-white h-100 border-0" style={{ display: "flex", flexDirection: "column", height: "100%"}}>
-                        <img src={item.medias_game[0].url} className="atropos-img" alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
+                        <img src={item.medias_game[0].url} alt={item.title} style={{ objectFit: 'contain', flexShrink: 0}} />
                         <div className="p-3" style={{ flexGrow: 1 }}>
                             <h5 className="fs-4">{item.title}</h5>
                         </div>
