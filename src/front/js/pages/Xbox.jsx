@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const Xbox = () => {
     const {store, actions} = useContext(Context)
     const navigate = useNavigate()
+    const isLoged = store.isLoged;
 
     const xboxData = async () => {
         await actions.getXbox()
@@ -14,6 +15,10 @@ export const Xbox = () => {
         await actions.getXboxDetailsId(id)
         navigate("/xboxdetails")
     }
+
+    const handleAddToFavourites = async (gameId) => {
+        await actions.addToFavourites(gameId);
+    };
     useEffect(() => {
         xboxData()
     },[])
@@ -31,7 +36,15 @@ export const Xbox = () => {
                         </div>
                         <footer className="p-3 mb-1 d-flex justify-content-between align-items-center" style={{ background: "transparent", flexShrink: 0 }}>
                             <strong>€{item.game_characteristics[1].store.price}</strong>
-                            <button onClick={() => handleXboxDetails(item.id)} className="btn btn-primary">Info</button>
+                            <span>
+                                    <button onClick={() => handlePcDetails(item.id)} className="btn btn-primary">Info</button>
+
+                                    {isLoged ? (
+                                        <button onClick={() => handleAddToFavourites(item.id)} className="btn btn-secondary">
+                                            <i className="fa-regular fa-heart"></i>
+                                        </button>
+                                    ) : null}
+                                </span>
                         </footer>
                     </div>
                 </div>

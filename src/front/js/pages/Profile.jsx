@@ -9,6 +9,8 @@ import logo from '../../img/Recurso 1_png.png';
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Favourites } from "./Favourites.jsx";
+
+
 export const Profile = () => {
     const { actions, store } = useContext(Context);
     const navigate = useNavigate();
