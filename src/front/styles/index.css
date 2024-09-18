@@ -252,4 +252,11 @@ h1 {
     color: #000000; 
     border: none;
 }
-  
+.favourite-btn i.fa-heart {
+    color: #ccc; /* Corazón sin marcar */
+    transition: color 0.3s ease;
+}
+
+.favourite-btn.favourited i.fa-heart {
+    color: red; /* Corazón marcado */
+}

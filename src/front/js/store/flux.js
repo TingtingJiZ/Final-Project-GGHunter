@@ -376,6 +376,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error fetching favourites:", error);
 				}
 			},
+			removeFromFavourites: async (gameId) => {
+				const token = localStorage.getItem('token');
+				const uri = `${process.env.URIBACK}/api/favourites`; // Eliminar el game_id de la URL
+				const dataToSend = { game_id: gameId }; // Enviar el game_id en el cuerpo de la solicitud
+				const options = {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`
+					},
+					body: JSON.stringify(dataToSend) // Asegúrate de que el body contenga el game_id
+				};
+			
+				try {
+					const response = await fetch(uri, options);
+					if (!response.ok) {
+						console.log('Error: ', response.status, response.statusText);
+						if (response.status === 401) {
+							console.log("Error: " + response.status + " " + response.statusText);
+						} else if (response.status === 404) {
+							console.log("Favorito no encontrado");
+						}
+						return;
+					}
+					console.log(`Favorito con game_id ${gameId} eliminado`);
+			
+					// Actualizar la lista de favoritos en el estado global (store)
+					const updatedFavourites = getStore().favouritesUser.filter(fav => fav.game_id !== gameId);
+					setStore({ favouritesUser: updatedFavourites });
+				} catch (error) {
+					console.error("Error removing from favourites:", error);
+				}
+			},
 
 			setCurrentUser: (user) => { setStore({ currentUser: user }) },
 			setIsLoged: (isLogin) => { setStore({ isLoged: isLogin }) },
